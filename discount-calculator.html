@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator – Calculate Final Price After Discount</title>
+    <meta name="description" content="Calculate exactly how much you save and the final price after any percentage discount. Free, fast, and easy to use online tool.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .calculator-card { transition: all 0.3s ease; }
+        .calculator-card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="text-slate-900">
+    <!-- Simple Navigation -->
+    <nav class="bg-white border-b border-slate-200 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="discount-calculator.html" class="font-bold text-xl text-blue-600">QuickCalc</a>
+            <div class="space-x-4 text-sm font-medium">
+                <a href="discount-calculator.html" class="text-blue-600">Discount</a>
+                <a href="simple-interest-calculator.html" class="text-slate-600 hover:text-blue-600">Interest</a>
+                <a href="profit-margin-calculator.html" class="text-slate-600 hover:text-blue-600">Profit</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold mb-4 tracking-tight">Discount Calculator</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                Stop guessing your savings. Use our free tool to instantly calculate the final price after a percentage discount and see exactly how much you save.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <!-- Calculator Input -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 calculator-card">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Currency</span>
+                    <div class="flex p-0.5 bg-slate-100 rounded-lg">
+                        <button onclick="setCurrency('$')" id="btn-usd" class="px-3 py-1 text-xs font-bold rounded-md bg-white text-blue-600 shadow-sm">USD ($)</button>
+                        <button onclick="setCurrency('₹')" id="btn-inr" class="px-3 py-1 text-xs font-bold rounded-md text-slate-500 hover:text-slate-700">INR (₹)</button>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Original Price (<span class="currency-label">$</span>)</label>
+                        <input type="number" id="price" placeholder="e.g. 100" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Discount (%)</label>
+                        <input type="number" id="percent" placeholder="e.g. 20" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                    </div>
+                    <button onclick="calculate()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors shadow-sm">
+                        Calculate Savings
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="hidden mt-8 p-4 bg-green-50 rounded-xl border border-green-100">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-green-600 uppercase font-bold tracking-wider mb-1">Total Savings</p>
+                            <p class="text-xl font-bold text-slate-900"><span class="currency-label">$</span><span id="res-savings">0.00</span></p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-green-600 uppercase font-bold tracking-wider mb-1">Final Price</p>
+                            <p class="text-xl font-bold text-slate-900"><span class="currency-label">$</span><span id="res-final">0.00</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div class="space-y-8">
+                <section>
+                    <h2 class="text-2xl font-bold mb-4">How This Calculator Works</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        To find the discounted price, the tool first calculates the total discount amount by multiplying the original price by the discount percentage. It then subtracts this amount from the original price to give you the final total.
+                    </p>
+                    <div class="mt-4 p-4 bg-slate-100 rounded-lg font-mono text-sm">
+                        Formula: Final Price = Original Price - (Original Price × Discount % / 100)
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-800">What is a discount?</h3>
+                            <p class="text-slate-600 text-sm">A discount is a reduction in the usual cost of a product or service, often used to boost sales.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">How do I calculate 20% off?</h3>
+                            <p class="text-slate-600 text-sm">To calculate 20% off, multiply the price by 0.20 to get the discount amount, then subtract it from the total.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">Can I calculate stackable discounts?</h3>
+                            <p class="text-slate-600 text-sm">This tool calculates single discounts. For multiple discounts, apply them sequentially to the resulting price.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200 py-12 bg-white text-center text-slate-400 text-sm">
+        &copy; 2025 QuickCalc Suite. All calculations are private and local.
+    </footer>
+
+    <script>
+        let currentCurrency = '$';
+
+        function setCurrency(symbol) {
+            currentCurrency = symbol;
+            document.querySelectorAll('.currency-label').forEach(el => el.innerText = symbol);
+            
+            const btnUsd = document.getElementById('btn-usd');
+            const btnInr = document.getElementById('btn-inr');
+            
+            if (symbol === '$') {
+                btnUsd.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
+                btnUsd.classList.remove('text-slate-500');
+                btnInr.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
+                btnInr.classList.add('text-slate-500');
+            } else {
+                btnInr.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
+                btnInr.classList.remove('text-slate-500');
+                btnUsd.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
+                btnUsd.classList.add('text-slate-500');
+            }
+        }
+
+        function calculate() {
+            const price = parseFloat(document.getElementById('price').value);
+            const percent = parseFloat(document.getElementById('percent').value);
+
+            if (isNaN(price) || isNaN(percent) || price < 0 || percent < 0) {
+                alert("Please enter valid positive numbers");
+                return;
+            }
+
+            const savings = (price * percent) / 100;
+            const final = price - savings;
+
+            document.getElementById('res-savings').innerText = savings.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('res-final').innerText = final.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

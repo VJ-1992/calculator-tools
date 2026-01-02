@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interest Calculator – Calculate Interest Easily</title>
+    <meta name="description" content="Use our free simple interest calculator to find out how much interest you'll earn or pay over time. Fast and accurate calculations.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .calculator-card { transition: all 0.3s ease; }
+        .calculator-card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="text-slate-900">
+    <!-- Simple Navigation -->
+    <nav class="bg-white border-b border-slate-200 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="discount-calculator.html" class="font-bold text-xl text-blue-600">QuickCalc</a>
+            <div class="space-x-4 text-sm font-medium">
+                <a href="discount-calculator.html" class="text-slate-600 hover:text-blue-600">Discount</a>
+                <a href="simple-interest-calculator.html" class="text-blue-600">Interest</a>
+                <a href="profit-margin-calculator.html" class="text-slate-600 hover:text-blue-600">Profit</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold mb-4 tracking-tight">Simple Interest Calculator</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                Easily determine the total interest on loans or savings. Just enter the principal, rate, and time to get your results instantly.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <!-- Calculator Input -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 calculator-card">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Currency</span>
+                    <div class="flex p-0.5 bg-slate-100 rounded-lg">
+                        <button onclick="setCurrency('$')" id="btn-usd" class="px-3 py-1 text-xs font-bold rounded-md bg-white text-blue-600 shadow-sm">USD ($)</button>
+                        <button onclick="setCurrency('₹')" id="btn-inr" class="px-3 py-1 text-xs font-bold rounded-md text-slate-500 hover:text-slate-700">INR (₹)</button>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Principal Amount (<span class="currency-label">$</span>)</label>
+                        <input type="number" id="principal" placeholder="e.g. 5000" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Rate (% p.a.)</label>
+                            <input type="number" id="rate" placeholder="e.g. 5" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Time (Years)</label>
+                            <input type="number" id="time" placeholder="e.g. 2" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+                        </div>
+                    </div>
+                    <button onclick="calculate()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors shadow-sm">
+                        Calculate Interest
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="hidden mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-blue-600 uppercase font-bold tracking-wider mb-1">Interest Earned</p>
+                            <p class="text-xl font-bold text-slate-900"><span class="currency-label">$</span><span id="res-interest">0.00</span></p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-blue-600 uppercase font-bold tracking-wider mb-1">Total Amount</p>
+                            <p class="text-xl font-bold text-slate-900"><span class="currency-label">$</span><span id="res-total">0.00</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div class="space-y-8">
+                <section>
+                    <h2 class="text-2xl font-bold mb-4">How This Calculator Works</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Simple interest is calculated by multiplying the principal amount by the annual interest rate and then by the time period in years. Unlike compound interest, simple interest is only charged on the original principal.
+                    </p>
+                    <div class="mt-4 p-4 bg-slate-100 rounded-lg font-mono text-sm">
+                        Formula: Interest = Principal × Rate × Time / 100
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-800">What is Principal?</h3>
+                            <p class="text-slate-600 text-sm">The principal is the initial amount of money borrowed or invested, before any interest is added.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">When is Simple Interest used?</h3>
+                            <p class="text-slate-600 text-sm">It is commonly used for short-term loans, car loans, and some types of consumer credit.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">How is it different from Compound Interest?</h3>
+                            <p class="text-slate-600 text-sm">Compound interest is calculated on both the principal and the accumulated interest from previous periods.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200 py-12 bg-white text-center text-slate-400 text-sm">
+        &copy; 2025 QuickCalc Suite. All calculations are private and local.
+    </footer>
+
+    <script>
+        let currentCurrency = '$';
+
+        function setCurrency(symbol) {
+            currentCurrency = symbol;
+            document.querySelectorAll('.currency-label').forEach(el => el.innerText = symbol);
+            
+            const btnUsd = document.getElementById('btn-usd');
+            const btnInr = document.getElementById('btn-inr');
+            
+            if (symbol === '$') {
+                btnUsd.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
+                btnUsd.classList.remove('text-slate-500');
+                btnInr.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
+                btnInr.classList.add('text-slate-500');
+            } else {
+                btnInr.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
+                btnInr.classList.remove('text-slate-500');
+                btnUsd.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
+                btnUsd.classList.add('text-slate-500');
+            }
+        }
+
+        function calculate() {
+            const p = parseFloat(document.getElementById('principal').value);
+            const r = parseFloat(document.getElementById('rate').value);
+            const t = parseFloat(document.getElementById('time').value);
+
+            if (isNaN(p) || isNaN(r) || isNaN(t) || p < 0 || r < 0 || t < 0) {
+                alert("Please enter valid positive numbers");
+                return;
+            }
+
+            const interest = (p * r * t) / 100;
+            const total = p + interest;
+
+            document.getElementById('res-interest').innerText = interest.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('res-total').innerText = total.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
