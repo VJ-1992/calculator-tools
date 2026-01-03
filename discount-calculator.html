@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Discount Calculator – Desktop Optimized Dashboard</title>
-    <meta name="description" content="Calculate final prices after multiple sequential discounts and taxes with our professional, no-scroll dashboard.">
+    <title>Pro Discount Calculator – Compact & Professional Dashboard</title>
+    <meta name="description" content="Calculate final prices after multiple sequential discounts and taxes with our high-density, no-scroll professional dashboard.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -20,7 +20,7 @@
             background-color: #f1f5f9; 
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevent entire page from scrolling on desktop */
+            overflow: hidden; 
         }
 
         /* Mobile Overrides: Restore normal scroll behavior */
@@ -32,7 +32,7 @@
         }
 
         nav {
-            height: 64px;
+            height: 52px; /* Reduced height */
             flex-shrink: 0;
             background: white;
             border-bottom: 1px solid #e2e8f0;
@@ -45,8 +45,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
-            overflow: hidden; /* Contain the card */
+            padding: 1.5rem; /* Reduced padding */
+            overflow: hidden;
         }
         @media (max-width: 768px) {
             .app-container { 
@@ -57,16 +57,16 @@
             }
         }
 
-        /* Main Card - Fits inside 90vh */
+        /* Main Card - Fits inside 70vh for compact above-the-fold display */
         .main-card {
             background: white;
-            border-radius: 24px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 20px; /* Smaller radius */
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.08);
             display: flex;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1000px; /* Slightly narrower */
             height: 100%;
-            max-height: 85vh; /* Ensure card stays within safe viewport limits */
+            max-height: 70vh; /* REDUCED height */
             overflow: hidden;
             border: 1px solid #e2e8f0;
         }
@@ -82,110 +82,110 @@
             }
         }
 
-        /* FIX: The Scrollable Input Pane */
+        /* Scrollable Input Pane with reduced padding */
         .input-pane {
             flex: 1.1;
             display: flex;
             flex-direction: column;
-            min-height: 0; /* Important for flex children scrolling */
-            overflow-y: auto; /* Enable internal scrolling */
-            padding: 2.5rem;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 1.5rem; /* REDUCED padding from 2.5rem */
             border-right: 1px solid #f1f5f9;
             scrollbar-width: thin;
             scrollbar-color: #cbd5e1 #f8fafc;
         }
-        .input-pane::-webkit-scrollbar { width: 6px; }
+        .input-pane::-webkit-scrollbar { width: 5px; }
         .input-pane::-webkit-scrollbar-track { background: #f8fafc; }
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
 
         @media (max-width: 768px) {
             .input-pane { 
-                padding: 1.5rem; 
+                padding: 1.25rem; 
                 background: white; 
-                border-radius: 20px; 
+                border-radius: 16px; 
                 border: 1px solid #e2e8f0; 
-                margin-bottom: 1.5rem; 
+                margin-bottom: 1rem; 
                 overflow-y: visible;
                 height: auto;
                 flex: none;
             }
         }
 
-        /* Sticky/Fixed Result Pane */
+        /* Result Pane with tighter spacing */
         .result-pane {
             flex: 0.9;
             background: #0f172a;
             color: white;
             display: flex;
             flex-direction: column;
-            padding: 2.5rem;
+            padding: 1.5rem; /* REDUCED padding from 2.5rem */
             justify-content: space-between;
-            overflow: hidden; /* Results shouldn't usually scroll independently */
+            overflow: hidden;
         }
         @media (max-width: 768px) {
             .result-pane { 
-                padding: 1.5rem; 
-                border-radius: 20px; 
+                padding: 1.25rem; 
+                border-radius: 16px; 
                 flex: none;
                 height: auto;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
         }
 
-        /* Components */
+        /* Tighter Components */
         .input-label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* Reduced font size */
             font-weight: 700;
             color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.35rem; /* Reduced margin */
         }
         .input-field {
             width: 100%;
             background: #f8fafc;
             border: 2px solid #f1f5f9;
-            border-radius: 12px;
-            padding: 0.875rem 1rem;
+            border-radius: 10px;
+            padding: 0.625rem 0.875rem; /* Tighter padding */
             font-weight: 600;
             outline: none;
             transition: all 0.2s;
-            font-size: 1.125rem;
+            font-size: 1rem; /* Reduced from 1.125rem */
         }
         .input-field:focus {
             border-color: #3b82f6;
             background: white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .pill-toggle {
             display: flex;
             background: #f1f5f9;
-            padding: 4px;
-            border-radius: 10px;
+            padding: 3px;
+            border-radius: 8px;
         }
         .pill-toggle button {
             flex: 1;
-            padding: 6px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            padding: 4px;
+            border-radius: 6px;
+            font-size: 0.65rem; /* Reduced font size */
+            font-weight: 800;
             transition: all 0.2s;
             color: #64748b;
         }
         .pill-toggle button.active {
             background: white;
             color: #2563eb;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .receipt-row {
             display: flex;
             justify-content: space-between;
-            padding: 0.875rem 0;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-            font-size: 0.9375rem;
+            padding: 0.5rem 0; /* Tighter rows */
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem; /* Smaller text */
         }
         .receipt-row:last-child { border: none; }
     </style>
@@ -193,15 +193,15 @@
 <body>
 
     <nav>
-        <div class="container mx-auto h-full px-6 flex justify-between items-center">
+        <div class="container mx-auto h-full px-5 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-2">
-                <div class="bg-blue-600 p-1.5 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
+                <div class="bg-blue-600 p-1 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
                 </div>
-                <span class="font-bold text-lg tracking-tight">QuickCalc<span class="text-blue-600">Pro</span></span>
+                <span class="font-bold text-base tracking-tight">QuickCalc<span class="text-blue-600">Pro</span></span>
             </a>
-            <div class="flex gap-6 text-[11px] font-black uppercase tracking-widest text-slate-400">
-                <a href="discount-calculator.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Discount</a>
+            <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="discount-calculator.html" class="text-blue-600 border-b border-blue-600 pb-0.5">Discount</a>
                 <a href="simple-interest-calculator.html" class="hover:text-slate-900 transition-colors">Interest</a>
                 <a href="profit-margin-calculator.html" class="hover:text-slate-900 transition-colors">Profit</a>
             </div>
@@ -211,82 +211,82 @@
     <div class="app-container">
         <div class="main-card">
             
-            <!-- INPUT PANEL - Forced Internal Scroll -->
+            <!-- INPUT PANEL -->
             <div class="input-pane">
-                <div class="flex items-center justify-between mb-8 flex-shrink-0">
-                    <h2 class="text-xl font-extrabold text-slate-800 tracking-tight">Price Settings</h2>
-                    <div class="flex gap-1 bg-slate-100 p-1 rounded-lg text-[10px] font-bold">
-                        <button onclick="setCurrency('$')" id="c-usd" class="px-3 py-1.5 bg-white shadow-sm rounded-md text-blue-600 transition-all">USD ($)</button>
-                        <button onclick="setCurrency('₹')" id="c-inr" class="px-3 py-1.5 text-slate-500 hover:text-slate-700 transition-all">INR (₹)</button>
+                <div class="flex items-center justify-between mb-5 flex-shrink-0">
+                    <h2 class="text-lg font-extrabold text-slate-800 tracking-tight">Price Settings</h2>
+                    <div class="flex gap-1 bg-slate-100 p-1 rounded-lg text-[9px] font-bold">
+                        <button onclick="setCurrency('$')" id="c-usd" class="px-2.5 py-1 bg-white shadow-sm rounded-md text-blue-600">USD</button>
+                        <button onclick="setCurrency('₹')" id="c-inr" class="px-2.5 py-1 text-slate-500">INR</button>
                     </div>
                 </div>
 
-                <div class="space-y-8">
+                <div class="space-y-5"> <!-- Tighter vertical spacing -->
                     <!-- Base Price -->
                     <div class="input-group">
-                        <label class="input-label">1. Original Item Price</label>
+                        <label class="input-label">1. Original Price</label>
                         <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol">$</span>
-                            <input type="number" id="base-price" placeholder="0.00" oninput="calculate()" class="input-field pl-10">
+                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-sm">$</span>
+                            <input type="number" id="base-price" placeholder="0.00" oninput="calculate()" class="input-field pl-9">
                         </div>
                     </div>
 
                     <!-- Discount 1 -->
-                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                        <div class="flex items-center justify-between mb-4">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <div class="flex items-center justify-between mb-3">
                             <label class="input-label !mb-0">2. Primary Discount</label>
-                            <div class="pill-toggle w-36">
-                                <button onclick="setD1Type('percent')" id="d1p" class="active">Percent</button>
-                                <button onclick="setD1Type('flat')" id="d1f">Flat</button>
+                            <div class="pill-toggle w-32">
+                                <button onclick="setD1Type('percent')" id="d1p" class="active">Pct %</button>
+                                <button onclick="setD1Type('flat')" id="d1f">Flat Amt</button>
                             </div>
                         </div>
                         <div class="relative">
                             <input type="number" id="d1-val" placeholder="0" oninput="calculate()" class="input-field">
-                            <span id="d1-suffix" class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">%</span>
+                            <span id="d1-suffix" class="absolute right-3.5 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-sm">%</span>
                         </div>
                     </div>
 
                     <!-- Discount 2 -->
-                    <div id="d2-wrap" class="hidden animate-in fade-in slide-in-from-top-2 duration-300">
-                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                            <div class="flex items-center justify-between mb-4">
-                                <label class="input-label !mb-0 text-blue-600">3. Extra Sequential Discount (%)</label>
-                                <button onclick="toggleD2(false)" class="text-[10px] font-black text-red-400 uppercase tracking-tighter hover:text-red-500">Remove</button>
+                    <div id="d2-wrap" class="hidden">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <label class="input-label !mb-0 text-blue-600">3. Extra Sequential %</label>
+                                <button onclick="toggleD2(false)" class="text-[9px] font-black text-red-400 uppercase tracking-tighter hover:text-red-500">Remove</button>
                             </div>
                             <div class="relative">
-                                <input type="number" id="d2-val" placeholder="0" oninput="calculate()" class="input-field border-blue-100">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">%</span>
+                                <input type="number" id="d2-val" placeholder="0" oninput="calculate()" class="input-field border-blue-50">
+                                <span class="absolute right-3.5 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-sm">%</span>
                             </div>
                         </div>
                     </div>
 
-                    <button id="add-d2" onclick="toggleD2(true)" class="flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                        Apply an additional discount
+                    <button id="add-d2" onclick="toggleD2(true)" class="flex items-center gap-1.5 text-[11px] font-bold text-blue-600 hover:text-blue-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        Apply additional discount
                     </button>
 
                     <!-- Tax -->
-                    <div class="space-y-4 pt-2">
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" id="tax-toggle" onchange="toggleTax(); calculate();" class="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer">
-                            <label for="tax-toggle" class="text-sm font-bold text-slate-600 cursor-pointer select-none">Include Sales Tax / GST</label>
+                    <div class="space-y-3 pt-1">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="tax-toggle" onchange="toggleTax(); calculate();" class="w-4 h-4 rounded border-slate-300 text-blue-600 cursor-pointer">
+                            <label for="tax-toggle" class="text-xs font-bold text-slate-500 cursor-pointer select-none">Include Tax / GST</label>
                         </div>
 
                         <div id="tax-wrap" class="hidden">
-                            <div class="p-5 bg-orange-50 border border-orange-100 rounded-2xl">
-                                <label class="input-label !text-orange-600">Tax Rate Percentage (%)</label>
-                                <input type="number" id="tax-rate" placeholder="e.g. 18" oninput="calculate()" class="input-field bg-white border-orange-100 focus:border-orange-400">
+                            <div class="p-4 bg-orange-50/50 border border-orange-100 rounded-xl">
+                                <label class="input-label !text-orange-600">Tax Rate (%)</label>
+                                <input type="number" id="tax-rate" placeholder="e.g. 18" oninput="calculate()" class="input-field bg-white border-orange-50 focus:border-orange-400">
                             </div>
                         </div>
                     </div>
 
                     <!-- Action Row -->
-                    <div class="grid grid-cols-2 gap-4 pt-4 pb-4">
-                        <button onclick="resetAll()" class="py-4 bg-slate-100 text-slate-500 font-bold rounded-xl text-sm hover:bg-slate-200 transition-colors">
-                            Clear All
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-xs hover:bg-slate-200">
+                            Clear
                         </button>
-                        <button onclick="copyBill()" id="copy-btn" class="py-4 bg-slate-900 text-white font-bold rounded-xl text-sm hover:bg-black transition-all flex items-center justify-center gap-2">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-xs hover:bg-black flex items-center justify-center gap-1.5">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                            Copy
                         </button>
                     </div>
@@ -296,22 +296,22 @@
             <!-- RESULT PANEL -->
             <div class="result-pane">
                 <div>
-                    <div class="flex items-center gap-2 mb-8 opacity-40">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                        <span class="text-[10px] font-black uppercase tracking-[0.4em]">Final Result</span>
+                    <div class="flex items-center gap-2 mb-6 opacity-40">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        <span class="text-[9px] font-black uppercase tracking-[0.4em]">Breakdown</span>
                     </div>
 
-                    <div class="mb-10 text-center">
-                        <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">Payable Amount</p>
-                        <div class="flex items-baseline justify-center gap-2">
-                            <span class="text-3xl font-bold currency-symbol text-blue-400">$</span>
-                            <span id="res-final" class="text-6xl md:text-7xl font-black tracking-tighter leading-none">0.00</span>
+                    <div class="mb-8 text-center">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Payable Amount</p>
+                        <div class="flex items-baseline justify-center gap-1.5">
+                            <span class="text-xl font-bold currency-symbol text-blue-400">$</span>
+                            <span id="res-final" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
                         </div>
                     </div>
 
-                    <div class="space-y-1">
+                    <div class="space-y-0.5">
                         <div class="receipt-row">
-                            <span class="text-slate-400">Original Price</span>
+                            <span class="text-slate-400">Initial Price</span>
                             <span class="font-bold tracking-tight"><span class="currency-symbol">$</span><span id="out-base">0.00</span></span>
                         </div>
                         <div class="receipt-row">
@@ -319,7 +319,7 @@
                             <span class="font-bold text-emerald-400">-<span class="currency-symbol">$</span><span id="out-d1">0.00</span></span>
                         </div>
                         <div id="row-d2" class="receipt-row hidden">
-                            <span class="text-slate-400">Extra Discount</span>
+                            <span class="text-slate-400">Extra Disc.</span>
                             <span class="font-bold text-emerald-400">-<span class="currency-symbol">$</span><span id="out-d2">0.00</span></span>
                         </div>
                         <div id="row-tax" class="receipt-row hidden">
@@ -329,14 +329,14 @@
                     </div>
                 </div>
 
-                <div class="pt-8 border-t border-slate-800">
+                <div class="pt-5 border-t border-slate-800">
                     <div class="flex justify-between items-end">
-                        <div class="space-y-1">
-                            <p class="text-[10px] font-black text-blue-500 uppercase tracking-widest">Total Saved</p>
-                            <p class="text-3xl font-black text-white"><span class="currency-symbol">$</span><span id="res-savings">0.00</span></p>
+                        <div class="space-y-0.5">
+                            <p class="text-[9px] font-black text-blue-500 uppercase tracking-widest">Saved</p>
+                            <p class="text-2xl font-black text-white"><span class="currency-symbol">$</span><span id="res-savings">0.00</span></p>
                         </div>
                         <div class="text-right">
-                            <div class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-lg text-xs font-black uppercase tracking-widest border border-emerald-500/20">
+                            <div class="inline-block px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-md text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
                                 <span id="savings-pct">0%</span> OFF
                             </div>
                         </div>
@@ -363,11 +363,11 @@
             const inrBtn = document.getElementById('c-inr');
             
             if (symbol === '$') {
-                usdBtn.className = "px-3 py-1.5 bg-white shadow-sm rounded-md text-blue-600 transition-all";
-                inrBtn.className = "px-3 py-1.5 text-slate-500 hover:text-slate-700 transition-all";
+                usdBtn.className = "px-2.5 py-1 bg-white shadow-sm rounded-md text-blue-600";
+                inrBtn.className = "px-2.5 py-1 text-slate-500";
             } else {
-                inrBtn.className = "px-3 py-1.5 bg-white shadow-sm rounded-md text-blue-600 transition-all";
-                usdBtn.className = "px-3 py-1.5 text-slate-500 hover:text-slate-700 transition-all";
+                inrBtn.className = "px-2.5 py-1 bg-white shadow-sm rounded-md text-blue-600";
+                usdBtn.className = "px-2.5 py-1 text-slate-500";
             }
             calculate();
         }
@@ -461,7 +461,7 @@
                 setTimeout(() => {
                     btn.innerHTML = prev;
                     btn.classList.replace('bg-emerald-600', 'bg-slate-900');
-                }, 1500);
+                }, 1200);
             } catch(e) {}
         }
 
