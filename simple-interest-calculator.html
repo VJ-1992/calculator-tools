@@ -4,160 +4,441 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Interest Calculator – Calculate Interest Easily</title>
-    <meta name="description" content="Use our free simple interest calculator to find out how much interest you'll earn or pay over time. Fast and accurate calculations.">
+    <meta name="description" content="Calculate simple interest and total amounts instantly. Supports monthly/yearly terms and optional compound interest comparison. Professional, high-density dashboard.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .calculator-card { transition: all 0.3s ease; }
-        .calculator-card:hover { transform: translateY(-2px); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        /* Shared UX Patterns with Discount Calculator */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            color: #0f172a;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f1f5f9; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+
+        @media (max-width: 768px) {
+            body { 
+                overflow-y: auto; 
+                height: auto; 
+            }
+        }
+
+        nav {
+            height: 52px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        @media (max-width: 768px) {
+            nav { height: auto; padding: 10px 0; }
+        }
+
+        .hero-section {
+            padding: 1.5rem 1rem 0 1rem;
+            text-align: center;
+        }
+
+        .app-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.25rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-height: 68vh;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .main-card { 
+                flex-direction: column; 
+                max-height: none; 
+                height: auto; 
+                border: none; 
+                box-shadow: none; 
+                background: transparent; 
+            }
+        }
+
+        /* Fixed Split-Pane Navigation */
+        .input-pane {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 1.25rem;
+            border-right: 1px solid #f1f5f9;
+            scrollbar-width: thin;
+        }
+        .input-pane::-webkit-scrollbar { width: 5px; }
+        .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
+
+        @media (max-width: 768px) {
+            .input-pane { 
+                padding: 1.25rem; 
+                background: white; 
+                border-radius: 16px; 
+                border: 1px solid #e2e8f0; 
+                margin-bottom: 1rem; 
+                overflow-y: visible;
+            }
+        }
+
+        .result-pane {
+            flex: 0.9;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 1.25rem;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+            .result-pane { padding: 1.25rem; border-radius: 16px; }
+        }
+
+        /* Typography & Components Matching */
+        .input-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.25rem;
+        }
+        .input-field {
+            width: 100%;
+            background: #f8fafc;
+            border: 2px solid #f1f5f9;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        .input-field:focus { border-color: #3b82f6; background: white; }
+
+        .pill-toggle { display: flex; background: #f1f5f9; padding: 2px; border-radius: 6px; }
+        .pill-toggle button { flex: 1; padding: 3px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #64748b; }
+        .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+
+        .receipt-row { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.8rem; }
+        
+        .content-section { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; }
+        .content-section h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .content-section p, .content-section li { color: #475569; line-height: 1.6; margin-bottom: 1rem; }
+        .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.9rem; }
     </style>
 </head>
-<body class="text-slate-900">
-    <!-- Updated Navigation -->
-    <nav class="bg-white border-b border-slate-200">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center py-4 md:py-4">
-            <a href="index.html" class="font-bold text-xl text-blue-600 mb-3 md:mb-0">QuickCalc</a>
-            <div class="flex space-x-4 text-sm font-medium overflow-x-auto w-full md:w-auto justify-center no-scrollbar">
-                <a href="discount-calculator.html" class="text-slate-600 hover:text-blue-600 whitespace-nowrap">Discount</a>
-                <a href="simple-interest-calculator.html" class="text-blue-600 whitespace-nowrap">Interest</a>
-                <a href="profit-margin-calculator.html" class="text-slate-600 hover:text-blue-600 whitespace-nowrap">Profit</a>
+<body>
+
+    <nav>
+        <div class="container mx-auto h-full px-5 flex flex-col md:flex-row justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 py-1">
+                <div class="bg-blue-600 p-1 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
+                </div>
+                <span class="font-bold text-base tracking-tight">QuickCalc<span class="text-blue-600">Pro</span></span>
+            </a>
+            <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400 overflow-x-auto w-full md:w-auto justify-center pb-1 md:pb-0 no-scrollbar">
+                <a href="discount-calculator.html" class="hover:text-slate-900 transition-colors whitespace-nowrap">Discount</a>
+                <a href="simple-interest-calculator.html" class="text-blue-600 border-b border-blue-600 pb-0.5 whitespace-nowrap">Interest</a>
+                <a href="profit-margin-calculator.html" class="hover:text-slate-900 transition-colors whitespace-nowrap">Profit</a>
             </div>
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 py-12 max-w-4xl">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold mb-4 tracking-tight">Simple Interest Calculator</h1>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-                Easily determine the total interest on loans or savings. Just enter the principal, rate, and time to get your results instantly.
-            </p>
-        </div>
+    <header class="hero-section">
+        <h1 class="text-3xl font-black tracking-tight text-slate-900 mb-2">Simple Interest Calculator</h1>
+        <p class="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+            Quickly estimate your returns or loan costs based on fixed interest rates. 
+            Includes optional compound comparison for smarter financial planning.
+        </p>
+    </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <!-- Calculator Input -->
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 calculator-card">
-                <div class="flex items-center justify-between mb-6">
-                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Currency</span>
-                    <div class="flex p-0.5 bg-slate-100 rounded-lg">
-                        <button onclick="setCurrency('$')" id="btn-usd" class="px-3 py-1 text-xs font-bold rounded-md bg-white text-blue-600 shadow-sm">USD ($)</button>
-                        <button onclick="setCurrency('₹')" id="btn-inr" class="px-3 py-1 text-xs font-bold rounded-md text-slate-500 hover:text-slate-700">INR (₹)</button>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Principal Amount (<span class="currency-label">$</span>)</label>
-                        <input type="number" id="principal" placeholder="e.g. 5000" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Rate (% p.a.)</label>
-                            <input type="number" id="rate" placeholder="e.g. 5" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Time (Years)</label>
-                            <input type="number" id="time" placeholder="e.g. 2" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+    <main>
+        <div class="app-container">
+            <div class="main-card">
+                
+                <!-- INPUT PANEL -->
+                <div class="input-pane">
+                    <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                        <h2 class="text-base font-extrabold text-slate-800">Calculator Settings</h2>
+                        <div class="flex gap-1 bg-slate-100 p-0.5 rounded-md text-[9px] font-bold">
+                            <button onclick="setCurrency('$')" id="c-usd" class="px-2 py-1 bg-white shadow-sm rounded text-blue-600">USD</button>
+                            <button onclick="setCurrency('₹')" id="c-inr" class="px-2 py-1 text-slate-500">INR</button>
                         </div>
                     </div>
-                    <button onclick="calculate()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors shadow-sm">
-                        Calculate Interest
-                    </button>
-                </div>
 
-                <!-- Results -->
-                <div id="results" class="hidden mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <p class="text-xs text-blue-600 uppercase font-bold tracking-wider mb-1">Interest Earned</p>
-                            <p class="text-xl font-bold text-slate-900"><span class="currency-label">$</span><span id="res-interest">0.00</span></p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-blue-600 uppercase font-bold tracking-wider mb-1">Total Amount</p>
-                            <p class="text-xl font-bold text-slate-900"><span class="currency-label">$</span><span id="res-total">0.00</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SEO Content -->
-            <div class="space-y-8">
-                <section>
-                    <h2 class="text-2xl font-bold mb-4">How This Calculator Works</h2>
-                    <p class="text-slate-600 leading-relaxed">
-                        Simple interest is calculated by multiplying the principal amount by the annual interest rate and then by the time period in years. Unlike compound interest, simple interest is only charged on the original principal.
-                    </p>
-                    <div class="mt-4 p-4 bg-slate-100 rounded-lg font-mono text-sm">
-                        Formula: Interest = Principal × Rate × Time / 100
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
                     <div class="space-y-4">
-                        <div>
-                            <h3 class="font-bold text-slate-800">What is Principal?</h3>
-                            <p class="text-slate-600 text-sm">The principal is the initial amount of money borrowed or invested, before any interest is added.</p>
+                        <!-- Principal -->
+                        <div class="input-group">
+                            <label class="input-label">1. Principal Amount</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs">$</span>
+                                <input type="number" id="principal" placeholder="0.00" oninput="calculate()" class="input-field pl-8">
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-slate-800">When is Simple Interest used?</h3>
-                            <p class="text-slate-600 text-sm">It is commonly used for short-term loans, car loans, and some types of consumer credit.</p>
+
+                        <!-- Interest Rate -->
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <label class="input-label">2. Annual Interest Rate (%)</label>
+                            <div class="relative">
+                                <input type="number" id="rate" placeholder="e.g. 5" oninput="calculate()" class="input-field">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs">%</span>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-slate-800">How is it different from Compound Interest?</h3>
-                            <p class="text-slate-600 text-sm">Compound interest is calculated on both the principal and the accumulated interest from previous periods.</p>
+
+                        <!-- Time Period -->
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="input-label !mb-0">3. Time Period</label>
+                                <div class="pill-toggle w-28">
+                                    <button onclick="setTimeUnit('years')" id="t-years" class="active">Years</button>
+                                    <button onclick="setTimeUnit('months')" id="t-months">Months</button>
+                                </div>
+                            </div>
+                            <input type="number" id="time-val" placeholder="0" oninput="calculate()" class="input-field">
+                        </div>
+
+                        <!-- Compound Toggle -->
+                        <div class="space-y-2 pt-1">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="compare-toggle" onchange="calculate();" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer">
+                                <label for="compare-toggle" class="text-[11px] font-bold text-slate-500 cursor-pointer select-none">Compare with Compound Interest</label>
+                            </div>
+                        </div>
+
+                        <!-- Action Row -->
+                        <div class="grid grid-cols-2 gap-2 pt-1 pb-2">
+                            <button onclick="resetAll()" class="py-2.5 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase">Clear</button>
+                            <button onclick="copyBill()" id="copy-btn" class="py-2.5 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5">Copy Result</button>
                         </div>
                     </div>
-                </section>
+                </div>
+
+                <!-- RESULT PANEL -->
+                <div class="result-pane">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4 opacity-40">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Projected Total</span>
+                        </div>
+
+                        <div class="mb-6 text-center">
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Maturity Value</p>
+                            <div class="flex items-baseline justify-center gap-1">
+                                <span class="text-base font-bold currency-symbol text-blue-400">$</span>
+                                <span id="res-total" class="text-4xl font-black tracking-tighter leading-none">0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-0.5">
+                            <div class="receipt-row">
+                                <span class="text-slate-400">Principal Investment</span>
+                                <span class="font-bold tracking-tight"><span class="currency-symbol">$</span><span id="out-principal">0.00</span></span>
+                            </div>
+                            <div class="receipt-row">
+                                <span class="text-slate-400">Interest Earned (SI)</span>
+                                <span class="font-bold text-emerald-400">+<span class="currency-symbol">$</span><span id="out-interest">0.00</span></span>
+                            </div>
+                            <div id="row-compound" class="receipt-row hidden border-t border-slate-800 mt-2 pt-2">
+                                <span class="text-blue-400">As Compound Interest</span>
+                                <span class="font-bold text-blue-400"><span class="currency-symbol">$</span><span id="out-ci">0.00</span></span>
+                            </div>
+                            <div id="row-diff" class="receipt-row hidden">
+                                <span class="text-slate-500">Yield Difference</span>
+                                <span class="font-bold text-white"><span class="currency-symbol">$</span><span id="out-diff">0.00</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800">
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-0.5">
+                                <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Total Interest</p>
+                                <p class="text-xl font-black text-white"><span class="currency-symbol">$</span><span id="res-si-only">0.00</span></p>
+                            </div>
+                            <div class="text-right">
+                                <div class="inline-block px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-md text-[9px] font-black uppercase border border-emerald-500/20">
+                                    <span id="interest-pct">0%</span> GAIN
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- SEO INFORMATIONAL CONTENT -->
+        <article class="content-section">
+            <h2>How to Use the Simple Interest Calculator</h2>
+            <p>Our professional dashboard provides instant clarity on your financial growth. Here is how to navigate the tool:</p>
+            <ul class="list-disc pl-5">
+                <li><strong>Principal Amount:</strong> Enter the initial sum of money invested or borrowed.</li>
+                <li><strong>Annual Interest Rate:</strong> Provide the yearly interest percentage (e.g., 5.5).</li>
+                <li><strong>Term Period:</strong> Choose between Years or Months to match your contract terms.</li>
+                <li><strong>Compound Comparison:</strong> Toggle this option to see how much more you would earn (or pay) if the interest were compounded annually.</li>
+                <li><strong>Instant Summary:</strong> The dark panel on the right updates in real-time as you type.</li>
+            </ul>
+
+            <h2>Simple Interest Calculation Formula</h2>
+            <p>Simple interest is calculated exclusively on the principal amount, which makes it linear and predictable.</p>
+            <div class="formula-box">
+                Interest = (Principal × Rate × Time) / 100<br>
+                Total Amount = Principal + Interest<br>
+                *Note: Time must be expressed in years. (Months / 12)
+            </div>
+            <p>Unlike <strong>Compound Interest</strong>, where you earn interest on your interest, Simple Interest remains the same for every period, assuming the principal isn't changed.</p>
+
+            <h2>Real-Life Example Calculation</h2>
+            <p>Suppose you lend <strong>$5,000</strong> to a friend for a business startup at a <strong>6%</strong> annual rate for <strong>18 months</strong>.</p>
+            <ul class="list-none pl-0">
+                <li>💰 <strong>Principal:</strong> $5,000.00</li>
+                <li>🕒 <strong>Time in Years:</strong> 1.5 Years (18 ÷ 12)</li>
+                <li>📈 <strong>Interest Earned:</strong> $5,000 × 0.06 × 1.5 = $450.00</li>
+                <li>✅ <strong>Final Repayment:</strong> $5,450.00</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="space-y-6 mt-6">
+                <div>
+                    <h4 class="font-bold text-slate-800">What is the main difference between Simple and Compound interest?</h4>
+                    <p class="text-sm">Simple interest is calculated only on the initial amount (principal) you invested or borrowed. Compound interest is calculated on the principal plus any interest that has accumulated from previous periods.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800">When is Simple Interest typically used?</h4>
+                    <p class="text-sm">It is most common in short-term loans, car loans, and some types of certificates of deposit (CDs) where interest is paid out rather than reinvested.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Is this calculator accurate for bank loans?</h4>
+                    <p class="text-sm">Most modern bank mortgages and savings accounts use compounding interest. This tool is perfect for private loans or specific fixed-rate financial products that explicitly state "simple interest."</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800">How do I calculate for only a few days?</h4>
+                    <p class="text-sm">Enter the number of days as a decimal of a year. For example, for 30 days, you could enter approx 0.082 years (30 / 365).</p>
+                </div>
+            </div>
+        </article>
     </main>
 
-    <footer class="mt-20 border-t border-slate-200 py-12 bg-white text-center text-slate-400 text-sm">
-        &copy; 2025 QuickCalc Suite. All calculations are private and local.
+    <footer class="bg-white border-t border-slate-200 py-10 text-center">
+        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">&copy; 2025 QuickCalc Pro. Efficiency via Simplicity.</p>
     </footer>
 
     <script>
-        let currentCurrency = '$';
+        let state = {
+            currency: '$',
+            timeUnit: 'years'
+        };
 
         function setCurrency(symbol) {
-            currentCurrency = symbol;
-            document.querySelectorAll('.currency-label').forEach(el => el.innerText = symbol);
-            
-            const btnUsd = document.getElementById('btn-usd');
-            const btnInr = document.getElementById('btn-inr');
-            
-            if (symbol === '$') {
-                btnUsd.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
-                btnUsd.classList.remove('text-slate-500');
-                btnInr.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
-                btnInr.classList.add('text-slate-500');
-            } else {
-                btnInr.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
-                btnInr.classList.remove('text-slate-500');
-                btnUsd.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
-                btnUsd.classList.add('text-slate-500');
-            }
+            state.currency = symbol;
+            document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol);
+            const usdBtn = document.getElementById('c-usd'), inrBtn = document.getElementById('c-inr');
+            if (symbol === '$') { usdBtn.className = "px-2 py-1 bg-white shadow-sm rounded text-blue-600"; inrBtn.className = "px-2 py-1 text-slate-500"; }
+            else { inrBtn.className = "px-2 py-1 bg-white shadow-sm rounded text-blue-600"; usdBtn.className = "px-2 py-1 text-slate-500"; }
+            calculate();
+        }
+
+        function setTimeUnit(unit) {
+            state.timeUnit = unit;
+            document.getElementById('t-years').classList.toggle('active', unit === 'years');
+            document.getElementById('t-months').classList.toggle('active', unit === 'months');
+            calculate();
         }
 
         function calculate() {
-            const p = parseFloat(document.getElementById('principal').value);
-            const r = parseFloat(document.getElementById('rate').value);
-            const t = parseFloat(document.getElementById('time').value);
+            const p = parseFloat(document.getElementById('principal').value) || 0;
+            const r = parseFloat(document.getElementById('rate').value) || 0;
+            const tInput = parseFloat(document.getElementById('time-val').value) || 0;
+            const compare = document.getElementById('compare-toggle').checked;
 
-            if (isNaN(p) || isNaN(r) || isNaN(t) || p < 0 || r < 0 || t < 0) {
-                alert("Please enter valid positive numbers");
-                return;
+            // Normalize time to years
+            const tYears = state.timeUnit === 'years' ? tInput : tInput / 12;
+
+            // Simple Interest Logic
+            const si = (p * r * tYears) / 100;
+            const totalSI = p + si;
+
+            // UI Elements
+            const rowCompound = document.getElementById('row-compound');
+            const rowDiff = document.getElementById('row-diff');
+            
+            if (compare && p > 0 && r > 0 && tYears > 0) {
+                // Compound Interest Logic (Annual)
+                const totalCI = p * Math.pow((1 + (r / 100)), tYears);
+                const ciOnly = totalCI - p;
+                const diff = totalCI - totalSI;
+
+                rowCompound.classList.remove('hidden');
+                rowDiff.classList.remove('hidden');
+                document.getElementById('out-ci').innerText = fmt(totalCI);
+                document.getElementById('out-diff').innerText = fmt(diff);
+            } else {
+                rowCompound.classList.add('hidden');
+                rowDiff.classList.add('hidden');
             }
 
-            const interest = (p * r * t) / 100;
-            const total = p + interest;
+            const gainPct = p > 0 ? (si / p) * 100 : 0;
 
-            document.getElementById('res-interest').innerText = interest.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('res-total').innerText = total.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('results').classList.remove('hidden');
+            // Render Results
+            document.getElementById('res-total').innerText = fmt(totalSI);
+            document.getElementById('out-principal').innerText = fmt(p);
+            document.getElementById('out-interest').innerText = fmt(si);
+            document.getElementById('res-si-only').innerText = fmt(si);
+            document.getElementById('interest-pct').innerText = Math.round(gainPct) + '%';
         }
+
+        function fmt(v) {
+            return v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function resetAll() {
+            document.getElementById('principal').value = '';
+            document.getElementById('rate').value = '';
+            document.getElementById('time-val').value = '';
+            document.getElementById('compare-toggle').checked = false;
+            calculate();
+        }
+
+        async function copyBill() {
+            const total = document.getElementById('res-total').innerText;
+            const interest = document.getElementById('res-si-only').innerText;
+            const text = `Interest Check:\nTotal Maturity: ${state.currency}${total}\nInterest Earned: ${state.currency}${interest}\nCalculated on QuickCalc Pro.`;
+            try {
+                await navigator.clipboard.writeText(text);
+                const btn = document.getElementById('copy-btn');
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = 'Copy Result', 1200);
+            } catch(e) {}
+        }
+
+        // Initialize
+        calculate();
     </script>
 </body>
 </html>
