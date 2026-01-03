@@ -14,9 +14,10 @@
             margin: 0;
             padding: 0;
             color: #0f172a;
+            min-height: 100vh;
+            overflow-y: auto; /* Allow page scrolling */
         }
 
-        /* Nav and Hero Section */
         nav {
             height: 52px;
             background: white;
@@ -27,21 +28,18 @@
         }
 
         @media (max-width: 768px) {
-            nav {
-                height: auto;
-                padding: 10px 0;
-            }
+            nav { height: auto; padding: 10px 0; }
         }
 
         .hero-section {
-            padding: 1.5rem 1rem 0 1rem;
+            padding: 2.5rem 1rem 1.5rem 1rem;
             text-align: center;
         }
 
         .app-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 1.25rem;
+            padding: 0 1.25rem 2.5rem 1.25rem;
             display: flex;
             justify-content: center;
         }
@@ -53,8 +51,8 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             display: flex;
             width: 100%;
-            height: 100%;
-            max-height: 68vh;
+            height: 650px; /* Fixed height on desktop for dashboard feel */
+            max-height: 80vh;
             overflow: hidden;
             border: 1px solid #e2e8f0;
         }
@@ -67,16 +65,16 @@
                 border: none; 
                 box-shadow: none; 
                 background: transparent; 
+                overflow: visible;
             }
         }
 
-        /* Internal scrolling for inputs on desktop */
         .input-pane {
             flex: 1.1;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            padding: 1.25rem;
+            padding: 1.5rem;
             border-right: 1px solid #f1f5f9;
             scrollbar-width: thin;
         }
@@ -94,78 +92,32 @@
             }
         }
 
-        /* Static Results Dashboard */
         .result-pane {
             flex: 0.9;
             background: #0f172a;
             color: white;
             display: flex;
             flex-direction: column;
-            padding: 1.25rem;
+            padding: 1.5rem;
             justify-content: space-between;
         }
 
         @media (max-width: 768px) {
-            .result-pane { 
-                padding: 1.25rem; 
-                border-radius: 16px; 
-            }
+            .result-pane { padding: 1.25rem; border-radius: 16px; }
         }
 
-        /* SEO Content Sections */
-        .content-section {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 0 1.5rem;
-        }
-        .content-section h2 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        .content-section p, .content-section li {
-            color: #475569;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        .formula-box {
-            background: #f8fafc;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.9rem;
-        }
+        .content-section { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; }
+        .content-section h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .content-section p, .content-section li { color: #475569; line-height: 1.6; margin-bottom: 1rem; }
+        .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1.5rem 0; font-family: ui-monospace, monospace; font-size: 0.9rem; }
 
-        /* Tighter Components */
-        .input-label {
-            display: block;
-            font-size: 0.65rem;
-            font-weight: 800;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.25rem;
-        }
-        .input-field {
-            width: 100%;
-            background: #f8fafc;
-            border: 2px solid #f1f5f9;
-            border-radius: 8px;
-            padding: 0.5rem 0.75rem;
-            font-weight: 600;
-            outline: none;
-            font-size: 0.95rem;
-        }
+        .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+        .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
-
         .pill-toggle { display: flex; background: #f1f5f9; padding: 2px; border-radius: 6px; }
         .pill-toggle button { flex: 1; padding: 3px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #64748b; }
         .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-
-        .receipt-row { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.8rem; }
+        .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -187,10 +139,10 @@
     </nav>
 
     <header class="hero-section">
-        <h1 class="text-3xl font-black tracking-tight text-slate-900 mb-2">Discount Calculator</h1>
-        <p class="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
-            Quickly calculate final prices with support for percentage or flat discounts, 
-            sequential savings, and tax integration. Accurate results in seconds.
+        <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3">Discount Calculator</h1>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Calculate exact savings and final prices after multiple discounts and taxes. 
+            Perfect for comparing deals, retail shopping, and business pricing strategies.
         </p>
     </header>
 
@@ -200,7 +152,7 @@
                 
                 <!-- INPUT PANEL -->
                 <div class="input-pane">
-                    <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                    <div class="flex items-center justify-between mb-5 flex-shrink-0">
                         <h2 class="text-base font-extrabold text-slate-800">Calculator Settings</h2>
                         <div class="flex gap-1 bg-slate-100 p-0.5 rounded-md text-[9px] font-bold">
                             <button onclick="setCurrency('$')" id="c-usd" class="px-2 py-1 bg-white shadow-sm rounded text-blue-600">USD</button>
@@ -217,7 +169,7 @@
                             </div>
                         </div>
 
-                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
                             <div class="flex items-center justify-between mb-2">
                                 <label class="input-label !mb-0">2. Primary Discount</label>
                                 <div class="pill-toggle w-28">
@@ -232,7 +184,7 @@
                         </div>
 
                         <div id="d2-wrap" class="hidden">
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
                                 <div class="flex items-center justify-between mb-2">
                                     <label class="input-label !mb-0 text-blue-600">3. Extra Sequential %</label>
                                     <button onclick="toggleD2(false)" class="text-[8px] font-black text-red-400 uppercase tracking-tighter">Remove</button>
@@ -246,25 +198,25 @@
 
                         <button id="add-d2" onclick="toggleD2(true)" class="flex items-center gap-1.5 text-[10px] font-bold text-blue-600 hover:text-blue-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                            Add another discount
+                            Add sequential discount
                         </button>
 
-                        <div class="space-y-2 pt-1">
+                        <div class="space-y-3 pt-1">
                             <div class="flex items-center gap-2">
                                 <input type="checkbox" id="tax-toggle" onchange="toggleTax(); calculate();" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer">
                                 <label for="tax-toggle" class="text-[11px] font-bold text-slate-500 cursor-pointer">Apply Sales Tax / GST</label>
                             </div>
                             <div id="tax-wrap" class="hidden">
-                                <div class="p-3 bg-orange-50/50 border border-orange-100 rounded-xl">
+                                <div class="p-4 bg-orange-50/50 border border-orange-100 rounded-xl">
                                     <label class="input-label !text-orange-600">Tax Rate (%)</label>
                                     <input type="number" id="tax-rate" placeholder="e.g. 18" oninput="calculate()" class="input-field bg-white border-orange-50">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-2 pt-1 pb-2">
-                            <button onclick="resetAll()" class="py-2.5 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase">Clear</button>
-                            <button onclick="copyBill()" id="copy-btn" class="py-2.5 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5">Copy Result</button>
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase">Clear</button>
+                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5">Copy Result</button>
                         </div>
                     </div>
                 </div>
@@ -272,16 +224,16 @@
                 <!-- RESULT PANEL -->
                 <div class="result-pane">
                     <div>
-                        <div class="flex items-center gap-2 mb-4 opacity-40">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        <div class="flex items-center gap-2 mb-5 opacity-40">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                             <span class="text-[8px] font-black uppercase tracking-[0.4em]">Breakdown</span>
                         </div>
 
-                        <div class="mb-6 text-center">
-                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Final Total</p>
-                            <div class="flex items-baseline justify-center gap-1">
-                                <span class="text-base font-bold currency-symbol text-blue-400">$</span>
-                                <span id="res-final" class="text-4xl font-black tracking-tighter leading-none">0.00</span>
+                        <div class="mb-10 text-center">
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Payable Total</p>
+                            <div class="flex items-baseline justify-center gap-1.5">
+                                <span class="text-xl font-bold currency-symbol text-blue-400">$</span>
+                                <span id="res-final" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
                             </div>
                         </div>
 
@@ -291,28 +243,28 @@
                                 <span class="font-bold tracking-tight"><span class="currency-symbol">$</span><span id="out-base">0.00</span></span>
                             </div>
                             <div class="receipt-row">
-                                <span class="text-slate-400">Primary Save</span>
+                                <span class="text-slate-400">Total Savings</span>
                                 <span class="font-bold text-emerald-400">-<span class="currency-symbol">$</span><span id="out-d1">0.00</span></span>
                             </div>
                             <div id="row-d2" class="receipt-row hidden">
-                                <span class="text-slate-400">Extra Save</span>
+                                <span class="text-slate-400">Extra Discount</span>
                                 <span class="font-bold text-emerald-400">-<span class="currency-symbol">$</span><span id="out-d2">0.00</span></span>
                             </div>
                             <div id="row-tax" class="receipt-row hidden">
-                                <span class="text-slate-400">Add Tax</span>
+                                <span class="text-slate-400">Estimated Tax</span>
                                 <span class="font-bold text-orange-400">+<span class="currency-symbol">$</span><span id="out-tax">0.00</span></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-slate-800">
+                    <div class="pt-6 border-t border-slate-800">
                         <div class="flex justify-between items-end">
                             <div class="space-y-0.5">
-                                <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Total Saved</p>
-                                <p class="text-xl font-black text-white"><span class="currency-symbol">$</span><span id="res-savings">0.00</span></p>
+                                <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Saved Total</p>
+                                <p class="text-2xl font-black text-white"><span class="currency-symbol">$</span><span id="res-savings">0.00</span></p>
                             </div>
                             <div class="text-right">
-                                <div class="inline-block px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-md text-[9px] font-black uppercase border border-emerald-500/20">
+                                <div class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-md text-[10px] font-black uppercase border border-emerald-500/20">
                                     <span id="savings-pct">0%</span> OFF
                                 </div>
                             </div>
@@ -343,7 +295,7 @@
             </div>
             <p>When using <strong>sequential discounts</strong>, the second discount is applied to the already reduced price, not the original price. This is standard retail practice for "double discount" events.</p>
 
-            <h2>Real-Life Example Calculation</h2>
+            <h2>Example Calculation</h2>
             <p>Imagine buying a high-end laptop originally priced at <strong>$1,200</strong>.</p>
             <ul class="list-none pl-0">
                 <li>📉 <strong>Primary Discount:</strong> 15% Store Sale (-$180). New balance: $1,020.</li>
@@ -432,7 +384,7 @@
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('res-final').innerText = fmt(final);
             document.getElementById('out-base').innerText = fmt(base);
-            document.getElementById('out-d1').innerText = fmt(d1Amt);
+            document.getElementById('out-d1').innerText = fmt(d1Amt + d2Amt);
             document.getElementById('out-d2').innerText = fmt(d2Amt);
             document.getElementById('out-tax').innerText = fmt(taxAmt);
             document.getElementById('res-savings').innerText = fmt(totalSavings);
@@ -451,7 +403,7 @@
         async function copyBill() {
             const final = document.getElementById('res-final').innerText;
             const save = document.getElementById('res-savings').innerText;
-            const text = `Discount Check:\nFinal Price: ${state.currency}${final}\nTotal Saved: ${state.currency}${save}\nCalculated on QuickCalc Pro.`;
+            const text = `Price Breakdown:\nFinal: ${state.currency}${final}\nSaved: ${state.currency}${save}\nCalculated via QuickCalc Pro.`;
             try {
                 await navigator.clipboard.writeText(text);
                 const btn = document.getElementById('copy-btn');
