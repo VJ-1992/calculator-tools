@@ -8,108 +8,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #f1f5f9; 
-            margin: 0;
-            padding: 0;
-            color: #0f172a;
-            min-height: 100vh;
-            overflow-y: auto; /* Fixed: Allow page scrolling */
-        }
-
-        nav {
-            height: 52px;
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        @media (max-width: 768px) {
-            nav { height: auto; padding: 10px 0; }
-        }
-
-        .hero-section {
-            padding: 2.5rem 1rem 1.5rem 1rem;
-            text-align: center;
-        }
-
-        .app-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1.25rem 2.5rem 1.25rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .main-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            width: 100%;
-            height: 650px; /* Fixed height for dashboard effect on desktop */
-            max-height: 80vh;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        @media (max-width: 768px) {
-            .main-card { 
-                flex-direction: column; 
-                max-height: none; 
-                height: auto; 
-                border: none; 
-                box-shadow: none; 
-                background: transparent; 
-                overflow: visible;
-            }
-        }
-
-        .input-pane {
-            flex: 1.1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            padding: 1.5rem;
-            border-right: 1px solid #f1f5f9;
-            scrollbar-width: thin;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; overflow-y: auto; }
+        nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
+        @media (max-width: 768px) { nav { height: auto; padding: 10px 0; } }
+        .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
+        .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; justify-content: center; }
+        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 80vh; overflow: hidden; border: 1px solid #e2e8f0; }
+        @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
+        .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
         .input-pane::-webkit-scrollbar { width: 5px; }
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
-
-        @media (max-width: 768px) {
-            .input-pane { 
-                padding: 1.25rem; 
-                background: white; 
-                border-radius: 16px; 
-                border: 1px solid #e2e8f0; 
-                margin-bottom: 1rem; 
-                overflow-y: visible;
-            }
-        }
-
-        .result-pane {
-            flex: 0.9;
-            background: #0f172a;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem;
-            justify-content: space-between;
-        }
-
-        @media (max-width: 768px) {
-            .result-pane { padding: 1.25rem; border-radius: 16px; }
-        }
-
+        @media (max-width: 768px) { .input-pane { padding: 1.25rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow-y: visible; } }
+        .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
+        @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
         .content-section { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; }
         .content-section h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem; letter-spacing: -0.02em; }
         .content-section p, .content-section li { color: #475569; line-height: 1.6; margin-bottom: 1rem; }
         .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.9rem; }
-
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
@@ -120,7 +35,6 @@
     </style>
 </head>
 <body>
-
     <nav>
         <div class="container mx-auto h-full px-5 flex flex-col md:flex-row justify-between items-center">
             <a href="index.html" class="flex items-center gap-2 py-1">
@@ -139,17 +53,12 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3">Simple Interest Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Quickly estimate your returns or loan costs based on fixed interest rates. 
-            Compare against compound interest in real-time with our professional financial dashboard.
-        </p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">Quickly estimate returns or loan costs based on fixed interest rates.</p>
     </header>
 
     <main>
         <div class="app-container">
             <div class="main-card">
-                
-                <!-- INPUT PANEL -->
                 <div class="input-pane">
                     <div class="flex items-center justify-between mb-5 flex-shrink-0">
                         <h2 class="text-base font-extrabold text-slate-800">Calculator Settings</h2>
@@ -158,251 +67,70 @@
                             <button onclick="setCurrency('₹')" id="c-inr" class="px-2 py-1 text-slate-500">INR</button>
                         </div>
                     </div>
-
                     <div class="space-y-4">
                         <div class="input-group">
                             <label class="input-label">1. Principal Amount</label>
-                            <div class="relative">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs">$</span>
-                                <input type="number" id="principal" placeholder="0.00" oninput="calculate()" class="input-field pl-8">
-                            </div>
+                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs">$</span><input type="number" id="principal" placeholder="0.00" oninput="calculate()" class="input-field pl-8"></div>
                         </div>
-
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <label class="input-label">2. Annual Interest Rate (%)</label>
-                            <div class="relative">
-                                <input type="number" id="rate" placeholder="e.g. 5" oninput="calculate()" class="input-field">
-                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs">%</span>
-                            </div>
-                        </div>
-
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <div class="flex items-center justify-between mb-2">
-                                <label class="input-label !mb-0">3. Time Period</label>
-                                <div class="pill-toggle w-28">
-                                    <button onclick="setTimeUnit('years')" id="t-years" class="active">Years</button>
-                                    <button onclick="setTimeUnit('months')" id="t-months">Months</button>
-                                </div>
-                            </div>
-                            <input type="number" id="time-val" placeholder="0" oninput="calculate()" class="input-field">
-                        </div>
-
-                        <div class="space-y-2 pt-1">
-                            <div class="flex items-center gap-2">
-                                <input type="checkbox" id="compare-toggle" onchange="calculate();" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer">
-                                <label for="compare-toggle" class="text-[11px] font-bold text-slate-500 cursor-pointer select-none">Compare with Compound Interest</label>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3 pt-2">
-                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase">Clear</button>
-                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5">Copy Result</button>
-                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100"><label class="input-label">2. Annual Interest Rate (%)</label><div class="relative"><input type="number" id="rate" placeholder="e.g. 5" oninput="calculate()" class="input-field"><span class="absolute right-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs">%</span></div></div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100"><div class="flex items-center justify-between mb-2"><label class="input-label !mb-0">3. Time Period</label><div class="pill-toggle w-28"><button onclick="setTimeUnit('years')" id="t-years" class="active">Years</button><button onclick="setTimeUnit('months')" id="t-months">Months</button></div></div><input type="number" id="time-val" placeholder="0" oninput="calculate()" class="input-field"></div>
+                        <div class="space-y-2 pt-1"><div class="flex items-center gap-2"><input type="checkbox" id="compare-toggle" onchange="calculate();" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer"><label for="compare-toggle" class="text-[11px] font-bold text-slate-500 cursor-pointer select-none">Compare with Compound Interest</label></div></div>
+                        <div class="grid grid-cols-2 gap-3 pt-2"><button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase">Clear</button><button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5">Copy Result</button></div>
                     </div>
                 </div>
-
-                <!-- RESULT PANEL -->
                 <div class="result-pane">
                     <div>
-                        <div class="flex items-center gap-2 mb-5 opacity-40">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Projected Yield</span>
-                        </div>
-
-                        <div class="mb-10 text-center">
-                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Maturity Value</p>
-                            <div class="flex items-baseline justify-center gap-1.5">
-                                <span class="text-xl font-bold currency-symbol text-blue-400">$</span>
-                                <span id="res-total" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
-                            </div>
-                        </div>
-
-                        <div class="space-y-0.5">
-                            <div class="receipt-row">
-                                <span class="text-slate-400">Initial Principal</span>
-                                <span class="font-bold tracking-tight"><span class="currency-symbol">$</span><span id="out-principal">0.00</span></span>
-                            </div>
-                            <div class="receipt-row">
-                                <span class="text-slate-400">Total Interest (SI)</span>
-                                <span class="font-bold text-emerald-400">+<span class="currency-symbol">$</span><span id="out-interest">0.00</span></span>
-                            </div>
-                            <div id="row-compound" class="receipt-row hidden border-t border-slate-800 mt-2 pt-2">
-                                <span class="text-blue-400">As Compound Yield</span>
-                                <span class="font-bold text-blue-400"><span class="currency-symbol">$</span><span id="out-ci">0.00</span></span>
-                            </div>
-                            <div id="row-diff" class="receipt-row hidden">
-                                <span class="text-slate-500">Yield Gap</span>
-                                <span class="font-bold text-white"><span class="currency-symbol">$</span><span id="out-diff">0.00</span></span>
-                            </div>
-                        </div>
+                        <div class="flex items-center gap-2 mb-5 opacity-40"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="text-[8px] font-black uppercase tracking-[0.4em]">Yield</span></div>
+                        <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Maturity Value</p><div class="flex items-baseline justify-center gap-1.5"><span class="text-xl font-bold currency-symbol text-blue-400">$</span><span id="res-total" class="text-5xl font-black tracking-tighter leading-none">0.00</span></div></div>
+                        <div class="space-y-0.5"><div class="receipt-row"><span>Principal</span><span class="font-bold"><span class="currency-symbol">$</span><span id="out-principal">0.00</span></span></div><div class="receipt-row"><span>Interest (SI)</span><span class="font-bold text-emerald-400">+<span class="currency-symbol">$</span><span id="out-interest">0.00</span></span></div><div id="row-compound" class="receipt-row hidden border-t border-slate-800 mt-2 pt-2"><span class="text-blue-400">As Compound</span><span class="font-bold text-blue-400"><span class="currency-symbol">$</span><span id="out-ci">0.00</span></span></div></div>
                     </div>
-
-                    <div class="pt-6 border-t border-slate-800">
-                        <div class="flex justify-between items-end">
-                            <div class="space-y-0.5">
-                                <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Total Earnings</p>
-                                <p class="text-2xl font-black text-white"><span class="currency-symbol">$</span><span id="res-si-only">0.00</span></p>
-                            </div>
-                            <div class="text-right">
-                                <div class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-md text-[10px] font-black uppercase border border-emerald-500/20">
-                                    <span id="interest-pct">0%</span> GAIN
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="pt-6 border-t border-slate-800"><div class="flex justify-between items-end"><div class="space-y-0.5"><p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Earnings</p><p class="text-2xl font-black text-white"><span class="currency-symbol">$</span><span id="res-si-only">0.00</span></p></div><div class="text-right"><div class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-md text-[10px] font-black uppercase border border-emerald-500/20"><span id="interest-pct">0%</span> GAIN</div></div></div></div>
                 </div>
             </div>
         </div>
-
-        <!-- SEO INFORMATIONAL CONTENT -->
-        <article class="content-section">
-            <h2>How to Use the Simple Interest Calculator</h2>
-            <p>Our tool is designed for speed and clarity. Follow these simple steps to find your interest earnings or loan costs:</p>
-            <ul class="list-disc pl-5">
-                <li><strong>Enter Principal Amount:</strong> Type the initial amount of money you are investing or borrowing.</li>
-                <li><strong>Enter Interest Rate:</strong> Provide the annual interest rate as a percentage.</li>
-                <li><strong>Select Time Period:</strong> Use the toggle to choose between Years or Months, then enter the duration.</li>
-                <li><strong>View Results:</strong> The right-hand panel updates instantly to show the Interest Earned and the total Maturity Value.</li>
-                <li><strong>Optional Comparison:</strong> Tick the 'Compare with Compound Interest' checkbox to see how simple interest stacks up against compound growth.</li>
-            </ul>
-
-            <h2>Simple Interest Formula</h2>
-            <p>Understanding the math behind simple interest helps you verify your results and plan your finances better. Here is the core formula used by this tool:</p>
-            <div class="formula-box">
-                Simple Interest (SI) = (P × R × T) ÷ 100<br>
-                Total Maturity Amount = P + SI
-            </div>
-            <p>Where:</p>
-            <ul class="list-disc pl-5">
-                <li><strong>P (Principal):</strong> The original sum of money.</li>
-                <li><strong>R (Rate):</strong> The annual percentage interest rate.</li>
-                <li><strong>T (Time):</strong> The time period for which the money is borrowed or invested (expressed in years).</li>
-            </ul>
-
-            <h2>Example Calculation</h2>
-            <p>Imagine you invest <strong>$10,000</strong> at an annual simple interest rate of <strong>5%</strong> for a period of <strong>3 years</strong>.</p>
-            <ul class="list-none pl-0">
-                <li>💰 <strong>Principal (P):</strong> $10,000</li>
-                <li>📉 <strong>Interest Rate (R):</strong> 5%</li>
-                <li>🕒 <strong>Time Period (T):</strong> 3 Years</li>
-                <li>📈 <strong>Calculation:</strong> ($10,000 × 5 × 3) ÷ 100 = $1,500</li>
-                <li>✅ <strong>Final Total Amount:</strong> $11,500</li>
-            </ul>
-
-            <h2>Simple vs. Compound Interest</h2>
-            <p>The primary difference between these two lies in the "compounding" effect. While simple interest is calculated only on the initial principal, compound interest is calculated on the principal *plus* any interest that has accumulated in previous periods. Over long durations, compound interest grows significantly faster than simple interest.</p>
-
-            <h2>Frequently Asked Questions (FAQs)</h2>
-            <div class="space-y-6 mt-6">
-                <div>
-                    <h4 class="font-bold text-slate-800">What is a simple interest calculator?</h4>
-                    <p class="text-sm">It is a digital tool that calculates the interest charge or earnings on a principal sum over a specific time period using a fixed interest rate.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-800">When should I use simple interest?</h4>
-                    <p class="text-sm">Simple interest is typically used for short-term loans, car loans, and certain types of fixed-rate certificates of deposit where interest is paid out rather than reinvested.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-800">Can I calculate interest for months?</h4>
-                    <p class="text-sm">Yes. Our calculator allows you to toggle between years and months. If months are selected, the tool automatically divides the duration by 12 to convert it to the required annual time unit for the formula.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-800">Is this calculator free?</h4>
-                    <p class="text-sm">Yes, QuickCalc Pro is 100% free to use, and all calculations are processed locally in your browser for maximum privacy.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-800">Does it work on mobile?</h4>
-                    <p class="text-sm">Absolutely. The calculator features a fully responsive design, ensuring it works perfectly on smartphones, tablets, and desktop computers.</p>
-                </div>
-            </div>
-        </article>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-10 text-center">
-        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">&copy; 2025 QuickCalc Pro. Efficiency via Simplicity.</p>
+    <footer class="bg-white border-t border-slate-200 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8">&copy; 2025 QuickCalc Pro. Accurate Financial Logic.</p>
+            <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+                <a href="terms-conditions.html" class="hover:text-blue-600 transition-colors">Terms of Service</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        let state = {
-            currency: '$',
-            timeUnit: 'years'
-        };
-
+        let state = { currency: '$', timeUnit: 'years' };
         function setCurrency(symbol) {
-            state.currency = symbol;
-            document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol);
-            const usdBtn = document.getElementById('c-usd'), inrBtn = document.getElementById('c-inr');
-            if (symbol === '$') { usdBtn.className = "px-2 py-1 bg-white shadow-sm rounded text-blue-600"; inrBtn.className = "px-2 py-1 text-slate-500"; }
-            else { inrBtn.className = "px-2 py-1 bg-white shadow-sm rounded text-blue-600"; usdBtn.className = "px-2 py-1 text-slate-500"; }
+            state.currency = symbol; document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol);
             calculate();
         }
-
-        function setTimeUnit(unit) {
-            state.timeUnit = unit;
-            document.getElementById('t-years').classList.toggle('active', unit === 'years');
-            document.getElementById('t-months').classList.toggle('active', unit === 'months');
-            calculate();
-        }
-
+        function setTimeUnit(unit) { state.timeUnit = unit; document.getElementById('t-years').classList.toggle('active', unit === 'years'); document.getElementById('t-months').classList.toggle('active', unit === 'months'); calculate(); }
         function calculate() {
             const p = parseFloat(document.getElementById('principal').value) || 0;
             const r = parseFloat(document.getElementById('rate').value) || 0;
             const tInput = parseFloat(document.getElementById('time-val').value) || 0;
-            const compare = document.getElementById('compare-toggle').checked;
-
             const tYears = state.timeUnit === 'years' ? tInput : tInput / 12;
             const si = (p * r * tYears) / 100;
             const totalSI = p + si;
-
-            const rowCompound = document.getElementById('row-compound');
-            const rowDiff = document.getElementById('row-diff');
-            
+            const compare = document.getElementById('compare-toggle').checked;
             if (compare && p > 0 && r > 0 && tYears > 0) {
                 const totalCI = p * Math.pow((1 + (r / 100)), tYears);
-                const ciOnly = totalCI - p;
-                const diff = totalCI - totalSI;
-
-                rowCompound.classList.remove('hidden');
-                rowDiff.classList.remove('hidden');
+                document.getElementById('row-compound').classList.remove('hidden');
                 document.getElementById('out-ci').innerText = fmt(totalCI);
-                document.getElementById('out-diff').innerText = fmt(diff);
-            } else {
-                rowCompound.classList.add('hidden');
-                rowDiff.classList.add('hidden');
-            }
-
-            const gainPct = p > 0 ? (si / p) * 100 : 0;
+            } else { document.getElementById('row-compound').classList.add('hidden'); }
             document.getElementById('res-total').innerText = fmt(totalSI);
             document.getElementById('out-principal').innerText = fmt(p);
             document.getElementById('out-interest').innerText = fmt(si);
             document.getElementById('res-si-only').innerText = fmt(si);
-            document.getElementById('interest-pct').innerText = Math.round(gainPct) + '%';
+            document.getElementById('interest-pct').innerText = Math.round(p > 0 ? (si / p) * 100 : 0) + '%';
         }
-
-        function fmt(v) {
-            return v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-
-        function resetAll() {
-            document.getElementById('principal').value = '';
-            document.getElementById('rate').value = '';
-            document.getElementById('time-val').value = '';
-            document.getElementById('compare-toggle').checked = false;
-            calculate();
-        }
-
-        async function copyBill() {
-            const total = document.getElementById('res-total').innerText;
-            const interest = document.getElementById('res-si-only').innerText;
-            const text = `Interest Breakdown:\nMaturity: ${state.currency}${total}\nInterest: ${state.currency}${interest}\nCalculated via QuickCalc Pro.`;
-            try {
-                await navigator.clipboard.writeText(text);
-                const btn = document.getElementById('copy-btn');
-                btn.innerText = 'Copied!';
-                setTimeout(() => btn.innerText = 'Copy Result', 1200);
-            } catch(e) {}
-        }
-
+        function fmt(v) { return v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+        function resetAll() { document.getElementById('principal').value = ''; document.getElementById('rate').value = ''; document.getElementById('time-val').value = ''; document.getElementById('compare-toggle').checked = false; calculate(); }
+        async function copyBill() { const total = document.getElementById('res-total').innerText; try { await navigator.clipboard.writeText(`Maturity: ${state.currency}${total}`); } catch(e) {} }
         calculate();
     </script>
 </body>
