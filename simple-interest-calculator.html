@@ -8,12 +8,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; overflow-y: auto; }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; }
         nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
         @media (max-width: 768px) { nav { height: auto; padding: 10px 0; } }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; justify-content: center; }
-        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 80vh; overflow: hidden; border: 1px solid #e2e8f0; }
+        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 85vh; overflow: hidden; border: 1px solid #e2e8f0; }
         @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
         .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
         .input-pane::-webkit-scrollbar { width: 5px; }
@@ -21,10 +21,11 @@
         @media (max-width: 768px) { .input-pane { padding: 1.25rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow-y: visible; } }
         .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
         @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
-        .content-section { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; }
-        .content-section h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem; letter-spacing: -0.02em; }
-        .content-section p, .content-section li { color: #475569; line-height: 1.6; margin-bottom: 1rem; }
-        .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.9rem; }
+        .content-section { max-width: 850px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+        .content-section h3 { font-size: 1.25rem; font-weight: 700; color: #334155; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .content-section p, .content-section li { color: #475569; line-height: 1.7; margin-bottom: 1rem; }
+        .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
@@ -32,6 +33,7 @@
         .pill-toggle button { flex: 1; padding: 3px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #64748b; }
         .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
@@ -88,6 +90,58 @@
                 </div>
             </div>
         </div>
+
+        <!-- RESTORED INFORMATIONAL CONTENT -->
+        <article class="content-section">
+            <h2>How to Use the Simple Interest Calculator</h2>
+            <p>Our tool helps you determine the growth of an investment or the cost of a loan over a specific period. Follow these simple steps:</p>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><strong>Principal Amount:</strong> Enter the initial amount of money borrowed or invested.</li>
+                <li><strong>Interest Rate:</strong> Enter the annual interest rate as a percentage (e.g., 5.5).</li>
+                <li><strong>Time Period:</strong> Enter the duration. You can toggle between <strong>Years</strong> or <strong>Months</strong> to match your terms.</li>
+                <li><strong>Comparison:</strong> Optionally check the <strong>"Compare with Compound Interest"</strong> box to see how much more you would earn/owe if interest was compounded annually.</li>
+            </ul>
+
+            <h2>Formula Explanation</h2>
+            <p>Simple interest is calculated only on the principal amount of a loan or investment. The formula used by this calculator is:</p>
+            <div class="formula-box">
+                Interest = Principal (P) × Rate (R) × Time (T) / 100<br>
+                Maturity Value = Principal + Interest
+            </div>
+            <p>Note that "Time" must be expressed in years. If you enter months, the tool automatically divides by 12 to convert it to the yearly equivalent required for the standard rate.</p>
+
+            <h2>Example Calculation</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <p>Let's say you invest <strong>$1,000</strong> at an annual simple interest rate of <strong>5%</strong> for <strong>3 years</strong>.</p>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>Principal (P) = $1,000</li>
+                    <li>Rate (R) = 5%</li>
+                    <li>Time (T) = 3 years</li>
+                    <li>Interest = (1,000 × 5 × 3) / 100 = <strong>$150</strong>.</li>
+                    <li>The total maturity value after 3 years will be <strong>$1,150</strong>.</li>
+                </ol>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3>What is the difference between Simple and Compound interest?</h3>
+                    <p>Simple interest is calculated solely on the principal amount. Compound interest is calculated on the principal plus any interest that has already accumulated, leading to faster growth over time.</p>
+                </div>
+                <div>
+                    <h3>Can I calculate interest for just a few months?</h3>
+                    <p>Yes. Simply use the toggle to select "Months" and enter the number of months. The calculator will handle the conversion automatically.</p>
+                </div>
+                <div>
+                    <h3>Does this calculator work for car loans?</h3>
+                    <p>Many personal and car loans use compound interest or specific amortized formulas. However, this tool is excellent for estimating basic debt growth or checking private loan agreements that specify "simple interest" terms.</p>
+                </div>
+                <div>
+                    <h3>Is the interest rate per month or per year?</h3>
+                    <p>Standard financial practice assumes the rate is per annum (p.a.), meaning per year. Our calculator follows this standard.</p>
+                </div>
+            </div>
+        </article>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-16">
