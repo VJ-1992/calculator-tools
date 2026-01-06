@@ -7,14 +7,60 @@
     <meta name="description" content="Calculate your gross profit margin and profit amount instantly. Ideal for small businesses and retail pricing strategies. Professional high-density dashboard.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; }
-        nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
-        @media (max-width: 768px) { nav { height: auto; padding: 10px 0; } }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
+        nav {
+            height: 52px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .brand-link {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .tabs-container {
+            display: flex;
+            gap: 1rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; justify-content: center; }
         .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 85vh; overflow: hidden; border: 1px solid #e2e8f0; }
-        @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
+        @media (max-width: 768px) {
+            .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; }
+        }
         .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
         .input-pane::-webkit-scrollbar { width: 5px; }
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
@@ -32,53 +78,76 @@
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            if (theme === 'dark') document.documentElement.classList.add('dark');
+        })();
+    </script>
 </head>
-<body>
-    <nav>
-        <div class="container mx-auto h-full px-5 flex flex-col md:flex-row justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2 py-1">
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 dark:bg-slate-900 dark:border-slate-800">
+        <div class="nav-container">
+            <a href="index.html" class="brand-link">
                 <div class="bg-blue-600 p-1 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
                 </div>
-                <span class="font-bold text-base tracking-tight">QuickCalc<span class="text-blue-600">Pro</span></span>
+                <span class="font-bold text-base tracking-tight dark:text-white">QuickCalc<span class="text-blue-600">Pro</span></span>
             </a>
-            <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400 overflow-x-auto w-full md:w-auto justify-center pb-1 md:pb-0 no-scrollbar">
-                <a href="discount-calculator.html" class="hover:text-slate-900 transition-colors whitespace-nowrap">Discount</a>
-                <a href="simple-interest-calculator.html" class="hover:text-slate-900 transition-colors whitespace-nowrap">Interest</a>
-                <a href="profit-margin-calculator.html" class="text-blue-600 border-b border-blue-600 pb-0.5 whitespace-nowrap">Profit</a>
+            <div class="flex items-center gap-2 md:gap-4">
+                <div class="hidden md:flex tabs-container">
+                    <a href="discount-calculator.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Discount</a>
+                    <a href="simple-interest-calculator.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Interest</a>
+                    <a href="profit-margin-calculator.html" class="text-blue-600 border-b-2 border-blue-600 pb-0.5">Profit</a>
+                </div>
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" aria-label="Toggle Theme">
+                    <svg id="sun-icon" class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
+                    <svg id="moon-icon" class="w-4 h-4 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                </button>
+                <button onclick="toggleMenu()" class="md:hidden p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" aria-label="Toggle Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-[52px] left-0 right-0 bg-white border-b border-slate-200 shadow-xl z-40 md:hidden dark:bg-slate-900 dark:border-slate-800">
+            <div class="flex flex-col p-4 gap-4 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <a href="discount-calculator.html" class="hover:text-slate-900 dark:hover:text-white">Discount Calculator</a>
+                <a href="simple-interest-calculator.html" class="hover:text-slate-900 dark:hover:text-white">Simple Interest</a>
+                <a href="profit-margin-calculator.html" class="text-blue-600">Profit Margin</a>
             </div>
         </div>
     </nav>
 
     <header class="hero-section">
-        <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3">Profit Margin Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">Analyze profitability for your business instantly.</p>
+        <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">Profit Margin Calculator</h1>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Analyze profitability for your business instantly.</p>
     </header>
 
     <main>
         <div class="app-container">
-            <div class="main-card">
-                <div class="input-pane">
+            <div class="main-card dark:bg-slate-900 dark:border-slate-800 dark:shadow-none">
+                <div class="input-pane dark:border-slate-800">
                     <div class="flex items-center justify-between mb-5 flex-shrink-0">
-                        <h2 class="text-base font-extrabold text-slate-800">Product Settings</h2>
-                        <div class="flex gap-1 bg-slate-100 p-0.5 rounded-md text-[9px] font-bold">
-                            <button onclick="setCurrency('$')" id="c-usd" class="px-2 py-1 bg-white shadow-sm rounded text-blue-600">USD</button>
-                            <button onclick="setCurrency('₹')" id="c-inr" class="px-2 py-1 text-slate-500">INR</button>
+                        <h2 class="text-base font-extrabold text-slate-800 dark:text-white">Product Settings</h2>
+                        <div class="flex gap-1 bg-slate-100 p-0.5 rounded-md text-[9px] font-bold dark:bg-slate-800">
+                            <button onclick="setCurrency('$')" id="c-usd" class="px-2 py-1 bg-white shadow-sm rounded text-blue-600 dark:bg-slate-700 dark:text-blue-400">USD</button>
+                            <button onclick="setCurrency('₹')" id="c-inr" class="px-2 py-1 text-slate-500 dark:text-slate-400">INR</button>
                         </div>
                     </div>
                     <div class="space-y-6">
                         <div class="input-group">
-                            <label class="input-label">Cost Price</label>
-                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs">$</span><input type="number" id="cost" oninput="calculate()" class="input-field pl-8"></div>
+                            <label class="input-label dark:text-slate-400">Cost Price</label>
+                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="cost" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
                         </div>
                         <div class="input-group">
-                            <label class="input-label">Selling Price</label>
-                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs">$</span><input type="number" id="selling" oninput="calculate()" class="input-field pl-8"></div>
+                            <label class="input-label dark:text-slate-400">Selling Price</label>
+                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="selling" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
                         </div>
-                        <div class="grid grid-cols-2 gap-3 pt-4"><button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase">Clear</button><button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase">Copy Result</button></div>
+                        <div class="grid grid-cols-2 gap-3 pt-4"><button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400">Clear</button><button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase dark:bg-blue-600 dark:hover:bg-blue-700">Copy Result</button></div>
                     </div>
                 </div>
-                <div class="result-pane">
+                <div class="result-pane dark:bg-black">
                     <div>
                         <div class="flex items-center gap-2 mb-5 opacity-40"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="text-[8px] font-black uppercase tracking-[0.4em]">Summary</span></div>
                         <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Profit Amount</p><div class="flex items-baseline justify-center gap-1.5"><span class="text-xl font-bold currency-symbol text-blue-400">$</span><span id="res-profit" class="text-5xl font-black tracking-tighter leading-none">0.00</span></div></div>
@@ -93,73 +162,86 @@
             </div>
         </div>
 
-        <!-- RESTORED INFORMATIONAL CONTENT -->
         <article class="content-section">
-            <h2>How to Use the Profit Margin Calculator</h2>
-            <p>Understanding your numbers is key to business growth. Use this tool to quickly find out how much you are actually making on your products:</p>
-            <ul class="list-disc pl-5 space-y-2">
+            <h2 class="dark:text-white">How to Use the Profit Margin Calculator</h2>
+            <p class="dark:text-slate-400">Understanding your numbers is key to business growth. Use this tool to quickly find out how much you are actually making on your products:</p>
+            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
                 <li><strong>Cost Price:</strong> Enter the total cost to produce or purchase the item, including shipping and manufacturing.</li>
                 <li><strong>Selling Price:</strong> Enter the price you are charging the customer.</li>
                 <li><strong>Results:</strong> The calculator instantly shows your <strong>Net Profit</strong> (the dollar amount) and your <strong>Gross Margin</strong> (the percentage).</li>
             </ul>
 
-            <h2>Formula Explanation</h2>
-            <p>Profit margin is a ratio of a company's profit divided by its revenue. Here is the math we use:</p>
-            <div class="formula-box">
+            <h2 class="dark:text-white">Formula Explanation</h2>
+            <p class="dark:text-slate-400">Profit margin is a ratio of a company's profit divided by its revenue. Here is the math we use:</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
                 Net Profit = Selling Price - Cost Price<br>
                 Gross Margin (%) = (Net Profit / Selling Price) × 100
             </div>
-            <p>It is important to distinguish this from <strong>Markup</strong>. While markup is calculated based on the cost, margin is always calculated based on the selling price. Margin tells you what percentage of every dollar you keep as profit.</p>
+            <p class="dark:text-slate-400">It is important to distinguish this from <strong>Markup</strong>. While markup is calculated based on the cost, margin is always calculated based on the selling price. Margin tells you what percentage of every dollar you keep as profit.</p>
 
-            <h2>Example Calculation</h2>
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <p>Let's say you buy a product for <strong>$60</strong> and sell it for <strong>$100</strong>.</p>
-                <ol class="list-decimal pl-5 space-y-2">
+            <h2 class="dark:text-white">Example Calculation</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <p class="dark:text-slate-400">Let's say you buy a product for <strong>$60</strong> and sell it for <strong>$100</strong>.</p>
+                <ol class="list-decimal pl-5 space-y-2 dark:text-slate-400">
                     <li>Cost Price = $60</li>
                     <li>Selling Price = $100</li>
                     <li>Net Profit = $100 - $60 = <strong>$40</strong>.</li>
                     <li>Gross Margin = ($40 / $100) × 100 = <strong>40%</strong>.</li>
                 </ol>
-                <p class="mt-4 text-sm italic">In this scenario, for every $1 you receive in sales, you keep $0.40 as gross profit.</p>
+                <p class="mt-4 text-sm italic dark:text-slate-500">In this scenario, for every $1 you receive in sales, you keep $0.40 as gross profit.</p>
             </div>
 
-            <h2>Frequently Asked Questions</h2>
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
             <div class="space-y-6">
                 <div>
-                    <h3>What is a "good" profit margin?</h3>
-                    <p>Good margins vary by industry. Retail often averages between 20% and 40%, while SaaS (software) companies can have margins as high as 80%. Consult with a financial advisor to understand benchmarks for your specific niche.</p>
+                    <h3 class="dark:text-white">What is a "good" profit margin?</h3>
+                    <p class="dark:text-slate-400">Good margins vary by industry. Retail often averages between 20% and 40%, while SaaS (software) companies can have margins as high as 80%. Consult with a financial advisor to understand benchmarks for your specific niche.</p>
                 </div>
                 <div>
-                    <h3>Is Gross Margin the same as Net Margin?</h3>
-                    <p>No. Gross margin only considers the "cost of goods sold" (COGS). Net margin subtracts all other business expenses like rent, marketing, salaries, and taxes.</p>
+                    <h3 class="dark:text-white">Is Gross Margin the same as Net Margin?</h3>
+                    <p class="dark:text-slate-400">No. Gross margin only considers the "cost of goods sold" (COGS). Net margin subtracts all other business expenses like rent, marketing, salaries, and taxes.</p>
                 </div>
                 <div>
-                    <h3>What if my margin is negative?</h3>
-                    <p>A negative margin means your cost price is higher than your selling price. This indicates you are losing money on every sale and should re-evaluate your pricing strategy or supply costs.</p>
+                    <h3 class="dark:text-white">What if my margin is negative?</h3>
+                    <p class="dark:text-slate-400">A negative margin means your cost price is higher than your selling price. This indicates you are losing money on every sale and should re-evaluate your pricing strategy or supply costs.</p>
                 </div>
                 <div>
-                    <h3>Does this tool include shipping costs?</h3>
-                    <p>Yes, as long as you include those costs in your "Cost Price" input. For the most accurate result, ensure you are using the "Landed Cost" (total cost to get the product to the customer).</p>
+                    <h3 class="dark:text-white">Does this tool include shipping costs?</h3>
+                    <p class="dark:text-slate-400">Yes, as long as you include those costs in your "Cost Price" input. For the most accurate result, ensure you are using the "Landed Cost" (total cost to get the product to the customer).</p>
                 </div>
             </div>
         </article>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-16">
+    <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8">&copy; 2025 QuickCalc Pro. Accurate Financial Logic.</p>
-            <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
-                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact Us</a>
-                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
-                <a href="terms-conditions.html" class="hover:text-blue-600 transition-colors">Terms of Service</a>
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Accurate Financial Logic.</p>
+            <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <a href="about.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Privacy Policy</a>
+                <a href="terms-conditions.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Terms of Service</a>
             </div>
         </div>
     </footer>
 
     <script>
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
         let state = { currency: '$' };
-        function setCurrency(symbol) { state.currency = symbol; document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol); calculate(); }
+        function setCurrency(symbol) { 
+            state.currency = symbol; 
+            document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol); 
+            calculate(); 
+        }
         function calculate() {
             const cp = parseFloat(document.getElementById('cost').value) || 0;
             const sp = parseFloat(document.getElementById('selling').value) || 0;
