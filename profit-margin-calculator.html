@@ -81,6 +81,13 @@
             transform: scale(1) translateY(0);
             pointer-events: auto;
         }
+        /* Toggle Switch Style */
+        .switch { position: relative; display: inline-block; width: 34px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #3b82f6; }
+        input:checked + .slider:before { transform: translateX(14px); }
     </style>
     <script>
         (function() {
@@ -153,29 +160,71 @@
                             <button onclick="setCurrency('₹')" id="c-inr" class="px-2 py-1 text-slate-500 dark:text-slate-400">INR</button>
                         </div>
                     </div>
-                    <div class="space-y-6">
+                    <div class="space-y-5">
                         <div class="input-group">
                             <label class="input-label dark:text-slate-400">Cost Price</label>
-                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="cost" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
+                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="cost" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white" step="0.01"></div>
                         </div>
                         <div class="input-group">
                             <label class="input-label dark:text-slate-400">Selling Price</label>
-                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="selling" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
+                            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="selling" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white" step="0.01"></div>
                         </div>
-                        <div class="grid grid-cols-2 gap-3 pt-4"><button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400">Clear</button><button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase dark:bg-blue-600 dark:hover:bg-blue-700">Copy Result</button></div>
+
+                        <!-- Quantity Toggle -->
+                        <div class="pt-2">
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
+                                <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300 cursor-pointer" for="qty-toggle-btn">Calculate Total Profit by Quantity</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="qty-toggle-btn" onchange="toggleQty(this.checked)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Input -->
+                        <div id="qty-input-wrap" class="hidden animate-in slide-in-from-top-2 duration-200">
+                            <div class="input-group">
+                                <label class="input-label dark:text-slate-400">Quantity Sold</label>
+                                <div class="relative">
+                                    <input type="number" id="quantity" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="1" min="1" step="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400 hover:bg-slate-200 transition-colors">Clear</button>
+                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase dark:bg-blue-600 dark:hover:bg-blue-700 hover:bg-slate-800 transition-colors">Copy Result</button>
+                        </div>
                     </div>
                 </div>
                 <div class="result-pane dark:bg-black">
                     <div>
                         <div class="flex items-center gap-2 mb-5 opacity-40"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="text-[8px] font-black uppercase tracking-[0.4em]">Summary</span></div>
-                        <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Profit Amount</p><div class="flex items-baseline justify-center gap-1.5"><span class="text-xl font-bold currency-symbol text-blue-400">$</span><span id="res-profit" class="text-5xl font-black tracking-tighter leading-none">0.00</span></div></div>
+                        <div class="mb-10 text-center">
+                            <p id="res-hero-label" class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Profit Amount</p>
+                            <div class="flex items-baseline justify-center gap-1.5">
+                                <span class="text-xl font-bold currency-symbol text-blue-400">$</span>
+                                <span id="res-profit" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
+                            </div>
+                        </div>
                         <div class="space-y-0.5">
                             <div class="receipt-row"><span>Cost Price</span><span class="font-bold"><span class="currency-symbol">$</span><span id="out-cost">0.00</span></span></div>
                             <div class="receipt-row"><span>Total Revenue</span><span class="font-bold"><span class="currency-symbol">$</span><span id="out-revenue">0.00</span></span></div>
+                            <div id="row-total-profit" class="receipt-row hidden">
+                                <span class="text-emerald-400">Total Profit</span>
+                                <span class="font-bold text-emerald-400"><span class="currency-symbol">$</span><span id="out-total-profit">0.00</span></span>
+                            </div>
                             <div class="receipt-row border-t border-slate-800 mt-2 pt-2"><span class="text-indigo-400">Gross Margin %</span><span class="font-bold text-indigo-400"><span id="out-margin">0.00</span>%</span></div>
                         </div>
                     </div>
-                    <div class="pt-6 border-t border-slate-800"><div class="flex justify-between items-end"><div class="space-y-0.5"><p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Performance</p><p id="perf-status" class="text-2xl font-black text-white">Balanced</p></div></div></div>
+                    <div class="pt-6 border-t border-slate-800">
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-0.5">
+                                <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Performance</p>
+                                <p id="perf-status" class="text-2xl font-black text-white">Balanced</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,6 +235,7 @@
             <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
                 <li><strong>Cost Price:</strong> Enter the total cost to produce or purchase the item, including shipping and manufacturing.</li>
                 <li><strong>Selling Price:</strong> Enter the price you are charging the customer.</li>
+                <li><strong>Quantity (Optional):</strong> Toggle the quantity switch to calculate your total profit based on the volume of sales.</li>
                 <li><strong>Results:</strong> The calculator instantly shows your <strong>Net Profit</strong> (the dollar amount) and your <strong>Gross Margin</strong> (the percentage).</li>
             </ul>
 
@@ -193,7 +243,8 @@
             <p class="dark:text-slate-400">Profit margin is a ratio of a company's profit divided by its revenue. Here is the math we use:</p>
             <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
                 Net Profit = Selling Price - Cost Price<br>
-                Gross Margin (%) = (Net Profit / Selling Price) × 100
+                Gross Margin (%) = (Net Profit / Selling Price) × 100<br>
+                Total Profit = Net Profit × Quantity
             </div>
             <p class="dark:text-slate-400">It is important to distinguish this from <strong>Markup</strong>. While markup is calculated based on the cost, margin is always calculated based on the selling price. Margin tells you what percentage of every dollar you keep as profit.</p>
 
@@ -205,8 +256,8 @@
                     <li>Selling Price = $100</li>
                     <li>Net Profit = $100 - $60 = <strong>$40</strong>.</li>
                     <li>Gross Margin = ($40 / $100) × 100 = <strong>40%</strong>.</li>
+                    <li>If you sell <strong>50 units</strong>, your Total Profit is $40 × 50 = <strong>$2,000</strong>.</li>
                 </ol>
-                <p class="mt-4 text-sm italic dark:text-slate-500">In this scenario, for every $1 you receive in sales, you keep $0.40 as gross profit.</p>
             </div>
 
             <h2 class="dark:text-white">Frequently Asked Questions</h2>
@@ -275,27 +326,94 @@
             }
         }
 
-        let state = { currency: '$' };
+        let state = { currency: '$', qtyMode: false };
+
         function setCurrency(symbol) { 
             state.currency = symbol; 
             document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol); 
             calculate(); 
         }
+
+        function toggleQty(isOn) {
+            state.qtyMode = isOn;
+            const wrap = document.getElementById('qty-input-wrap');
+            const row = document.getElementById('row-total-profit');
+            const label = document.getElementById('res-hero-label');
+            
+            if (isOn) {
+                wrap.classList.remove('hidden');
+                row.classList.remove('hidden');
+                label.innerText = "Profit Per Unit";
+                if (!document.getElementById('quantity').value) {
+                    document.getElementById('quantity').value = 1;
+                }
+            } else {
+                wrap.classList.add('hidden');
+                row.classList.add('hidden');
+                label.innerText = "Net Profit Amount";
+            }
+            calculate();
+        }
+
         function calculate() {
             const cp = parseFloat(document.getElementById('cost').value) || 0;
             const sp = parseFloat(document.getElementById('selling').value) || 0;
-            const profit = sp - cp;
-            const margin = sp > 0 ? (profit / sp) * 100 : 0;
+            const qty = state.qtyMode ? (parseInt(document.getElementById('quantity').value) || 1) : 1;
+
+            const unitProfit = sp - cp;
+            const totalProfit = unitProfit * qty;
+            const margin = sp > 0 ? (unitProfit / sp) * 100 : 0;
+            
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('res-profit').innerText = fmt(Math.abs(profit));
+            
+            document.getElementById('res-profit').innerText = fmt(Math.abs(unitProfit));
             document.getElementById('out-cost').innerText = fmt(cp);
             document.getElementById('out-revenue').innerText = fmt(sp);
             document.getElementById('out-margin').innerText = margin.toFixed(2);
+            document.getElementById('out-total-profit').innerText = fmt(totalProfit);
+
             const perf = document.getElementById('perf-status');
-            if (profit > 0) perf.innerText = "Profitable"; else if (profit < 0) perf.innerText = "Loss"; else perf.innerText = "Balanced";
+            if (totalProfit > 0) {
+                perf.innerText = "Profitable";
+                perf.className = "text-2xl font-black text-white";
+            } else if (totalProfit < 0) {
+                perf.innerText = "Loss";
+                perf.className = "text-2xl font-black text-red-400";
+            } else {
+                perf.innerText = "Balanced";
+                perf.className = "text-2xl font-black text-white opacity-60";
+            }
         }
-        function resetAll() { document.getElementById('cost').value = ''; document.getElementById('selling').value = ''; calculate(); }
-        async function copyBill() { const profit = document.getElementById('res-profit').innerText; try { await navigator.clipboard.writeText(`Profit: ${state.currency}${profit}`); } catch(e) {} }
+
+        function resetAll() { 
+            document.getElementById('cost').value = ''; 
+            document.getElementById('selling').value = ''; 
+            document.getElementById('quantity').value = '';
+            document.getElementById('qty-toggle-btn').checked = false;
+            toggleQty(false);
+            calculate(); 
+        }
+
+        async function copyBill() { 
+            const profit = document.getElementById('res-profit').innerText; 
+            const margin = document.getElementById('out-margin').innerText;
+            let text = `Profit Per Unit: ${state.currency}${profit}\nMargin: ${margin}%`;
+            
+            if (state.qtyMode) {
+                const total = document.getElementById('out-total-profit').innerText;
+                const qty = document.getElementById('quantity').value;
+                text += `\nQuantity: ${qty}\nTotal Profit: ${state.currency}${total}`;
+            }
+            
+            try { 
+                await navigator.clipboard.writeText(text); 
+                const btn = document.getElementById('copy-btn');
+                const originalText = btn.innerText;
+                btn.innerText = "Copied!";
+                setTimeout(() => btn.innerText = originalText, 1500);
+            } catch(e) {} 
+        }
+
         calculate();
     </script>
 </body>
