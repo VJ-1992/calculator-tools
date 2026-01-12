@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profit Margin Calculator – Professional Business Tool</title>
-    <meta name="description" content="Calculate gross profit margin, per-piece profit, and packet margins. Supports bundle pricing and bulk quantity logic. Professional high-density business dashboard.">
+    <title>Profit Margin Calculator - Packet & Bulk Selling Profit</title>
+    <meta name="description" content="Use our free Profit Margin Calculator to find per-unit profit, packet selling margins, and bulk quantity earnings. Ideal for shopkeepers and business owners.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
@@ -111,7 +111,7 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">Profit Margin Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Advanced analysis for retailers, traders, and wholesalers.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Analyze your business profitability instantly. This professional calculator helps shopkeepers, wholesalers, and traders determine profit per piece, packet margins, and total earnings for bulk orders.</p>
     </header>
 
     <main>
@@ -228,32 +228,60 @@
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">Professional Profit Analysis</h2>
-            <p class="dark:text-slate-400">This calculator is optimized for retail shopkeepers and wholesalers who deal with multiple units and bundle pricing. Understanding your per-piece profit versus your packet profit is crucial for inventory strategy.</p>
-            
-            <h3 class="dark:text-white">Advanced Modes Explained</h3>
-            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
-                <li><strong>Packet / Bundle Mode:</strong> Used when you sell items in fixed counts (e.g., a box of 12 pens). Input the packet price, and the tool finds the per-piece revenue for you.</li>
-                <li><strong>Bulk Sale Mode:</strong> Used to calculate the total profit for a specific transaction size. Helpful for generating quotes for customers buying multiple units.</li>
-            </ul>
-
-            <h2 class="dark:text-white">The Math of Margin</h2>
+            <h2 class="dark:text-white">How is Profit Margin Calculated?</h2>
+            <p class="dark:text-slate-400">Understanding your profit margin is essential for pricing your products correctly and ensuring business sustainability. Our tool uses standard financial formulas to give you accurate insights:</p>
             <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
-                Unit Profit = Selling Price (per piece) - Cost Price (per piece)<br>
-                Margin % = (Unit Profit / Selling Price per piece) × 100<br>
-                Packet Profit = Unit Profit × Pieces per Packet
+                Profit = Selling Price − Cost Price<br>
+                Profit Margin (%) = (Profit ÷ Selling Price) × 100
+            </div>
+            <p class="dark:text-slate-400">While <strong>Markup</strong> is calculated as a percentage of the cost, <strong>Margin</strong> is always calculated as a percentage of the selling price. This distinction is vital for accurate financial reporting.</p>
+
+            <h2 class="dark:text-white">Real-World Example: Packet Selling & Bulk Profit</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <p class="dark:text-slate-400 font-bold">Scenario: A shopkeeper sells a packet of chocolates.</p>
+                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
+                    <li><strong>Packet Details:</strong> 20 pieces per packet.</li>
+                    <li><strong>Packet Selling Price:</strong> ₹25.00.</li>
+                    <li><strong>Cost per Piece:</strong> ₹0.80.</li>
+                </ul>
+                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <p class="dark:text-slate-300 font-mono text-sm">
+                        1. Selling Price per Piece = ₹25 / 20 = <strong>₹1.25</strong><br>
+                        2. Profit per Piece = ₹1.25 - ₹0.80 = <strong>₹0.45</strong><br>
+                        3. Total Profit (1 Packet) = ₹0.45 × 20 = <strong>₹9.00</strong><br>
+                        4. Total Profit (100 Packets) = ₹9.00 × 100 = <strong>₹900.00</strong>
+                    </p>
+                </div>
             </div>
 
-            <h2 class="dark:text-white">Example Scenario</h2>
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
-                <p class="dark:text-slate-400 italic">"I buy a box of chocolates for $10 (containing 20 bars). I sell each box for $15."</p>
-                <ol class="list-decimal pl-5 space-y-2 mt-4 dark:text-slate-400">
-                    <li>Cost per Piece: $10 / 20 = <strong>$0.50</strong></li>
-                    <li>Selling Price per Packet: <strong>$15.00</strong></li>
-                    <li>Selling Price per Piece: $15 / 20 = <strong>$0.75</strong></li>
-                    <li>Profit per Piece: $0.75 - $0.50 = <strong>$0.25</strong></li>
-                    <li>Margin: ($0.25 / $0.75) × 100 = <strong>33.33%</strong></li>
-                </ol>
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is a profit margin calculator?</h3>
+                    <p class="dark:text-slate-400">A profit margin calculator is a financial tool that helps business owners determine the percentage of profit they earn on a sale relative to the selling price. It helps in deciding whether a product is priced high enough to cover costs and generate income.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How do shopkeepers calculate profit per piece?</h3>
+                    <p class="dark:text-slate-400">Shopkeepers calculate profit per piece by subtracting the landing cost (purchase price + transport) of a single item from its individual selling price. If they buy in bundles, they first divide the total bundle cost by the number of pieces to find the per-piece cost.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How to calculate profit on packet selling?</h3>
+                    <p class="dark:text-slate-400">To calculate profit on packet selling, you take the total selling price of the packet and subtract the total cost of all items inside that packet. Alternatively, calculate the profit for one piece and multiply it by the number of pieces in the packet.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Can I calculate total profit for bulk quantity?</h3>
+                    <p class="dark:text-slate-400">Yes. By enabling "Bulk Sale Mode" in our calculator, you can enter the total quantity sold (e.g., 500 units) to see the combined profit for that entire transaction.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is this calculator free to use?</h3>
+                    <p class="dark:text-slate-400">Yes, QuickCalc Pro offers this tool completely free of charge. No account or personal data is required to perform your business calculations.</p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Try Our Other Tools</h2>
+            <div class="flex flex-wrap gap-4 mt-6">
+                <a href="discount-calculator.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors">Discount Calculator</a>
+                <a href="simple-interest-calculator.html" class="px-4 py-2 bg-emerald-600 text-white rounded-lg font-bold text-sm hover:bg-emerald-700 transition-colors">Simple Interest Calculator</a>
             </div>
         </article>
     </main>
