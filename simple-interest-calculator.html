@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Interest Calculator – Calculate Interest Easily</title>
-    <meta name="description" content="Calculate simple interest and total amounts instantly. Supports monthly/yearly terms and optional compound interest comparison. Professional, high-density dashboard.">
+    <title>Simple Interest Calculator - Calculate Loan & Investment Returns</title>
+    <meta name="description" content="Calculate simple interest and maturity values instantly. Our free tool helps you find interest earned on loans or investments with easy monthly and yearly terms.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
@@ -61,7 +61,7 @@
         .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
         .content-section h3 { font-size: 1.25rem; font-weight: 700; color: #334155; margin-top: 2rem; margin-bottom: 0.75rem; }
         .content-section p, .content-section li { color: #475569; line-height: 1.7; margin-bottom: 1rem; }
-        .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
+        .formula-box { background: #f8fafc; border-left: 4px solid #10b981; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: ui-monospace, monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
@@ -142,7 +142,7 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">Simple Interest Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Quickly estimate returns or loan costs based on fixed interest rates.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Estimate your loan costs or investment growth in seconds. Our Simple Interest Calculator is a free tool designed for students, shoppers, and business owners to find interest earned and maturity values with precision.</p>
     </header>
 
     <main>
@@ -200,53 +200,59 @@
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">How to Use the Simple Interest Calculator</h2>
-            <p class="dark:text-slate-400">Our tool helps you determine the growth of an investment or the cost of a loan over a specific period. Follow these simple steps:</p>
-            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
-                <li><strong>Principal Amount:</strong> Enter the initial amount of money borrowed or invested.</li>
-                <li><strong>Interest Rate:</strong> Enter the annual interest rate as a percentage (e.g., 5.5).</li>
-                <li><strong>Time Period:</strong> Enter the duration. You can toggle between <strong>Years</strong> or <strong>Months</strong> to match your terms.</li>
-                <li><strong>Comparison:</strong> Optionally check the <strong>"Compare with Compound Interest"</strong> box to see how much more you would earn/owe if interest was compounded annually.</li>
-            </ul>
-
-            <h2 class="dark:text-white">Formula Explanation</h2>
-            <p class="dark:text-slate-400">Simple interest is calculated only on the principal amount of a loan or investment. The formula used by this calculator is:</p>
-            <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
-                Interest = Principal (P) × Rate (R) × Time (T) / 100<br>
-                Maturity Value = Principal + Interest
+            <h2 class="dark:text-white">How to Calculate Simple Interest</h2>
+            <p class="dark:text-slate-400">Calculating simple interest is a fundamental skill for managing personal finances. It allows you to see how much a loan will cost or how much your savings will grow over time. Our tool automates the standard financial formulas to provide instant results:</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-emerald-900 dark:text-white">
+                Simple Interest (I) = (Principal × Rate × Time) / 100<br>
+                Maturity Value (A) = Principal + Interest
             </div>
-            <p class="dark:text-slate-400">Note that "Time" must be expressed in years. If you enter months, the tool automatically divides by 12 to convert it to the yearly equivalent required for the standard rate.</p>
+            <p class="dark:text-slate-400">In this formula, <strong>Principal</strong> is the starting balance, <strong>Rate</strong> is the annual percentage, and <strong>Time</strong> is the duration expressed in years. If you provide time in months, our calculator automatically handles the conversion to yearly format.</p>
 
-            <h2 class="dark:text-white">Example Calculation</h2>
+            <h2 class="dark:text-white">Real-World Investment Example</h2>
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
-                <p class="dark:text-slate-400">Let's say you invest <strong>$1,000</strong> at an annual simple interest rate of <strong>5%</strong> for <strong>3 years</strong>.</p>
-                <ol class="list-decimal pl-5 space-y-2 dark:text-slate-400">
-                    <li>Principal (P) = $1,000</li>
-                    <li>Rate (R) = 5%</li>
-                    <li>Time (T) = 3 years</li>
-                    <li>Interest = (1,000 × 5 × 3) / 100 = <strong>$150</strong>.</li>
-                    <li>The total maturity value after 3 years will be <strong>$1,150</strong>.</li>
-                </ol>
+                <p class="dark:text-slate-400 font-bold">Scenario: Investing ₹50,000 at a fixed rate for 2 years.</p>
+                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
+                    <li><strong>Principal Amount:</strong> ₹50,000</li>
+                    <li><strong>Annual Interest Rate:</strong> 6%</li>
+                    <li><strong>Duration:</strong> 2 Years</li>
+                </ul>
+                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <p class="dark:text-slate-300 font-mono text-sm leading-relaxed">
+                        1. Calculate Interest: (50,000 × 6 × 2) / 100 = <strong>₹6,000</strong><br>
+                        2. Calculate Total Amount: 50,000 + 6,000 = <strong>₹56,000</strong><br>
+                        3. Your Net Gain: <strong>₹6,000</strong>
+                    </p>
+                </div>
             </div>
 
             <h2 class="dark:text-white">Frequently Asked Questions</h2>
             <div class="space-y-6">
                 <div>
-                    <h3 class="dark:text-white">What is the difference between Simple and Compound interest?</h3>
-                    <p class="dark:text-slate-400">Simple interest is calculated solely on the principal amount. Compound interest is calculated on the principal plus any interest that has already accumulated, leading to faster growth over time.</p>
+                    <h3 class="dark:text-white">What is a simple interest calculator?</h3>
+                    <p class="dark:text-slate-400">A simple interest calculator is a digital tool that determines the amount of interest owed or earned on a principal balance over a set period. Unlike compound interest, simple interest is calculated only on the original amount borrowed or invested.</p>
                 </div>
                 <div>
-                    <h3 class="dark:text-white">Can I calculate interest for just a few months?</h3>
-                    <p class="dark:text-slate-400">Yes. Simply use the toggle to select "Months" and enter the number of months. The calculator will handle the conversion automatically.</p>
+                    <h3 class="dark:text-white">How do you calculate interest percentage?</h3>
+                    <p class="dark:text-slate-400">To find the interest percentage earned, divide the total interest amount by the original principal and then multiply by 100. For example, if you earn $200 on a $1,000 investment, your total percentage gain is 20%.</p>
                 </div>
                 <div>
-                    <h3 class="dark:text-white">Does this calculator work for car loans?</h3>
-                    <p class="dark:text-slate-400">Many personal and car loans use compound interest or specific amortized formulas. However, this tool is excellent for estimating basic debt growth or checking private loan agreements that specify "simple interest" terms.</p>
+                    <h3 class="dark:text-white">How to calculate final price after interest?</h3>
+                    <p class="dark:text-slate-400">The final price, also known as the maturity value, is found by adding the calculated interest amount to the original principal. This gives you the total balance you will have (or owe) at the end of the term.</p>
                 </div>
                 <div>
-                    <h3 class="dark:text-white">Is the interest rate per month or per year?</h3>
-                    <p class="dark:text-slate-400">Standard financial practice assumes the rate is per annum (p.a.), meaning per year. Our calculator follows this standard.</p>
+                    <h3 class="dark:text-white">Can I calculate interest for online loans?</h3>
+                    <p class="dark:text-slate-400">Yes! While some lenders use complex compounding methods, many private loans and simple savings accounts use simple interest logic. You can use this tool to verify the estimates provided by your financial provider.</p>
                 </div>
+                <div>
+                    <h3 class="dark:text-white">Is this interest calculator free to use?</h3>
+                    <p class="dark:text-slate-400">QuickCalc Pro offers this tool 100% free of charge. No registration or account setup is required, making it a fast and private way to perform your financial math.</p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Explore More Financial Tools</h2>
+            <div class="flex flex-wrap gap-4 mt-6">
+                <a href="profit-margin-calculator.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold text-sm hover:bg-indigo-700 transition-colors">Profit Margin Calculator</a>
+                <a href="discount-calculator.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors">Discount Calculator</a>
             </div>
         </article>
     </main>
