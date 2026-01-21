@@ -54,7 +54,7 @@
             gap: 0.5rem;
         }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
-        .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; justify-content: center; }
+        .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 1rem 1.25rem; display: flex; justify-content: center; }
         .main-card {
             background: white;
             border-radius: 20px;
@@ -93,7 +93,7 @@
             justify-content: space-between;
         }
         @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
-        .content-section { max-width: 850px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .content-section { max-width: 850px; margin: 0 auto; padding: 2rem 1.5rem 4rem 1.5rem; }
         .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
         .content-section h3 { font-size: 1.25rem; font-weight: 700; color: #334155; margin-top: 2rem; margin-bottom: 0.75rem; }
         .content-section p, .content-section li { color: #475569; line-height: 1.7; margin-bottom: 1rem; }
@@ -151,6 +151,12 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 1.5 1.5L21 3"/><path d="M13 7h8"/><path d="M5 3v18"/><path d="m19 13-1.5 1.5L13 19"/><path d="M21 15h-8"/></svg>
                                 </div>
                                 <span class="text-xs font-bold text-blue-600 dark:text-blue-400">Discount Calculator</span>
+                            </a>
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 group transition-colors">
+                                <div class="p-1.5 bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-orange-600 dark:group-hover:text-orange-400">GST Calculator</span>
                             </a>
                             <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 group transition-colors">
                                 <div class="p-1.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-md">
@@ -281,6 +287,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- Suggestion Box -->
+        <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
+                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-2">Have a Suggestion?</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Found a bug or want a new feature? Let us know! Your feedback helps us improve.</p>
+                
+                <form id="suggestion-form" onsubmit="sendSuggestion(event, 'Discount Calculator')" class="space-y-4">
+                    <div>
+                        <label class="input-label dark:text-slate-400">Your Suggestion</label>
+                        <textarea id="suggest-text" required maxlength="500" placeholder="Describe your idea or report an issue..." class="input-field min-h-[100px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                        <div>
+                            <label class="input-label dark:text-slate-400">Email (Optional)</label>
+                            <input type="email" id="suggest-email" placeholder="For follow-up" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            Send Suggestion
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic">Suggestions are optional and emails are never shared.</p>
+                </form>
+                <div id="suggest-success" class="hidden animate-in fade-in zoom-in duration-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 p-4 rounded-xl text-center">
+                    <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">Thank you! Your email client has been opened.</p>
+                </div>
+            </div>
+        </section>
 
         <article class="content-section">
             <h2 class="dark:text-white">How to Calculate a Discount?</h2>
@@ -454,6 +488,21 @@
             const text = `Final Price: ${state.currency}${final}\nCalculated via QuickCalc Pro.`;
             try { await navigator.clipboard.writeText(text); document.getElementById('copy-btn').innerText = 'Copied!'; setTimeout(() => document.getElementById('copy-btn').innerText = 'Copy Result', 1200); } catch(e) {}
         }
+
+        function sendSuggestion(e, tool) {
+            e.preventDefault();
+            const text = document.getElementById('suggest-text').value;
+            const email = document.getElementById('suggest-email').value;
+            const subject = encodeURIComponent(`Suggestion: ${tool}`);
+            const body = encodeURIComponent(`Tool: ${tool}\nURL: ${window.location.href}\n\nSuggestion:\n${text}\n\nContact: ${email || 'None'}`);
+            
+            const mailtoUrl = `mailto:Kashyapvijay59@gmail.com?subject=${subject}&body=${body}`;
+            window.open(mailtoUrl, '_blank');
+            
+            document.getElementById('suggestion-form').classList.add('hidden');
+            document.getElementById('suggest-success').classList.remove('hidden');
+        }
+
         calculate();
     </script>
 </body>
