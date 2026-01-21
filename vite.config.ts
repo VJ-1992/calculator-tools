@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: 'index.html',
         discount: 'discount-calculator.html',
+        gst: 'gst-calculator.html',
         interest: 'simple-interest-calculator.html',
         profit: 'profit-margin-calculator.html',
         about: 'about.html',
