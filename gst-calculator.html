@@ -25,7 +25,7 @@
         .nav-container { max-width: 1280px; margin: 0 auto; height: 100%; padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
         .brand-link { flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
-        .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; justify-content: center; }
+        .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; flex-direction: column; gap: 2rem; align-items: center; }
         .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 750px; max-height: 95vh; overflow: hidden; border: 1px solid #e2e8f0; }
         @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
         .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
@@ -51,6 +51,38 @@
         .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
         .type-pill { flex: 1; padding: 8px 4px; text-align: center; font-size: 0.55rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; border-radius: 6px; transition: all 0.2s; }
         .type-pill.active { background: #f97316; color: white; box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2); }
+
+        /* Invoice Styles */
+        #invoice-view { max-width: 800px; width: 100%; background: white; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 1rem; }
+        .invoice-header { padding: 2rem; border-bottom: 2px solid #f1f5f9; }
+        .invoice-body { padding: 2rem; }
+        .invoice-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .invoice-table th { text-align: left; padding: 12px; background: #f8fafc; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .invoice-table td { padding: 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #1e293b; }
+        .invoice-table td:last-child { text-align: right; }
+        .invoice-table th:last-child { text-align: right; }
+        
+        @media print {
+            nav, .hero-section, .main-card, .content-section, footer, #toggle-invoice-btn, .print-hide {
+                display: none !important;
+            }
+            body { background: white !important; padding: 0 !important; margin: 0 !important; }
+            #invoice-view {
+                display: block !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                max-width: none !important;
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .invoice-header, .invoice-body { padding: 1cm !important; }
+            .print-border-b { border-bottom: 2px solid #000 !important; }
+            .print-text-dark { color: #000 !important; }
+        }
     </style>
     <script>
         (function() {
@@ -189,15 +221,85 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800">
-                        <div class="flex justify-between items-end">
-                            <div class="space-y-0.5">
-                                <p class="text-[8px] font-black text-orange-500 uppercase tracking-widest">Calculated Share</p>
-                                <p class="text-2xl font-black text-white">₹<span id="res-tax-only">0.00</span></p>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex justify-between items-end">
+                                <div class="space-y-0.5">
+                                    <p class="text-[8px] font-black text-orange-500 uppercase tracking-widest">Calculated Share</p>
+                                    <p class="text-2xl font-black text-white">₹<span id="res-tax-only">0.00</span></p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="inline-block px-3 py-1 bg-orange-500/10 text-orange-400 rounded-md text-[10px] font-black uppercase border border-orange-500/20"><span id="tax-rate-display">18</span>% RATE</div>
+                                </div>
                             </div>
-                            <div class="text-right">
-                                <div class="inline-block px-3 py-1 bg-orange-500/10 text-orange-400 rounded-md text-[10px] font-black uppercase border border-orange-500/20"><span id="tax-rate-display">18</span>% RATE</div>
-                            </div>
+                            <button onclick="toggleInvoice()" id="toggle-invoice-btn" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] uppercase rounded-lg transition-colors flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                Show Invoice View
+                            </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Invoice View (Hidden by default) -->
+            <div id="invoice-view" class="hidden animate-in fade-in slide-in-from-top-4 duration-500 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-2xl overflow-hidden mb-12">
+                <div class="invoice-header bg-slate-50 dark:bg-slate-800/50 p-8 border-b-2 border-slate-100 dark:border-slate-800 flex justify-between items-start">
+                    <div class="space-y-4 max-w-md">
+                        <div class="space-y-1">
+                            <h2 class="text-[10px] font-black uppercase text-blue-600 tracking-widest mb-1">Business Details</h2>
+                            <input type="text" id="inv-biz-name" placeholder="Enter Business Name" value="QuickCalc Pro Services" class="w-full text-2xl font-black text-slate-900 dark:text-white bg-transparent border-b border-dashed border-slate-300 dark:border-slate-700 focus:border-blue-500 outline-none">
+                            <input type="text" id="inv-biz-gstin" placeholder="GSTIN: Optional" class="w-full text-xs font-bold text-slate-500 bg-transparent border-b border-dashed border-slate-200 dark:border-slate-800 focus:border-blue-400 outline-none mt-1">
+                        </div>
+                    </div>
+                    <div class="text-right space-y-2">
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Tax Invoice</h2>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest space-y-1">
+                            <p>Invoice #: <span id="inv-no" class="text-slate-900 dark:text-white">QCP-2025-001</span></p>
+                            <p>Date: <span id="inv-date" class="text-slate-900 dark:text-white"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invoice-body p-8 space-y-8">
+                    <div class="grid grid-cols-3 gap-8">
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Tax Type</p>
+                            <p id="inv-tx-type" class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-tight">Intra-State</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">GST Rate</p>
+                            <p id="inv-rate" class="text-sm font-bold text-slate-900 dark:text-white">18%</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Calc Mode</p>
+                            <p id="inv-mode" class="text-sm font-bold text-slate-900 dark:text-white">Inclusive</p>
+                        </div>
+                    </div>
+
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount Breakup</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inv-table-body">
+                            <!-- Dynamic rows via JS -->
+                        </tbody>
+                    </table>
+
+                    <div class="flex justify-end pt-6">
+                        <div class="w-64 bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border-2 border-slate-900 dark:border-white">
+                            <p class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-1">Total Payable</p>
+                            <p class="text-3xl font-black text-slate-900 dark:text-white">₹<span id="inv-total">0.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-12 flex justify-between items-center print-hide">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase italic">Generated via QuickCalc Pro India GST Toolkit</p>
+                        <button onclick="window.print()" id="print-invoice-btn" class="px-6 py-3 bg-slate-900 hover:bg-black text-white rounded-xl font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            Print / Save as PDF
+                        </button>
                     </div>
                 </div>
             </div>
@@ -286,7 +388,7 @@
             }
         }
 
-        let state = { mode: 'add', rate: 18, txType: 'intra' };
+        let state = { mode: 'add', rate: 18, txType: 'intra', invoiceVisible: false };
 
         function setMode(m) {
             state.mode = m;
@@ -328,6 +430,27 @@
                 btn.classList.toggle('border-orange-500', btn.innerText === r + '%');
             });
             calculate();
+        }
+
+        function toggleInvoice() {
+            state.invoiceVisible = !state.invoiceVisible;
+            const view = document.getElementById('invoice-view');
+            const btn = document.getElementById('toggle-invoice-btn');
+            
+            if (state.invoiceVisible) {
+                view.classList.remove('hidden');
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    Hide Invoice View
+                `;
+                view.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                view.classList.add('hidden');
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Show Invoice View
+                `;
+            }
         }
 
         function calculate() {
@@ -388,6 +511,35 @@
 
             // Label for IGST
             document.getElementById('lbl-igst').innerText = state.txType === 'import' ? 'IGST (Import Tax)' : 'IGST (Integrated Tax)';
+
+            updateInvoiceView({
+                base, gstTotal, net, cgst, sgst, igst, utgst, rate: r
+            });
+        }
+
+        function updateInvoiceView(data) {
+            const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            
+            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('en-IN');
+            document.getElementById('inv-tx-type').innerText = state.txType;
+            document.getElementById('inv-rate').innerText = data.rate.toFixed(data.rate % 1 === 0 ? 0 : 2) + '%';
+            document.getElementById('inv-mode').innerText = state.mode === 'add' ? 'Exclusive' : 'Inclusive';
+            document.getElementById('inv-total').innerText = fmt(data.net);
+
+            const tableBody = document.getElementById('inv-table-body');
+            let rows = `
+                <tr><td>Price Excluding GST</td><td class="font-bold">₹${fmt(data.base)}</td></tr>
+                <tr><td class="text-slate-500">GST Amount (Total)</td><td class="font-bold">₹${fmt(data.gstTotal)}</td></tr>
+            `;
+
+            if (data.cgst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">CGST Component</td><td>₹${fmt(data.cgst)}</td></tr>`;
+            if (data.sgst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">SGST Component</td><td>₹${fmt(data.sgst)}</td></tr>`;
+            if (data.igst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">${state.txType === 'import' ? 'Import IGST' : 'IGST Component'}</td><td>₹${fmt(data.igst)}</td></tr>`;
+            if (data.utgst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">UTGST Component</td><td>₹${fmt(data.utgst)}</td></tr>`;
+
+            rows += `<tr class="bg-slate-50"><td class="font-black uppercase text-[10px] tracking-widest">Grand Total (Incl. GST)</td><td class="font-black text-lg">₹${fmt(data.net)}</td></tr>`;
+            
+            tableBody.innerHTML = rows;
         }
 
         function clearResults() {
@@ -398,6 +550,8 @@
             document.querySelectorAll('.receipt-row').forEach(row => {
                 if(row.id) row.classList.add('hidden');
             });
+            document.getElementById('inv-table-body').innerHTML = '<tr><td colspan="2" class="text-center py-4 text-slate-400 italic">No data calculated</td></tr>';
+            document.getElementById('inv-total').innerText = '0.00';
         }
 
         function resetAll() {
