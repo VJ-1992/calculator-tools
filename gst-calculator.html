@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GST Calculator India – CGST, SGST, IGST & Import Support</title>
-    <meta name="description" content="Professional GST calculator for India. Calculate CGST, SGST, IGST, UTGST, and Import IGST for businesses and traders. Add or remove tax instantly.">
+    <title>GST Calculator India – CGST, SGST, IGST & Reverse GST</title>
+    <meta name="description" content="Professional GST calculator for India. Supports Add GST, Remove GST, and reverse calculations. Detailed split for CGST, SGST, IGST, UTGST, and Import IGST.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
@@ -26,26 +26,26 @@
         .brand-link { flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 2.5rem 1.25rem; display: flex; justify-content: center; }
-        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 720px; max-height: 95vh; overflow: hidden; border: 1px solid #e2e8f0; }
+        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 750px; max-height: 95vh; overflow: hidden; border: 1px solid #e2e8f0; }
         @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
         .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
         .input-pane::-webkit-scrollbar { width: 5px; }
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
         @media (max-width: 768px) { .input-pane { padding: 1.25rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow-y: visible; } }
         .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
-        @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
+        @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; margin-bottom: 2rem; } }
         .content-section { max-width: 850px; margin: 0 auto; padding: 4rem 1.5rem; }
         .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
         .content-section h3 { font-size: 1.25rem; font-weight: 700; color: #334155; margin-top: 2rem; margin-bottom: 0.75rem; }
         .content-section p, .content-section li { color: #475569; line-height: 1.7; margin-bottom: 1rem; }
         .formula-box { background: #f8fafc; border-left: 4px solid #f97316; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: ui-monospace, monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
-        .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
+        .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.65rem 0.85rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
-        .pill-toggle { display: flex; background: #f1f5f9; padding: 2px; border-radius: 6px; }
-        .pill-toggle button { flex: 1; padding: 3px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #64748b; transition: all 0.2s; }
-        .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
+        .mode-toggle { display: flex; background: #f1f5f9; padding: 3px; border-radius: 8px; gap: 2px; }
+        .mode-toggle button { flex: 1; padding: 8px 4px; border-radius: 6px; font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s; }
+        .mode-toggle button.active { background: white; color: #2563eb; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .receipt-row { display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
         .dropdown-animate { transform-origin: top right; transition: all 0.2s ease-out; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95) translateY(-10px); pointer-events: none; }
         .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
@@ -113,24 +113,25 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">GST Calculator Pro</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Complete GST solution supporting Intra-state, Inter-state, UT, and Import scenarios. Instantly split taxes into CGST, SGST, IGST, and UTGST.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Complete Indian GST solution. Supports domestic sales, imports, and reverse tax calculations with automatic CGST, SGST, IGST, and UTGST splits.</p>
     </header>
 
     <main>
         <div class="app-container">
             <div class="main-card dark:bg-slate-900 dark:border-slate-800 dark:shadow-none">
                 <div class="input-pane dark:border-slate-800">
-                    <div class="flex items-center justify-between mb-6 flex-shrink-0">
-                        <h2 class="text-base font-extrabold text-slate-800 dark:text-white">Tax Settings</h2>
-                        <div class="pill-toggle w-36 dark:bg-slate-800">
+                    <div class="mb-6">
+                        <label class="input-label dark:text-slate-400 mb-2">Calculation Mode</label>
+                        <div class="mode-toggle dark:bg-slate-800">
                             <button onclick="setMode('add')" id="m-add" class="active">Add GST</button>
-                            <button onclick="setMode('remove')" id="m-remove">Remove</button>
+                            <button onclick="setMode('remove')" id="m-remove">Remove GST</button>
+                            <button onclick="setMode('reverse')" id="m-reverse">Reverse GST</button>
                         </div>
                     </div>
                     
                     <div class="space-y-6">
                         <div class="input-group">
-                            <label id="amt-label" class="input-label dark:text-slate-400">Base Price (Exclusive)</label>
+                            <label id="amt-label" class="input-label dark:text-slate-400">Base Price (Excluding GST)</label>
                             <div class="relative">
                                 <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">₹</span>
                                 <input type="number" id="main-amount" placeholder="0.00" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white">
@@ -138,17 +139,17 @@
                         </div>
 
                         <div>
-                            <label class="input-label dark:text-slate-400 mb-2">Nature of Transaction</label>
+                            <label class="input-label dark:text-slate-400 mb-2">Transaction Details</label>
                             <div class="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl dark:bg-slate-800">
                                 <button onclick="setTxType('intra')" id="tx-intra" class="type-pill active">Intra-State</button>
                                 <button onclick="setTxType('inter')" id="tx-inter" class="type-pill">Inter-State</button>
                                 <button onclick="setTxType('ut')" id="tx-ut" class="type-pill">Union Terr.</button>
-                                <button onclick="setTxType('import')" id="tx-import" class="type-pill">Import IGST</button>
+                                <button onclick="setTxType('import')" id="tx-import" class="type-pill">Import</button>
                             </div>
                         </div>
 
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
-                            <label class="input-label dark:text-slate-400">Select GST Rate</label>
+                            <label class="input-label dark:text-slate-400">GST Tax Rate (%)</label>
                             <div class="grid grid-cols-4 gap-2 mt-2">
                                 <button onclick="setRate(5)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:border-orange-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white">5%</button>
                                 <button onclick="setRate(12)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:border-orange-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white">12%</button>
@@ -159,8 +160,8 @@
                         </div>
 
                         <div class="grid grid-cols-2 gap-3 pt-2">
-                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400">Clear All</button>
-                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5 hover:bg-black dark:bg-orange-600 dark:hover:bg-orange-700">Copy Results</button>
+                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400">Reset All</button>
+                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5 hover:bg-black dark:bg-orange-600 dark:hover:bg-orange-700">Copy Result</button>
                         </div>
                     </div>
                 </div>
@@ -169,32 +170,32 @@
                     <div>
                         <div class="flex items-center gap-2 mb-5 opacity-40">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Final Calculation</span>
+                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Final Summary</span>
                         </div>
                         <div class="mb-10 text-center">
-                            <p id="total-title" class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Price (Incl. GST)</p>
+                            <p id="res-hero-label" class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Price (Inclusive)</p>
                             <div class="flex items-baseline justify-center gap-1.5">
                                 <span class="text-xl font-bold text-orange-400">₹</span>
                                 <span id="res-total" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
                             </div>
                         </div>
                         <div class="space-y-0.5">
-                            <div class="receipt-row"><span>Original Value</span><span class="font-bold">₹<span id="out-base">0.00</span></span></div>
+                            <div class="receipt-row"><span id="lbl-out-base">Price Excluding GST</span><span class="font-bold">₹<span id="out-base">0.00</span></span></div>
                             <div id="row-cgst" class="receipt-row hidden"><span class="text-orange-400">CGST (Central Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-cgst">0.00</span></span></div>
                             <div id="row-sgst" class="receipt-row hidden"><span class="text-orange-400">SGST (State Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-sgst">0.00</span></span></div>
                             <div id="row-igst" class="receipt-row hidden"><span id="lbl-igst" class="text-orange-400">IGST (Integrated Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-igst">0.00</span></span></div>
                             <div id="row-utgst" class="receipt-row hidden"><span class="text-orange-400">UTGST (Union Terr. Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-utgst">0.00</span></span></div>
-                            <div class="receipt-row border-t border-slate-800 mt-2 pt-2"><span>Combined Tax Amount</span><span class="font-bold">₹<span id="out-gst-total">0.00</span></span></div>
+                            <div class="receipt-row border-t border-slate-800 mt-2 pt-2"><span>Total GST Amount</span><span class="font-bold">₹<span id="out-gst-total">0.00</span></span></div>
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800">
                         <div class="flex justify-between items-end">
                             <div class="space-y-0.5">
-                                <p class="text-[8px] font-black text-orange-500 uppercase tracking-widest">Total GST Share</p>
+                                <p class="text-[8px] font-black text-orange-500 uppercase tracking-widest">Calculated Share</p>
                                 <p class="text-2xl font-black text-white">₹<span id="res-tax-only">0.00</span></p>
                             </div>
                             <div class="text-right">
-                                <div class="inline-block px-3 py-1 bg-orange-500/10 text-orange-400 rounded-md text-[10px] font-black uppercase border border-orange-500/20"><span id="tax-rate-display">18</span>% SLAB</div>
+                                <div class="inline-block px-3 py-1 bg-orange-500/10 text-orange-400 rounded-md text-[10px] font-black uppercase border border-orange-500/20"><span id="tax-rate-display">18</span>% RATE</div>
                             </div>
                         </div>
                     </div>
@@ -203,34 +204,40 @@
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">Advanced GST Scenarios in India</h2>
-            <p class="dark:text-slate-400">Modern businesses handle various types of transactions, each with specific tax implications. Our calculator ensures compliance for all major scenarios:</p>
+            <h2 class="dark:text-white">Professional GST Calculation Guide</h2>
+            <p class="dark:text-slate-400">Our GST calculator is designed to handle all domestic and international trade scenarios for Indian businesses. Understanding which mode to use is key for accurate accounting.</p>
             
-            <h3 class="dark:text-white">1. Intra-State & Union Territory</h3>
-            <p class="dark:text-slate-400">For sales within the same state, the GST is split into <strong>CGST</strong> (Central) and <strong>SGST</strong> (State). For Union Territories like Delhi or Chandigarh, SGST is replaced by <strong>UTGST</strong>.</p>
-
-            <h3 class="dark:text-white">2. Inter-State & Imports</h3>
-            <p class="dark:text-slate-400">Transactions across state borders attract <strong>IGST</strong>. Similarly, goods imported from outside India are treated as inter-state supplies and attract <strong>IGST (Import)</strong> at the point of entry.</p>
-
-            <h2 class="dark:text-white">Precision Formulas</h2>
+            <h3 class="dark:text-white">1. Add GST (Exclusive to Inclusive)</h3>
+            <p class="dark:text-slate-400">Use this when you know the base price and want to find the final bill amount. Standard for generating sales invoices.</p>
             <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
-                <strong>Add GST Logic:</strong><br>
-                GST = (Base Price × Rate) / 100<br>
-                Total = Base Price + GST<br><br>
-                <strong>Remove GST Logic:</strong><br>
-                Base Price = Total / (1 + Rate/100)<br>
-                GST = Total − Base Price
+                GST Amount = (Base Price × GST Rate) / 100<br>
+                Total Price = Base Price + GST Amount
             </div>
 
-            <h2 class="dark:text-white">Common Questions</h2>
+            <h3 class="dark:text-white">2. Remove & Reverse GST (Inclusive to Exclusive)</h3>
+            <p class="dark:text-slate-400">Use this when you have a total amount (like a MRP) and need to extract the tax portion to find the original value.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
+                Excluding Amount = (Including Price × 100) / (100 + GST Rate)<br>
+                GST Portion = Including Price − Excluding Amount
+            </div>
+
+            <h3 class="dark:text-white">Tax Splits (CGST, SGST, IGST, UTGST)</h3>
+            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
+                <li><strong>Intra-State:</strong> Split 50:50 between CGST (Central) and SGST (State).</li>
+                <li><strong>Inter-State:</strong> Full 100% applied as IGST (Integrated Tax).</li>
+                <li><strong>Union Territory:</strong> Split 50:50 between CGST and UTGST.</li>
+                <li><strong>Imports:</strong> Treated as Inter-State supplies, attracting IGST (Import).</li>
+            </ul>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
             <div class="space-y-6">
                 <div>
-                    <h3 class="dark:text-white">What is Import IGST?</h3>
-                    <p class="dark:text-slate-400">Import IGST is the tax paid on goods imported into India. It is calculated on the value of the goods plus any customs duties. Our tool allows you to calculate the tax portion on the assessed value.</p>
+                    <h3 class="dark:text-white">What is the difference between Remove GST and Reverse GST?</h3>
+                    <p class="dark:text-slate-400">Mathematically, they are identical. Both extract the tax from an inclusive price. "Remove GST" is commonly used by shoppers to find pre-tax prices, while "Reverse GST" is often used by accountants to verify tax entries.</p>
                 </div>
                 <div>
-                    <h3 class="dark:text-white">How is tax split in Union Territories?</h3>
-                    <p class="dark:text-slate-400">In a Union Territory, the tax is split between CGST (Central Government) and UTGST (Union Territory Government), usually in a 50/50 ratio of the total GST rate.</p>
+                    <h3 class="dark:text-white">Is IGST applicable on imports?</h3>
+                    <p class="dark:text-slate-400">Yes, under the GST regime, imports into India are treated as inter-state supplies and are subject to IGST in addition to standard customs duties.</p>
                 </div>
             </div>
         </article>
@@ -238,7 +245,7 @@
 
     <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Comprehensive Tax Engine.</p>
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Comprehensive Indian Tax Logic.</p>
             <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
                 <a href="about.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">About Us</a>
                 <a href="contact.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Contact Us</a>
@@ -283,10 +290,26 @@
 
         function setMode(m) {
             state.mode = m;
-            document.getElementById('m-add').classList.toggle('active', m === 'add');
-            document.getElementById('m-remove').classList.toggle('active', m === 'remove');
-            document.getElementById('amt-label').innerText = m === 'add' ? 'Base Price (Exclusive)' : 'Total Price (Inclusive)';
-            document.getElementById('total-title').innerText = m === 'add' ? 'Net Price (Incl. GST)' : 'Original Price (Excl. GST)';
+            document.querySelectorAll('.mode-toggle button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('m-' + m).classList.add('active');
+
+            const label = document.getElementById('amt-label');
+            const heroLabel = document.getElementById('res-hero-label');
+            const outBaseLabel = document.getElementById('lbl-out-base');
+
+            if (m === 'add') {
+                label.innerText = 'Base Price (Excluding GST)';
+                heroLabel.innerText = 'Net Price (Inclusive)';
+                outBaseLabel.innerText = 'Price Excluding GST';
+            } else if (m === 'remove') {
+                label.innerText = 'Total Price (Including GST)';
+                heroLabel.innerText = 'Original Price (Exclusive)';
+                outBaseLabel.innerText = 'Price Including GST';
+            } else {
+                label.innerText = 'Price Including GST';
+                heroLabel.innerText = 'Excluding GST Amount';
+                outBaseLabel.innerText = 'Original Including Price';
+            }
             calculate();
         }
 
@@ -308,18 +331,24 @@
         }
 
         function calculate() {
-            const amtInput = parseFloat(document.getElementById('main-amount').value) || 0;
+            const val = parseFloat(document.getElementById('main-amount').value);
+            if (isNaN(val) || val < 0) {
+                clearResults();
+                return;
+            }
+
             const custom = parseFloat(document.getElementById('custom-rate').value);
-            const r = isNaN(custom) || custom === 0 ? state.rate : Math.abs(custom);
+            const r = isNaN(custom) || custom <= 0 ? state.rate : custom;
 
             let base, gstTotal, net;
 
             if (state.mode === 'add') {
-                base = amtInput;
+                base = val;
                 gstTotal = (base * r) / 100;
                 net = base + gstTotal;
             } else {
-                net = amtInput;
+                // remove or reverse modes are same logic
+                net = val;
                 base = (net * 100) / (100 + r);
                 gstTotal = net - base;
             }
@@ -336,28 +365,39 @@
                 utgst = gstTotal / 2;
             }
 
-            const fmt = (v) => Math.abs(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             
-            document.getElementById('res-total').innerText = fmt(state.mode === 'add' ? net : base);
-            document.getElementById('out-base').innerText = fmt(base);
+            const heroDisplayValue = state.mode === 'add' ? net : base;
+            document.getElementById('res-total').innerText = fmt(heroDisplayValue);
+            document.getElementById('out-base').innerText = fmt(state.mode === 'add' ? base : net);
             document.getElementById('out-gst-total').innerText = fmt(gstTotal);
             document.getElementById('res-tax-only').innerText = fmt(gstTotal);
             document.getElementById('tax-rate-display').innerText = r.toFixed(r % 1 === 0 ? 0 : 2);
 
-            // Output splits
+            // Detailed splits
             document.getElementById('out-cgst').innerText = fmt(cgst);
             document.getElementById('out-sgst').innerText = fmt(sgst);
             document.getElementById('out-igst').innerText = fmt(igst);
             document.getElementById('out-utgst').innerText = fmt(utgst);
 
-            // Conditional row visibility
+            // Dynamic visibility
             document.getElementById('row-cgst').classList.toggle('hidden', cgst <= 0);
             document.getElementById('row-sgst').classList.toggle('hidden', sgst <= 0);
             document.getElementById('row-igst').classList.toggle('hidden', igst <= 0);
             document.getElementById('row-utgst').classList.toggle('hidden', utgst <= 0);
 
-            // IGST Label dynamic
+            // Label for IGST
             document.getElementById('lbl-igst').innerText = state.txType === 'import' ? 'IGST (Import Tax)' : 'IGST (Integrated Tax)';
+        }
+
+        function clearResults() {
+            document.getElementById('res-total').innerText = '0.00';
+            document.getElementById('out-base').innerText = '0.00';
+            document.getElementById('out-gst-total').innerText = '0.00';
+            document.getElementById('res-tax-only').innerText = '0.00';
+            document.querySelectorAll('.receipt-row').forEach(row => {
+                if(row.id) row.classList.add('hidden');
+            });
         }
 
         function resetAll() {
@@ -365,19 +405,20 @@
             document.getElementById('custom-rate').value = '';
             setRate(18);
             setTxType('intra');
-            calculate();
+            setMode('add');
+            clearResults();
         }
 
         async function copyBill() {
             const net = document.getElementById('res-total').innerText;
             const gst = document.getElementById('out-gst-total').innerText;
             const type = state.txType === 'import' ? 'IMPORT IGST' : state.txType.toUpperCase();
-            const text = `Net Value: ₹${net}\nGST: ₹${gst} (${type})\nCalculated via QuickCalc Pro`;
+            const text = `Amount: ₹${net}\nGST: ₹${gst} (${type})\nQuickCalc Pro GST Tool`;
             try {
                 await navigator.clipboard.writeText(text);
                 const btn = document.getElementById('copy-btn');
                 btn.innerText = "Copied!";
-                setTimeout(() => btn.innerText = "Copy Results", 1500);
+                setTimeout(() => btn.innerText = "Copy Result", 1500);
             } catch(e) {}
         }
 
