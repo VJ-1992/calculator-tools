@@ -310,7 +310,7 @@
                     <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-2">Have a Suggestion?</h2>
                     <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Found a bug or want a new feature? Let us know! Your feedback helps us improve.</p>
                     
-                    <form id="suggestion-form" onsubmit="sendSuggestion(event, 'GST Calculator')" class="space-y-4">
+                    <form id="suggestion-form" onsubmit="sendSuggestion(event)" class="space-y-4">
                         <div>
                             <label class="input-label dark:text-slate-400">Your Suggestion</label>
                             <textarea id="suggest-text" required maxlength="500" placeholder="Describe your idea or report an issue..." class="input-field min-h-[100px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
@@ -320,14 +320,14 @@
                                 <label class="input-label dark:text-slate-400">Email (Optional)</label>
                                 <input type="email" id="suggest-email" placeholder="For follow-up" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
                             </div>
-                            <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            <button type="submit" id="suggest-submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
                                 Send Suggestion
                             </button>
                         </div>
                         <p class="text-[10px] text-slate-400 italic">Suggestions are optional and emails are never shared.</p>
                     </form>
                     <div id="suggest-success" class="hidden animate-in fade-in zoom-in duration-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 p-4 rounded-xl text-center">
-                        <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">Thank you! Your email client has been opened.</p>
+                        <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">Thank you! Your suggestion has been submitted.</p>
                     </div>
                 </div>
             </section>
@@ -604,18 +604,53 @@
             } catch(e) {}
         }
 
-        function sendSuggestion(e, tool) {
+        async function sendSuggestion(e) {
             e.preventDefault();
-            const text = document.getElementById('suggest-text').value;
+            const btn = document.getElementById('suggest-submit');
+            const originalText = btn.innerText;
+            
+            // Configuration: Replace these with your real Google Form/Field IDs
+            const FORM_ID = "1FAIpQLSfxxxx_your_form_id_here"; 
+            const ENTRIES = {
+                calcName: "entry.123456789", // Field for Calculator Name
+                url: "entry.987654321",      // Field for Page URL
+                suggestion: "entry.456789123",// Field for User Suggestion
+                email: "entry.789123456"     // Field for Email (optional)
+            };
+
+            const calcName = document.querySelector('h1')?.innerText || "GST Calculator";
+            const pageUrl = window.location.href;
+            const suggestion = document.getElementById('suggest-text').value;
             const email = document.getElementById('suggest-email').value;
-            const subject = encodeURIComponent(`Suggestion: ${tool}`);
-            const body = encodeURIComponent(`Tool: ${tool}\nURL: ${window.location.href}\n\nSuggestion:\n${text}\n\nContact: ${email || 'None'}`);
-            
-            const mailtoUrl = `mailto:Kashyapvijay59@gmail.com?subject=${subject}&body=${body}`;
-            window.open(mailtoUrl, '_blank');
-            
-            document.getElementById('suggestion-form').classList.add('hidden');
-            document.getElementById('suggest-success').classList.remove('hidden');
+
+            btn.disabled = true;
+            btn.innerText = "Sending...";
+
+            const formData = new URLSearchParams();
+            formData.append(ENTRIES.calcName, calcName);
+            formData.append(ENTRIES.url, pageUrl);
+            formData.append(ENTRIES.suggestion, suggestion);
+            formData.append(ENTRIES.email, email);
+
+            const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+
+            try {
+                await fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString()
+                });
+
+                document.getElementById('suggestion-form').reset();
+                document.getElementById('suggestion-form').classList.add('hidden');
+                document.getElementById('suggest-success').classList.remove('hidden');
+            } catch (error) {
+                console.error("Submission failed", error);
+                alert("Submission failed. Please check your connection.");
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
         }
 
         calculate();
