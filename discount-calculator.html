@@ -20,19 +20,78 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
-        nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
-        .nav-container { max-width: 1280px; margin: 0 auto; height: 100%; padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-        .brand-link { flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f1f5f9; 
+            margin: 0;
+            padding: 0;
+            color: #0f172a;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav {
+            height: 52px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .brand-link {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 1rem 1.25rem; display: flex; justify-content: center; }
-        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 85vh; overflow: hidden; border: 1px solid #e2e8f0; }
-        @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
-        .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            width: 100%;
+            height: 650px;
+            max-height: 85vh;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        @media (max-width: 768px) {
+            .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; }
+        }
+        .input-pane {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 1.5rem;
+            border-right: 1px solid #f1f5f9;
+            scrollbar-width: thin;
+        }
         .input-pane::-webkit-scrollbar { width: 5px; }
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
-        @media (max-width: 768px) { .input-pane { padding: 1.25rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow-y: visible; } }
-        .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
+        @media (max-width: 768px) {
+            .input-pane { padding: 1.25rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow-y: visible; }
+        }
+        .result-pane {
+            flex: 0.9;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            justify-content: space-between;
+        }
         @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
         .content-section { max-width: 850px; margin: 0 auto; padding: 2rem 1.5rem 4rem 1.5rem; }
         .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
@@ -47,9 +106,20 @@
         .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .dropdown-animate { transform-origin: top right; transition: all 0.2s ease-out; }
-        .dropdown-hidden { opacity: 0; transform: scale(0.95) translateY(-10px); pointer-events: none; }
-        .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+        .dropdown-animate {
+            transform-origin: top right;
+            transition: all 0.2s ease-out;
+        }
+        .dropdown-hidden {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+            pointer-events: none;
+        }
+        .dropdown-visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
     </style>
     <script>
         (function() {
@@ -218,13 +288,18 @@
             </div>
         </div>
 
-        <!-- Public Suggestion Box -->
+        <!-- Local Suggestion Box -->
         <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Feedback & Public Discussion</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Share your ideas with the community. Your comment will be visible to everyone.</p>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1 text-center md:text-left">Feedback & Suggestions</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">Share your ideas locally. Comments stay in your browser.</p>
+                    </div>
+                    <button onclick="clearMyComments()" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline text-center">Clear My History</button>
+                </div>
                 
-                <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
+                <form id="suggestion-form" onsubmit="handleLocalComment(event)" class="space-y-4 mb-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="input-label dark:text-slate-400">Your Name (Optional)</label>
@@ -232,21 +307,20 @@
                         </div>
                         <div class="flex-grow">
                             <label class="input-label dark:text-slate-400">Your Suggestion</label>
-                            <textarea id="suggest-text" required maxlength="500" placeholder="What should we add next?" class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                            <textarea id="suggest-text" required maxlength="400" placeholder="What should we add next?" class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                         </div>
                     </div>
-                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md disabled:opacity-50">
-                        Post Comment
-                    </button>
-                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-2">Thank you! Your suggestion has been submitted.</div>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <button type="submit" class="w-full md:w-auto px-10 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            Post Comment
+                        </button>
+                        <p class="text-[10px] text-slate-400 italic">No data is sent to a server. Everything is stored locally.</p>
+                    </div>
                 </form>
 
-                <!-- Comments List -->
-                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Recent Comments</h3>
-                    <div id="comment-list" class="space-y-6">
-                        <div class="text-center py-4 text-slate-400 text-xs italic">Loading discussion...</div>
-                    </div>
+                <!-- Discussion List -->
+                <div id="comment-list" class="space-y-4 max-h-[400px] overflow-y-auto pr-2 no-scrollbar">
+                    <!-- Comments render here -->
                 </div>
             </div>
         </section>
@@ -423,9 +497,8 @@
             try { await navigator.clipboard.writeText(text); document.getElementById('copy-btn').innerText = 'Copied!'; setTimeout(() => document.getElementById('copy-btn').innerText = 'Copy Result', 1200); } catch(e) {}
         }
 
-        // PUBLIC COMMENT SYSTEM
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
+        // LOCAL COMMENT SYSTEM LOGIC
+        const storageKey = `comments_${window.location.pathname}`;
 
         function escapeHTML(str) {
             const p = document.createElement('p');
@@ -433,74 +506,69 @@
             return p.innerHTML;
         }
 
-        async function fetchComments() {
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
             const list = document.getElementById('comment-list');
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                
-                if (filtered.length === 0) {
-                    list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first to share!</p>';
-                    return;
-                }
-
-                list.innerHTML = filtered.map(c => `
-                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
-                            <span class="text-[9px] text-slate-400 font-medium">${new Date(c.date).toLocaleDateString()}</span>
-                        </div>
-                        <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.comment)}</p>
-                    </div>
-                `).join('');
-            } catch (err) {
-                list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Failed to load comments.</p>';
+            
+            if (comments.length === 0) {
+                list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first!</p>';
+                return;
             }
+
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
+                        <span class="text-[9px] text-slate-400 font-medium">${new Date(c.timestamp).toLocaleString()}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.text)}</p>
+                </div>
+            `).join('');
         }
 
-        async function handlePublicComment(e) {
+        function handleLocalComment(e) {
             e.preventDefault();
-            const btn = document.getElementById('suggest-submit');
-            const nameEl = document.getElementById('suggest-name');
-            const textEl = document.getElementById('suggest-text');
-            const successMsg = document.getElementById('suggest-success-msg');
+            const nameInput = document.getElementById('suggest-name');
+            const textInput = document.getElementById('suggest-text');
             
-            const payload = {
-                page: currentPath,
-                name: nameEl.value.trim() || 'Anonymous',
-                comment: textEl.value.trim()
+            const comment = {
+                name: nameInput.value.trim(),
+                text: textInput.value.trim(),
+                timestamp: Date.now()
             };
 
-            if (!payload.comment) return;
+            if (!comment.text) return;
 
-            btn.disabled = true;
-            btn.innerText = 'Posting...';
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            comments.unshift(comment); // Newest first
+            localStorage.setItem(storageKey, JSON.stringify(comments));
 
-            try {
-                await fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload)
-                });
+            nameInput.value = '';
+            textInput.value = '';
+            
+            loadComments();
+            
+            // Show brief success state
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Posted!";
+            btn.classList.replace('bg-blue-600', 'bg-emerald-600');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.replace('bg-emerald-600', 'bg-blue-600');
+            }, 2000);
+        }
 
-                nameEl.value = '';
-                textEl.value = '';
-                successMsg.classList.remove('hidden');
-                setTimeout(() => successMsg.classList.add('hidden'), 3000);
-                
-                fetchComments(); // Refresh list
-            } catch (err) {
-                alert('Could not post comment. Please try again.');
-            } finally {
-                btn.disabled = false;
-                btn.innerText = 'Post Comment';
+        function clearMyComments() {
+            if (confirm("Clear all your comments for this page? This cannot be undone.")) {
+                localStorage.removeItem(storageKey);
+                loadComments();
             }
         }
 
         // Initialize
         calculate();
-        fetchComments();
+        loadComments();
     </script>
 </body>
 </html>

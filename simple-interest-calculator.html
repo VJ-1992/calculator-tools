@@ -21,13 +21,36 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
-        nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
-        .nav-container { max-width: 1280px; margin: 0 auto; height: 100%; padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-        .brand-link { flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
+        nav {
+            height: 52px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .brand-link {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 1rem 1.25rem; display: flex; justify-content: center; }
         .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 85vh; overflow: hidden; border: 1px solid #e2e8f0; }
-        @media (max-width: 768px) { .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; } }
+        @media (max-width: 768px) {
+            .main-card { flex-direction: column; max-height: none; height: auto; border: none; box-shadow: none; background: transparent; overflow: visible; }
+        }
         .input-pane { flex: 1.1; display: flex; flex-direction: column; overflow-y: auto; padding: 1.5rem; border-right: 1px solid #f1f5f9; scrollbar-width: thin; }
         .input-pane::-webkit-scrollbar { width: 5px; }
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
@@ -47,9 +70,20 @@
         .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .dropdown-animate { transform-origin: top right; transition: all 0.2s ease-out; }
-        .dropdown-hidden { opacity: 0; transform: scale(0.95) translateY(-10px); pointer-events: none; }
-        .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+        .dropdown-animate {
+            transform-origin: top right;
+            transition: all 0.2s ease-out;
+        }
+        .dropdown-hidden {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+            pointer-events: none;
+        }
+        .dropdown-visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
     </style>
     <script>
         (function() {
@@ -108,7 +142,7 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">Simple Interest Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Simple interest is a quick and easy method of calculating the interest charge on a loan or the growth of an investment.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Simple interest is a quick and easy method of calculating the interest charge on a loan or the growth of an investment. Our Simple Interest Calculator Online helps students, shoppers, and businesses find exact interest amounts and total maturity values in seconds.</p>
     </header>
 
     <main>
@@ -144,6 +178,10 @@
                                 <span class="text-blue-400">Compounded Total</span>
                                 <span class="font-bold text-blue-400"><span class="currency-symbol">$</span><span id="out-ci">0.00</span></span>
                             </div>
+                            <div id="row-diff" class="receipt-row hidden">
+                                <span class="text-indigo-400">Gain Difference</span>
+                                <span class="font-bold text-indigo-400">+<span class="currency-symbol">$</span><span id="out-diff">0.00</span></span>
+                            </div>
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800">
@@ -161,44 +199,96 @@
             </div>
         </div>
 
-        <!-- Public Suggestion Box -->
+        <!-- Local Suggestion Box -->
         <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Community Feedback</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Have a feature request? Let us know below.</p>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1 text-center md:text-left">Feedback & Suggestions</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">Share your ideas locally. Comments stay in your browser.</p>
+                    </div>
+                    <button onclick="clearMyComments()" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline text-center">Clear My History</button>
+                </div>
                 
-                <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
+                <form id="suggestion-form" onsubmit="handleLocalComment(event)" class="space-y-4 mb-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="input-label dark:text-slate-400">Name (Optional)</label>
+                            <label class="input-label dark:text-slate-400">Your Name (Optional)</label>
                             <input type="text" id="suggest-name" maxlength="30" placeholder="Anonymous" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
                         </div>
                         <div class="flex-grow">
-                            <label class="input-label dark:text-slate-400">Message</label>
-                            <textarea id="suggest-text" required maxlength="500" placeholder="I'd like to calculate..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                            <label class="input-label dark:text-slate-400">Your Suggestion</label>
+                            <textarea id="suggest-text" required maxlength="400" placeholder="What should we add next?" class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                         </div>
                     </div>
-                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
-                        Post Feedback
-                    </button>
-                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-2">Feedback shared successfully!</div>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <button type="submit" class="w-full md:w-auto px-10 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            Post Comment
+                        </button>
+                        <p class="text-[10px] text-slate-400 italic">No data is sent to a server. Everything is stored locally.</p>
+                    </div>
                 </form>
 
-                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Recent Discussions</h3>
-                    <div id="comment-list" class="space-y-6">
-                        <div class="text-center py-4 text-slate-400 text-xs italic">Loading...</div>
-                    </div>
+                <div id="comment-list" class="space-y-4 max-h-[400px] overflow-y-auto pr-2 no-scrollbar">
+                    <!-- Comments render here -->
                 </div>
             </div>
         </section>
 
         <article class="content-section">
             <h2 class="dark:text-white">How is Simple Interest Calculated?</h2>
-            <p class="dark:text-slate-400">Calculating simple interest is a basic financial skill used to determine the cost of borrowing or the profit from an investment.</p>
+            <p class="dark:text-slate-400">Calculating simple interest is a basic financial skill used to determine the cost of borrowing or the profit from an investment. Our tool uses standard mathematical formulas to provide accurate results:</p>
             <div class="formula-box dark:bg-slate-900 dark:border-emerald-900 dark:text-white">
                 Simple Interest = (Principal × Rate × Time) ÷ 100<br>
                 Total Amount = Principal + Simple Interest
+            </div>
+            <p class="dark:text-slate-400">In these formulas, <strong>Principal</strong> is the initial amount of money, <strong>Rate</strong> is the annual interest percentage, and <strong>Time</strong> is the number of years. Our simple interest calculator online handles all these variables automatically.</p>
+
+            <h2 class="dark:text-white">Step-by-Step Calculation Example</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <p class="dark:text-slate-400 font-bold">Example: Calculating interest for an investment.</p>
+                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
+                    <li><strong>Principal:</strong> ₹10,000</li>
+                    <li><strong>Rate:</strong> 5% per year</li>
+                    <li><strong>Time:</strong> 2 years</li>
+                </ul>
+                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <p class="dark:text-slate-300 font-mono text-sm leading-relaxed">
+                        1. Calculate Simple Interest: (10,000 × 5 × 2) / 100 = <strong>₹1,000</strong><br>
+                        2. Calculate Total Amount: 10,000 + 1,000 = <strong>₹11,000</strong><br>
+                        3. Your Total Earnings: <strong>₹1,000</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is simple interest?</h3>
+                    <p class="dark:text-slate-400">Simple interest is the interest calculated only on the original principal amount of a loan or deposit. It does not take into account any interest accumulated over time, making it easier to predict than compound interest.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How is simple interest different from compound interest?</h3>
+                    <p class="dark:text-slate-400">The primary difference is that simple interest is calculated only on the principal, whereas compound interest is calculated on the principal plus the interest that has already been added. Compound interest grows faster over time.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How to calculate simple interest manually?</h3>
+                    <p class="dark:text-slate-400">To calculate it manually, multiply the principal amount by the interest rate and the time period, then divide the result by 100. This is expressed as the simple interest formula: SI = (P × R × T) / 100.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Can students use this calculator?</h3>
+                    <p class="dark:text-slate-400">Absolutely! This calculator is designed to be student-friendly and is perfect for checking school assignments, understanding financial concepts, and learning how to calculate simple interest effectively.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is this simple interest calculator free?</h3>
+                    <p class="dark:text-slate-400">Yes, QuickCalc Pro provides this interest calculation tool 100% free of charge. You can use it as many times as you need for your personal or educational projects.</p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Related Business Tools</h2>
+            <div class="flex flex-wrap gap-4 mt-6">
+                <a href="profit-margin-calculator.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold text-sm hover:bg-indigo-700 transition-colors">Business Margin & Profit Tool</a>
+                <a href="discount-calculator.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors">Calculate Sale Discounts</a>
             </div>
         </article>
     </main>
@@ -226,20 +316,32 @@
             const dropdown = document.getElementById('nav-dropdown');
             const chevron = document.getElementById('drop-chevron');
             const isVisible = dropdown.classList.contains('dropdown-visible');
-            if (isVisible) { dropdown.classList.replace('dropdown-visible', 'dropdown-hidden'); chevron.style.transform = 'rotate(0deg)'; }
-            else { dropdown.classList.replace('dropdown-hidden', 'dropdown-visible'); chevron.style.transform = 'rotate(180deg)'; }
+            
+            if (isVisible) {
+                dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                dropdown.classList.replace('dropdown-hidden', 'dropdown-visible');
+                chevron.style.transform = 'rotate(180deg)';
+            }
         }
 
         window.onclick = function(event) {
             const dropdown = document.getElementById('nav-dropdown');
             const chevron = document.getElementById('drop-chevron');
             if (dropdown && !event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
-                if (dropdown.classList.contains('dropdown-visible')) { dropdown.classList.replace('dropdown-visible', 'dropdown-hidden'); chevron.style.transform = 'rotate(0deg)'; }
+                if (dropdown.classList.contains('dropdown-visible')) {
+                    dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
+                    chevron.style.transform = 'rotate(0deg)';
+                }
             }
         }
 
         let state = { currency: '$', timeUnit: 'years' };
-        function setCurrency(symbol) { state.currency = symbol; document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol); calculate(); }
+        function setCurrency(symbol) {
+            state.currency = symbol; document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol);
+            calculate();
+        }
         function setTimeUnit(unit) { state.timeUnit = unit; document.getElementById('t-years').classList.toggle('active', unit === 'years'); document.getElementById('t-months').classList.toggle('active', unit === 'months'); calculate(); }
         
         function calculate() {
@@ -247,14 +349,25 @@
             const r = parseFloat(document.getElementById('rate').value) || 0;
             const tInput = parseFloat(document.getElementById('time-val').value) || 0;
             const tYears = state.timeUnit === 'years' ? tInput : tInput / 12;
+            
             const si = (p * r * tYears) / 100;
             const totalSI = p + si;
             const compare = document.getElementById('compare-toggle').checked;
+            
             if (compare && p > 0 && r > 0 && tYears > 0) {
                 const totalCI = p * Math.pow((1 + (r / 100)), tYears);
+                const diff = totalCI - totalSI;
                 document.getElementById('row-compound').classList.remove('hidden');
+                document.getElementById('row-diff').classList.remove('hidden');
                 document.getElementById('out-ci').innerText = fmt(totalCI);
-            } else { document.getElementById('row-compound').classList.add('hidden'); }
+                document.getElementById('out-diff').innerText = fmt(diff);
+                document.getElementById('yield-label').innerText = "Total Earnings (SI)";
+            } else { 
+                document.getElementById('row-compound').classList.add('hidden');
+                document.getElementById('row-diff').classList.add('hidden');
+                document.getElementById('yield-label').innerText = "Earnings";
+            }
+            
             document.getElementById('res-total').innerText = fmt(totalSI);
             document.getElementById('out-principal').innerText = fmt(p);
             document.getElementById('out-interest').innerText = fmt(si);
@@ -263,50 +376,62 @@
         }
         function fmt(v) { return v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
         function resetAll() { document.getElementById('principal').value = ''; document.getElementById('rate').value = ''; document.getElementById('time-val').value = ''; document.getElementById('compare-toggle').checked = false; calculate(); }
-        async function copyBill() { const total = document.getElementById('res-total').innerText; try { await navigator.clipboard.writeText(`Maturity: ${state.currency}${total}`); const btn = document.getElementById('copy-btn'); btn.innerText = "Copied!"; setTimeout(() => btn.innerText = "Copy Result", 2000); } catch(e) {} }
+        async function copyBill() { const total = document.getElementById('res-total').innerText; try { await navigator.clipboard.writeText(`Maturity: ${state.currency}${total}`); const btn = document.getElementById('copy-btn'); const oldText = btn.innerText; btn.innerText = "Copied!"; setTimeout(() => btn.innerText = oldText, 2000); } catch(e) {} }
+        
+        // LOCAL COMMENT SYSTEM
+        const storageKey = `comments_${window.location.pathname}`;
 
-        // PUBLIC COMMENT SYSTEM
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
-
-        function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
-
-        async function fetchComments() {
-            const list = document.getElementById('comment-list');
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                if (filtered.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No feedback yet.</p>'; return; }
-                list.innerHTML = filtered.map(c => `
-                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black text-emerald-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
-                            <span class="text-[9px] text-slate-400">${new Date(c.date).toLocaleDateString()}</span>
-                        </div>
-                        <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.comment)}</p>
-                    </div>
-                `).join('');
-            } catch (err) { list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Load failed.</p>'; }
+        function escapeHTML(str) {
+            const p = document.createElement('p');
+            p.textContent = str;
+            return p.innerHTML;
         }
 
-        async function handlePublicComment(e) {
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            const list = document.getElementById('comment-list');
+            
+            if (comments.length === 0) {
+                list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first!</p>';
+                return;
+            }
+
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-black text-emerald-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
+                        <span class="text-[9px] text-slate-400 font-medium">${new Date(c.timestamp).toLocaleString()}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.text)}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleLocalComment(e) {
             e.preventDefault();
-            const btn = document.getElementById('suggest-submit');
-            const n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text'), s = document.getElementById('suggest-success-msg');
-            const payload = { page: currentPath, name: n.value.trim() || 'Anonymous', comment: t.value.trim() };
-            if (!payload.comment) return;
-            btn.disabled = true; btn.innerText = 'Posting...';
-            try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-                n.value = ''; t.value = ''; s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000);
-                fetchComments();
-            } catch (err) { alert('Try again later.'); }
-            finally { btn.disabled = false; btn.innerText = 'Post Feedback'; }
+            const nameInput = document.getElementById('suggest-name');
+            const textInput = document.getElementById('suggest-text');
+            const comment = { name: nameInput.value.trim(), text: textInput.value.trim(), timestamp: Date.now() };
+            if (!comment.text) return;
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            comments.unshift(comment);
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+            nameInput.value = ''; textInput.value = '';
+            loadComments();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const oldText = btn.innerText; btn.innerText = "Posted!";
+            setTimeout(() => btn.innerText = oldText, 2000);
+        }
+
+        function clearMyComments() {
+            if (confirm("Clear all your comments for this page?")) {
+                localStorage.removeItem(storageKey);
+                loadComments();
+            }
         }
 
         calculate();
-        fetchComments();
+        loadComments();
     </script>
 </body>
 </html>

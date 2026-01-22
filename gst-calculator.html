@@ -63,10 +63,25 @@
         .invoice-table th:last-child { text-align: right; }
         
         @media print {
-            nav, .hero-section, .main-card, .content-section, footer, #toggle-invoice-btn, .print-hide, #suggestion-box { display: none !important; }
+            nav, .hero-section, .main-card, .content-section, footer, #toggle-invoice-btn, .print-hide, #suggestion-box {
+                display: none !important;
+            }
             body { background: white !important; padding: 0 !important; margin: 0 !important; }
-            #invoice-view { display: block !important; position: fixed; top: 0; left: 0; width: 100% !important; max-width: none !important; border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; }
+            #invoice-view {
+                display: block !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                max-width: none !important;
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
             .invoice-header, .invoice-body { padding: 1cm !important; }
+            .print-border-b { border-bottom: 2px solid #000 !important; }
+            .print-text-dark { color: #000 !important; }
         }
     </style>
     <script>
@@ -87,139 +102,478 @@
             </a>
             <div class="flex items-center gap-2">
                 <div class="relative">
-                    <button onclick="toggleDropdown(event)" id="drop-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Calculators</button>
+                    <button onclick="toggleDropdown(event)" id="drop-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                        Calculators
+                        <svg id="drop-chevron" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
                         <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 group transition-colors"><span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span></a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-orange-50 dark:bg-orange-900/20 group transition-colors"><span class="text-xs font-bold text-orange-600 dark:text-orange-400">GST Calculator</span></a>
+                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 group transition-colors">
+                                <div class="p-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 1.5 1.5L21 3"/><path d="M13 7h8"/><path d="M5 3v18"/><path d="m19 13-1.5 1.5L13 19"/><path d="M21 15h-8"/></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">Discount Calculator</span>
+                            </a>
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-orange-50 dark:bg-orange-900/20 group transition-colors">
+                                <div class="p-1.5 bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                </div>
+                                <span class="text-xs font-bold text-orange-600 dark:text-orange-400">GST Calculator</span>
+                            </a>
+                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 group transition-colors">
+                                <div class="p-1.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">Simple Interest</span>
+                            </a>
+                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/20 group transition-colors">
+                                <div class="p-1.5 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Profit Margin</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">Theme</button>
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" aria-label="Toggle Theme">
+                    <svg id="sun-icon" class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
+                    <svg id="moon-icon" class="w-4 h-4 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">GST Calculator Pro</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Complete Indian GST solution.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Complete Indian GST solution. Supports domestic sales, imports, and reverse tax calculations with automatic CGST, SGST, IGST, and UTGST splits.</p>
     </header>
 
     <main>
         <div class="app-container">
             <div class="main-card dark:bg-slate-900 dark:border-slate-800 dark:shadow-none">
-                <!-- Inputs and Results... existing content omitted for brevity but logic must be maintained -->
                 <div class="input-pane dark:border-slate-800">
-                    <div class="mb-6"><label class="input-label dark:text-slate-400 mb-2">Calculation Mode</label><div class="mode-toggle dark:bg-slate-800"><button onclick="setMode('add')" id="m-add" class="active">Add GST</button><button onclick="setMode('remove')" id="m-remove">Remove GST</button></div></div>
+                    <div class="mb-6">
+                        <label class="input-label dark:text-slate-400 mb-2">Calculation Mode</label>
+                        <div class="mode-toggle dark:bg-slate-800">
+                            <button onclick="setMode('add')" id="m-add" class="active">Add GST</button>
+                            <button onclick="setMode('remove')" id="m-remove">Remove GST</button>
+                            <button onclick="setMode('reverse')" id="m-reverse">Reverse GST</button>
+                        </div>
+                    </div>
+                    
                     <div class="space-y-6">
-                        <div class="input-group"><label id="amt-label" class="input-label dark:text-slate-400">Base Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">₹</span><input type="number" id="main-amount" placeholder="0.00" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div></div>
-                        <div><label class="input-label dark:text-slate-400 mb-2">Transaction Details</label><div class="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl dark:bg-slate-800"><button onclick="setTxType('intra')" id="tx-intra" class="type-pill active">Intra-State</button><button onclick="setTxType('inter')" id="tx-inter" class="type-pill">Inter-State</button></div></div>
-                        <div class="grid grid-cols-2 gap-3 pt-2"><button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400">Reset</button><button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase dark:bg-orange-600">Copy</button></div>
+                        <div class="input-group">
+                            <label id="amt-label" class="input-label dark:text-slate-400">Base Price (Excluding GST)</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">₹</span>
+                                <input type="number" id="main-amount" placeholder="0.00" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="input-label dark:text-slate-400 mb-2">Transaction Details</label>
+                            <div class="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl dark:bg-slate-800">
+                                <button onclick="setTxType('intra')" id="tx-intra" class="type-pill active">Intra-State</button>
+                                <button onclick="setTxType('inter')" id="tx-inter" class="type-pill">Inter-State</button>
+                                <button onclick="setTxType('ut')" id="tx-ut" class="type-pill">Union Terr.</button>
+                                <button onclick="setTxType('import')" id="tx-import" class="type-pill">Import</button>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
+                            <label class="input-label dark:text-slate-400">GST Tax Rate (%)</label>
+                            <div class="grid grid-cols-4 gap-2 mt-2">
+                                <button onclick="setRate(5)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:border-orange-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white">5%</button>
+                                <button onclick="setRate(12)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:border-orange-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white">12%</button>
+                                <button onclick="setRate(18)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:border-orange-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white ring-2 ring-orange-500 border-orange-500">18%</button>
+                                <button onclick="setRate(28)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:border-orange-500 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white">28%</button>
+                            </div>
+                            <input type="number" id="custom-rate" placeholder="Custom Rate %" oninput="calculate()" class="input-field mt-3 dark:bg-slate-800 dark:border-slate-700 dark:text-white text-center">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400">Reset All</button>
+                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5 hover:bg-black dark:bg-orange-600 dark:hover:bg-orange-700">Copy Result</button>
+                        </div>
                     </div>
                 </div>
+
                 <div class="result-pane dark:bg-black">
-                    <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Total</p><div class="flex items-baseline justify-center gap-1.5"><span class="text-xl font-bold text-orange-400">₹</span><span id="res-total" class="text-5xl font-black tracking-tighter leading-none">0.00</span></div></div>
-                    <div class="space-y-0.5"><div class="receipt-row"><span>GST Portion</span><span class="font-bold">₹<span id="out-gst-total">0.00</span></span></div></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-5 opacity-40">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Final Summary</span>
+                        </div>
+                        <div class="mb-10 text-center">
+                            <p id="res-hero-label" class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Price (Inclusive)</p>
+                            <div class="flex items-baseline justify-center gap-1.5">
+                                <span class="text-xl font-bold text-orange-400">₹</span>
+                                <span id="res-total" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
+                            </div>
+                        </div>
+                        <div class="space-y-0.5">
+                            <div class="receipt-row"><span id="lbl-out-base">Price Excluding GST</span><span class="font-bold">₹<span id="out-base">0.00</span></span></div>
+                            <div id="row-cgst" class="receipt-row hidden"><span class="text-orange-400">CGST (Central Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-cgst">0.00</span></span></div>
+                            <div id="row-sgst" class="receipt-row hidden"><span class="text-orange-400">SGST (State Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-sgst">0.00</span></span></div>
+                            <div id="row-igst" class="receipt-row hidden"><span id="lbl-igst" class="text-orange-400">IGST (Integrated Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-igst">0.00</span></span></div>
+                            <div id="row-utgst" class="receipt-row hidden"><span class="text-orange-400">UTGST (Union Terr. Tax)</span><span class="font-bold text-orange-400">+₹<span id="out-utgst">0.00</span></span></div>
+                            <div class="receipt-row border-t border-slate-800 mt-2 pt-2"><span>Total GST Amount</span><span class="font-bold">₹<span id="out-gst-total">0.00</span></span></div>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex justify-between items-end">
+                                <div class="space-y-0.5">
+                                    <p class="text-[8px] font-black text-orange-500 uppercase tracking-widest">Calculated Share</p>
+                                    <p class="text-2xl font-black text-white">₹<span id="res-tax-only">0.00</span></p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="inline-block px-3 py-1 bg-orange-500/10 text-orange-400 rounded-md text-[10px] font-black uppercase border border-orange-500/20"><span id="tax-rate-display">18</span>% RATE</div>
+                                </div>
+                            </div>
+                            <button onclick="toggleInvoice()" id="toggle-invoice-btn" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] uppercase rounded-lg transition-colors flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                Show Invoice View
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Public Suggestion Box -->
+            <!-- Professional Invoice View -->
+            <div id="invoice-view" class="hidden animate-in fade-in slide-in-from-top-4 duration-500 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-2xl overflow-hidden">
+                <div class="invoice-header bg-slate-50 dark:bg-slate-800/50 p-8 border-b-2 border-slate-100 dark:border-slate-800 flex justify-between items-start">
+                    <div class="space-y-4 max-w-md">
+                        <div class="space-y-1">
+                            <h2 class="text-[10px] font-black uppercase text-blue-600 tracking-widest mb-1">Business Details</h2>
+                            <input type="text" id="inv-biz-name" placeholder="Enter Business Name" value="QuickCalc Pro Services" class="w-full text-2xl font-black text-slate-900 dark:text-white bg-transparent border-b border-dashed border-slate-300 dark:border-slate-700 focus:border-blue-500 outline-none">
+                            <input type="text" id="inv-biz-gstin" placeholder="GSTIN: Optional" class="w-full text-xs font-bold text-slate-500 bg-transparent border-b border-dashed border-slate-200 dark:border-slate-800 focus:border-blue-400 outline-none mt-1">
+                        </div>
+                    </div>
+                    <div class="text-right space-y-2">
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Tax Invoice</h2>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest space-y-1">
+                            <p>Invoice #: <span id="inv-no" class="text-slate-900 dark:text-white">QCP-2025-001</span></p>
+                            <p>Date: <span id="inv-date" class="text-slate-900 dark:text-white"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invoice-body p-8 space-y-8">
+                    <div class="grid grid-cols-3 gap-8">
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Tax Type</p>
+                            <p id="inv-tx-type" class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-tight">Intra-State</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">GST Rate</p>
+                            <p id="inv-rate" class="text-sm font-bold text-slate-900 dark:text-white">18%</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Calc Mode</p>
+                            <p id="inv-mode" class="text-sm font-bold text-slate-900 dark:text-white">Inclusive</p>
+                        </div>
+                    </div>
+
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount Breakup</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inv-table-body">
+                        </tbody>
+                    </table>
+
+                    <div class="flex justify-end pt-6">
+                        <div class="w-64 bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border-2 border-slate-900 dark:border-white">
+                            <p class="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-1">Total Payable</p>
+                            <p class="text-3xl font-black text-slate-900 dark:text-white">₹<span id="inv-total">0.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-12 flex justify-between items-center print-hide">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase italic">Generated locally for business reference</p>
+                        <button onclick="window.print()" class="px-6 py-3 bg-slate-900 hover:bg-black text-white rounded-xl font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            Print / Save as PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Local Suggestion Box -->
             <section id="suggestion-box" class="w-full max-w-[1000px] mt-12 px-0">
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                    <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">GST Discussion</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Suggest features or ask about GST calculation rules.</p>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                        <div>
+                            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Feedback & Feature Ideas</h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Post suggestions locally. They stay in your browser history.</p>
+                        </div>
+                        <button onclick="clearMyComments()" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline">Clear History</button>
+                    </div>
                     
-                    <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
+                    <form id="suggestion-form" onsubmit="handleLocalComment(event)" class="space-y-4 mb-10">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="input-label dark:text-slate-400">Name</label>
+                                <label class="input-label dark:text-slate-400">Business Name (Optional)</label>
                                 <input type="text" id="suggest-name" maxlength="30" placeholder="Business Owner" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
                             </div>
                             <div class="flex-grow">
-                                <label class="input-label dark:text-slate-400">Comment</label>
-                                <textarea id="suggest-text" required maxlength="500" placeholder="Need support for HSN codes?" class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                                <label class="input-label dark:text-slate-400">Requirement / Feedback</label>
+                                <textarea id="suggest-text" required maxlength="400" placeholder="Tell us what you'd like to see in the invoice..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                             </div>
                         </div>
-                        <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">Post Publicly</button>
-                        <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 mt-2">Posted! Your feedback is now public.</div>
+                        <button type="submit" class="w-full md:w-auto px-10 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            Add Local Entry
+                        </button>
                     </form>
 
-                    <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                        <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Discussion Thread</h3>
-                        <div id="comment-list" class="space-y-6">
-                            <div class="text-center py-4 text-slate-400 text-xs italic">Syncing with server...</div>
-                        </div>
+                    <div id="comment-list" class="space-y-4 max-h-[400px] overflow-y-auto pr-2 no-scrollbar">
+                        <!-- Comments render here -->
                     </div>
                 </div>
             </section>
         </div>
+
+        <article class="content-section">
+            <h2 class="dark:text-white">Professional GST Calculation Guide</h2>
+            <p class="dark:text-slate-400">Our GST calculator is designed to handle all domestic and international trade scenarios for Indian businesses. Understanding which mode to use is key for accurate accounting.</p>
+            
+            <h3 class="dark:text-white">1. Add GST (Exclusive to Inclusive)</h3>
+            <p class="dark:text-slate-400">Use this when you know the base price and want to find the final bill amount. Standard for generating sales invoices.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
+                GST Amount = (Base Price × GST Rate) / 100<br>
+                Total Price = Base Price + GST Amount
+            </div>
+
+            <h3 class="dark:text-white">2. Remove & Reverse GST (Inclusive to Exclusive)</h3>
+            <p class="dark:text-slate-400">Use this when you have a total amount (like a MRP) and need to extract the tax portion to find the original value.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
+                Excluding Amount = (Including Price × 100) / (100 + GST Rate)<br>
+                GST Portion = Including Price − Excluding Amount
+            </div>
+
+            <h3 class="dark:text-white">Tax Splits (CGST, SGST, IGST, UTGST)</h3>
+            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
+                <li><strong>Intra-State:</strong> Split 50:50 between CGST (Central) and SGST (State).</li>
+                <li><strong>Inter-State:</strong> Full 100% applied as IGST (Integrated Tax).</li>
+                <li><strong>Union Territory:</strong> Split 50:50 between CGST and UTGST.</li>
+                <li><strong>Imports:</strong> Treated as Inter-State supplies, attracting IGST (Import).</li>
+            </ul>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is the difference between Remove GST and Reverse GST?</h3>
+                    <p class="dark:text-slate-400">Mathematically, they are identical. Both extract the tax from an inclusive price. "Remove GST" is commonly used by shoppers to find pre-tax prices, while "Reverse GST" is often used by accountants to verify tax entries.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is IGST applicable on imports?</h3>
+                    <p class="dark:text-slate-400">Yes, under the GST regime, imports into India are treated as inter-state supplies and are subject to IGST in addition to standard customs duties.</p>
+                </div>
+            </div>
+        </article>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900">
-        <div class="container mx-auto px-4 text-center"><p class="text-slate-400 font-bold text-xs uppercase">&copy; 2025 QuickCalc Pro.</p></div>
+    <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Comprehensive Indian Tax Logic.</p>
+            <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <a href="about.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Terms of Service</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); }
-        function toggleDropdown(e) { e.stopPropagation(); const d = document.getElementById('nav-dropdown'); if (d.classList.contains('dropdown-visible')) d.classList.replace('dropdown-visible', 'dropdown-hidden'); else d.classList.replace('dropdown-hidden', 'dropdown-visible'); }
-        
-        let state = { mode: 'add', rate: 18, txType: 'intra' };
-        function setMode(m) { state.mode = m; document.querySelectorAll('.mode-toggle button').forEach(b => b.classList.toggle('active', b.id === 'm-'+m)); calculate(); }
-        function setTxType(t) { state.txType = t; document.querySelectorAll('.type-pill').forEach(b => b.classList.toggle('active', b.id === 'tx-'+t)); calculate(); }
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('nav-dropdown');
+            const chevron = document.getElementById('drop-chevron');
+            const isVisible = dropdown.classList.contains('dropdown-visible');
+            if (isVisible) {
+                dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                dropdown.classList.replace('dropdown-hidden', 'dropdown-visible');
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        window.onclick = function(event) {
+            const dropdown = document.getElementById('nav-dropdown');
+            const chevron = document.getElementById('drop-chevron');
+            if (dropdown && !event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
+                if (dropdown.classList.contains('dropdown-visible')) {
+                    dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        let state = { mode: 'add', rate: 18, txType: 'intra', invoiceVisible: false };
+
+        function setMode(m) {
+            state.mode = m;
+            document.querySelectorAll('.mode-toggle button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('m-' + m).classList.add('active');
+            const label = document.getElementById('amt-label');
+            const heroLabel = document.getElementById('res-hero-label');
+            const outBaseLabel = document.getElementById('lbl-out-base');
+            if (m === 'add') {
+                label.innerText = 'Base Price (Excluding GST)';
+                heroLabel.innerText = 'Net Price (Inclusive)';
+                outBaseLabel.innerText = 'Price Excluding GST';
+            } else if (m === 'remove') {
+                label.innerText = 'Total Price (Including GST)';
+                heroLabel.innerText = 'Original Price (Exclusive)';
+                outBaseLabel.innerText = 'Price Including GST';
+            } else {
+                label.innerText = 'Price Including GST';
+                heroLabel.innerText = 'Excluding GST Amount';
+                outBaseLabel.innerText = 'Original Including Price';
+            }
+            calculate();
+        }
+
+        function setTxType(type) {
+            state.txType = type;
+            document.querySelectorAll('.type-pill').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tx-' + type).classList.add('active');
+            calculate();
+        }
+
+        function setRate(r) {
+            state.rate = r;
+            document.getElementById('custom-rate').value = '';
+            document.querySelectorAll('.rate-btn').forEach(btn => {
+                btn.classList.toggle('ring-2', btn.innerText === r + '%');
+                btn.classList.toggle('border-orange-500', btn.innerText === r + '%');
+            });
+            calculate();
+        }
+
+        function toggleInvoice() {
+            state.invoiceVisible = !state.invoiceVisible;
+            const view = document.getElementById('invoice-view');
+            const btn = document.getElementById('toggle-invoice-btn');
+            if (state.invoiceVisible) {
+                view.classList.remove('hidden');
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> Hide Invoice View`;
+            } else {
+                view.classList.add('hidden');
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Show Invoice View`;
+            }
+        }
+
         function calculate() {
-            const v = parseFloat(document.getElementById('main-amount').value) || 0;
-            const r = state.rate;
-            let base, gst, net;
-            if (state.mode === 'add') { base = v; gst = (base * r) / 100; net = base + gst; } 
-            else { net = v; base = (net * 100) / (100 + r); gst = net - base; }
-            document.getElementById('res-total').innerText = net.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('out-gst-total').innerText = gst.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            const val = parseFloat(document.getElementById('main-amount').value);
+            if (isNaN(val) || val < 0) { clearResults(); return; }
+            const custom = parseFloat(document.getElementById('custom-rate').value);
+            const r = isNaN(custom) || custom <= 0 ? state.rate : custom;
+            let base, gstTotal, net;
+            if (state.mode === 'add') { base = val; gstTotal = (base * r) / 100; net = base + gstTotal; } 
+            else { net = val; base = (net * 100) / (100 + r); gstTotal = net - base; }
+            let cgst = 0, sgst = 0, igst = 0, utgst = 0;
+            if (state.txType === 'intra') { cgst = gstTotal / 2; sgst = gstTotal / 2; } 
+            else if (state.txType === 'inter' || state.txType === 'import') { igst = gstTotal; } 
+            else if (state.txType === 'ut') { cgst = gstTotal / 2; utgst = gstTotal / 2; }
+            const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('res-total').innerText = fmt(state.mode === 'add' ? net : base);
+            document.getElementById('out-base').innerText = fmt(state.mode === 'add' ? base : net);
+            document.getElementById('out-gst-total').innerText = fmt(gstTotal);
+            document.getElementById('res-tax-only').innerText = fmt(gstTotal);
+            document.getElementById('tax-rate-display').innerText = r.toFixed(r % 1 === 0 ? 0 : 2);
+            document.getElementById('out-cgst').innerText = fmt(cgst);
+            document.getElementById('out-sgst').innerText = fmt(sgst);
+            document.getElementById('out-igst').innerText = fmt(igst);
+            document.getElementById('out-utgst').innerText = fmt(utgst);
+            document.getElementById('row-cgst').classList.toggle('hidden', cgst <= 0);
+            document.getElementById('row-sgst').classList.toggle('hidden', sgst <= 0);
+            document.getElementById('row-igst').classList.toggle('hidden', igst <= 0);
+            document.getElementById('row-utgst').classList.toggle('hidden', utgst <= 0);
+            document.getElementById('lbl-igst').innerText = state.txType === 'import' ? 'IGST (Import Tax)' : 'IGST (Integrated Tax)';
+            updateInvoiceView({ base, gstTotal, net, cgst, sgst, igst, utgst, rate: r });
         }
-        function resetAll() { document.getElementById('main-amount').value = ''; calculate(); }
-        async function copyBill() { const n = document.getElementById('res-total').innerText; try { await navigator.clipboard.writeText(`Total: ₹${n}`); } catch(e){} }
 
-        // PUBLIC COMMENT SYSTEM
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
+        function updateInvoiceView(data) {
+            const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('en-IN');
+            document.getElementById('inv-tx-type').innerText = state.txType.toUpperCase();
+            document.getElementById('inv-rate').innerText = data.rate.toFixed(data.rate % 1 === 0 ? 0 : 2) + '%';
+            document.getElementById('inv-mode').innerText = state.mode === 'add' ? 'EXCLUSIVE' : 'INCLUSIVE';
+            document.getElementById('inv-total').innerText = fmt(data.net);
+            const tableBody = document.getElementById('inv-table-body');
+            let rows = `<tr><td class="font-medium text-slate-600">Base Price (Exclusive)</td><td class="font-bold">₹${fmt(data.base)}</td></tr>
+                        <tr><td class="text-slate-500">GST Amount (Total)</td><td class="font-bold">₹${fmt(data.gstTotal)}</td></tr>`;
+            if (data.cgst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">CGST Share</td><td>₹${fmt(data.cgst)}</td></tr>`;
+            if (data.sgst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">SGST Share</td><td>₹${fmt(data.sgst)}</td></tr>`;
+            if (data.igst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">${state.txType === 'import' ? 'Import IGST' : 'IGST Share'}</td><td>₹${fmt(data.igst)}</td></tr>`;
+            if (data.utgst > 0) rows += `<tr><td class="pl-8 text-xs text-slate-400">UTGST Share</td><td>₹${fmt(data.utgst)}</td></tr>`;
+            rows += `<tr class="bg-slate-50/50"><td class="font-black uppercase text-[10px] tracking-widest text-slate-900">Total Payable Amount</td><td class="font-black text-lg text-slate-900">₹${fmt(data.net)}</td></tr>`;
+            tableBody.innerHTML = rows;
+        }
 
+        function clearResults() {
+            document.getElementById('res-total').innerText = '0.00';
+            document.getElementById('out-base').innerText = '0.00';
+            document.getElementById('out-gst-total').innerText = '0.00';
+            document.getElementById('res-tax-only').innerText = '0.00';
+            document.querySelectorAll('.receipt-row').forEach(row => { if(row.id) row.classList.add('hidden'); });
+            document.getElementById('inv-total').innerText = '0.00';
+        }
+
+        function resetAll() {
+            document.getElementById('main-amount').value = '';
+            document.getElementById('custom-rate').value = '';
+            setRate(18); setTxType('intra'); setMode('add'); clearResults();
+        }
+
+        async function copyBill() {
+            const net = document.getElementById('res-total').innerText;
+            const text = `GST Calc: ₹${net}\nGenerated at QuickCalcPro`;
+            try { await navigator.clipboard.writeText(text); const btn = document.getElementById('copy-btn'); const oldText = btn.innerText; btn.innerText = "Copied!"; setTimeout(() => btn.innerText = oldText, 1500); } catch(e) {}
+        }
+
+        // LOCAL COMMENT SYSTEM
+        const storageKey = `comments_${window.location.pathname}`;
         function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
-
-        async function fetchComments() {
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
             const list = document.getElementById('comment-list');
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                if (filtered.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No entries found for this page.</p>'; return; }
-                list.innerHTML = filtered.map(c => `
-                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
-                            <span class="text-[9px] text-slate-400">${new Date(c.date).toLocaleDateString()}</span>
-                        </div>
-                        <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.comment)}</p>
+            if (comments.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No entries yet.</p>'; return; }
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
+                        <span class="text-[9px] text-slate-400">${new Date(c.timestamp).toLocaleString()}</span>
                     </div>
-                `).join('');
-            } catch (err) { list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Network error.</p>'; }
+                    <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.text)}</p>
+                </div>
+            `).join('');
         }
-
-        async function handlePublicComment(e) {
+        function handleLocalComment(e) {
             e.preventDefault();
-            const btn = document.getElementById('suggest-submit');
-            const n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text'), s = document.getElementById('suggest-success-msg');
-            const payload = { page: currentPath, name: n.value.trim() || 'Anonymous', comment: t.value.trim() };
-            if (!payload.comment) return;
-            btn.disabled = true; btn.innerText = 'Syncing...';
-            try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-                n.value = ''; t.value = ''; s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000);
-                fetchComments();
-            } catch (err) { alert('Check your connection.'); }
-            finally { btn.disabled = false; btn.innerText = 'Post Publicly'; }
+            const n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text');
+            if (!t.value.trim()) return;
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            comments.unshift({ name: n.value.trim(), text: t.value.trim(), timestamp: Date.now() });
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+            n.value = ''; t.value = ''; loadComments();
         }
+        function clearMyComments() { if (confirm("Clear local history?")) { localStorage.removeItem(storageKey); loadComments(); } }
 
         calculate();
-        fetchComments();
+        loadComments();
     </script>
 </body>
 </html>

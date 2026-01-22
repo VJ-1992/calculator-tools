@@ -111,7 +111,7 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">Profit Margin Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Analyze your business profitability instantly.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Analyze your business profitability instantly. This professional calculator helps shopkeepers, wholesalers, and traders determine profit per piece, packet margins, and total earnings for bulk orders.</p>
     </header>
 
     <main>
@@ -127,28 +127,74 @@
                     </div>
 
                     <div class="space-y-4">
+                        <!-- Mode Selectors -->
                         <div class="grid grid-cols-1 gap-3">
                             <div id="packet-mode-card" class="mode-card flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
-                                <div><p class="text-[10px] font-black text-slate-800 uppercase dark:text-white">Packet Mode</p></div>
-                                <label class="switch"><input type="checkbox" id="packet-toggle" onchange="toggleMode('packet', this.checked)"><span class="slider"></span></label>
+                                <div>
+                                    <p class="text-[10px] font-black text-slate-800 uppercase dark:text-white">Packet / Bundle Mode</p>
+                                    <p class="text-[9px] text-slate-500">Calculate per packet revenue</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="packet-toggle" onchange="toggleMode('packet', this.checked)">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div id="qty-mode-card" class="mode-card flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
+                                <div>
+                                    <p class="text-[10px] font-black text-slate-800 uppercase dark:text-white">Bulk Sale Mode</p>
+                                    <p class="text-[9px] text-slate-500">Apply quantity multiplier</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="qty-toggle" onchange="toggleMode('qty', this.checked)">
+                                    <span class="slider"></span>
+                                </label>
                             </div>
                         </div>
 
+                        <!-- Core Inputs -->
                         <div class="space-y-4 pt-2">
-                            <div id="packet-pcs-wrap" class="hidden"><label class="input-label dark:text-slate-400">Pcs/Packet</label><input type="number" id="pcs-per-packet" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
-                            <div class="input-group"><label id="cp-label" class="input-label dark:text-slate-400">Cost Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="cost" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div></div>
-                            <div class="input-group"><label id="sp-label" class="input-label dark:text-slate-400">Selling Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span><input type="number" id="selling" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div></div>
+                            <div id="packet-pcs-wrap" class="hidden animate-in slide-in-from-top-2 duration-200">
+                                <label class="input-label dark:text-slate-400">Pieces in Packet</label>
+                                <input type="number" id="pcs-per-packet" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="e.g. 10" min="1">
+                            </div>
+
+                            <div class="input-group">
+                                <label id="cp-label" class="input-label dark:text-slate-400">Cost Price (per Piece)</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span>
+                                    <input type="number" id="cost" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white" step="0.01">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label id="sp-label" class="input-label dark:text-slate-400">Selling Price (per Piece)</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 currency-symbol text-xs dark:text-slate-600">$</span>
+                                    <input type="number" id="selling" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white" step="0.01">
+                                </div>
+                            </div>
+
+                            <div id="bulk-qty-wrap" class="hidden animate-in slide-in-from-top-2 duration-200">
+                                <label class="input-label dark:text-slate-400">Total Quantity Sold</label>
+                                <input type="number" id="quantity" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white" placeholder="1" min="1">
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3 pt-4">
-                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400 transition-colors">Clear</button>
-                            <button onclick="copyResult()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase dark:bg-blue-600 dark:hover:bg-blue-700 transition-colors">Copy</button>
+                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400 hover:bg-slate-200 transition-colors">Clear</button>
+                            <button onclick="copyResult()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase dark:bg-blue-600 dark:hover:bg-blue-700 hover:bg-slate-800 transition-colors">Copy Summary</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="result-pane dark:bg-black">
                     <div>
+                        <div class="flex items-center gap-2 mb-5 opacity-40">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Business Insight</span>
+                        </div>
+                        
                         <div class="mb-10 text-center">
                             <p id="res-hero-label" class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Profit per Piece</p>
                             <div class="flex items-baseline justify-center gap-1.5">
@@ -156,15 +202,24 @@
                                 <span id="res-profit" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
                             </div>
                         </div>
+
                         <div class="space-y-0.5">
-                            <div class="receipt-row"><span>Gross Margin %</span><span class="font-bold text-indigo-400"><span id="out-margin">0.00</span>%</span></div>
+                            <div id="row-sp-piece" class="receipt-row hidden"><span>Selling Price (Pc)</span><span class="font-bold"><span class="currency-symbol">$</span><span id="out-sp-piece">0.00</span></span></div>
+                            <div class="receipt-row"><span>Unit Cost</span><span class="font-bold"><span class="currency-symbol">$</span><span id="out-cost">0.00</span></span></div>
+                            <div id="row-packet-profit" class="receipt-row hidden"><span class="text-blue-400">Profit (Packet)</span><span class="font-bold text-blue-400"><span class="currency-symbol">$</span><span id="out-packet-profit">0.00</span></span></div>
+                            <div id="row-total-profit" class="receipt-row hidden border-t border-slate-800 mt-2 pt-2"><span class="text-emerald-400">Total Earnings</span><span class="font-bold text-emerald-400"><span class="currency-symbol">$</span><span id="out-total-profit">0.00</span></span></div>
+                            <div class="receipt-row border-t border-slate-800 mt-2 pt-2"><span class="text-indigo-400">Gross Margin %</span><span class="font-bold text-indigo-400"><span id="out-margin">0.00</span>%</span></div>
                         </div>
                     </div>
+
                     <div class="pt-6 border-t border-slate-800">
                         <div class="flex justify-between items-end">
                             <div class="space-y-0.5">
                                 <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Performance</p>
                                 <p id="perf-status" class="text-2xl font-black text-white">Balanced</p>
+                            </div>
+                            <div id="pct-badge" class="px-2 py-1 bg-indigo-500/10 text-indigo-400 rounded-md text-[9px] font-black uppercase border border-indigo-500/20">
+                                <span id="out-margin-badge">0</span>% MARGIN
                             </div>
                         </div>
                     </div>
@@ -172,125 +227,296 @@
             </div>
         </div>
 
-        <!-- Public Suggestion Box -->
+        <!-- Local Suggestion Box -->
         <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Public Feedback</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Suggest improvements or report issues.</p>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1 text-center md:text-left">Feedback & Suggestions</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">Post suggestions locally. They stay in your browser.</p>
+                    </div>
+                    <button onclick="clearMyComments()" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline text-center">Clear My History</button>
+                </div>
                 
-                <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
+                <form id="suggestion-form" onsubmit="handleLocalComment(event)" class="space-y-4 mb-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="input-label dark:text-slate-400">Name (Optional)</label>
-                            <input type="text" id="suggest-name" maxlength="30" placeholder="Anonymous" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                            <input type="text" id="suggest-name" maxlength="30" placeholder="Business User" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
                         </div>
                         <div class="flex-grow">
-                            <label class="input-label dark:text-slate-400">Comment</label>
-                            <textarea id="suggest-text" required maxlength="500" placeholder="I'd like to see..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                            <label class="input-label dark:text-slate-400">Feature Idea</label>
+                            <textarea id="suggest-text" required maxlength="400" placeholder="I'd love to see a..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                         </div>
                     </div>
-                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
-                        Submit Comment
-                    </button>
-                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 mt-2">Thanks! Your comment is public.</div>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <button type="submit" class="w-full md:w-auto px-10 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            Save Locally
+                        </button>
+                        <p class="text-[10px] text-slate-400 italic">Static site: no external server data transfer.</p>
+                    </div>
                 </form>
 
-                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">User Discussion</h3>
-                    <div id="comment-list" class="space-y-6">
-                        <div class="text-center py-4 text-slate-400 text-xs italic">Fetching...</div>
-                    </div>
+                <div id="comment-list" class="space-y-4 max-h-[400px] overflow-y-auto pr-2 no-scrollbar">
+                    <!-- Comments render here -->
                 </div>
             </div>
         </section>
 
         <article class="content-section">
-            <h2 class="dark:text-white">Formulas</h2>
+            <h2 class="dark:text-white">How is Profit Margin Calculated?</h2>
+            <p class="dark:text-slate-400">Understanding your profit margin is essential for pricing your products correctly and ensuring business sustainability. Our tool uses standard financial formulas to give you accurate insights:</p>
             <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
                 Profit = Selling Price − Cost Price<br>
                 Profit Margin (%) = (Profit ÷ Selling Price) × 100
+            </div>
+            <p class="dark:text-slate-400">While <strong>Markup</strong> is calculated as a percentage of the cost, <strong>Margin</strong> is always calculated as a percentage of the selling price. This distinction is vital for accurate financial reporting.</p>
+
+            <h2 class="dark:text-white">Real-World Example: Packet Selling & Bulk Profit</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <p class="dark:text-slate-400 font-bold">Scenario: A shopkeeper sells a packet of chocolates.</p>
+                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
+                    <li><strong>Packet Details:</strong> 20 pieces per packet.</li>
+                    <li><strong>Packet Selling Price:</strong> ₹25.00.</li>
+                    <li><strong>Cost per Piece:</strong> ₹0.80.</li>
+                </ul>
+                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <p class="dark:text-slate-300 font-mono text-sm">
+                        1. Selling Price per Piece = ₹25 / 20 = <strong>₹1.25</strong><br>
+                        2. Profit per Piece = ₹1.25 - ₹0.80 = <strong>₹0.45</strong><br>
+                        3. Total Profit (1 Packet) = ₹0.45 × 20 = <strong>₹9.00</strong><br>
+                        4. Total Profit (100 Packets) = ₹9.00 × 100 = <strong>₹900.00</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is a profit margin calculator?</h3>
+                    <p class="dark:text-slate-400">A profit margin calculator is a financial tool that helps business owners determine the percentage of profit they earn on a sale relative to the selling price. It helps in deciding whether a product is priced high enough to cover costs and generate income.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How do shopkeepers calculate profit per piece?</h3>
+                    <p class="dark:text-slate-400">Shopkeepers calculate profit per piece by subtracting the landing cost (purchase price + transport) of a single item from its individual selling price. If they buy in bundles, they first divide the total bundle cost by the number of pieces to find the per-piece cost.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How to calculate profit on packet selling?</h3>
+                    <p class="dark:text-slate-400">To calculate profit on packet selling, you take the total selling price of the packet and subtract the total cost of all items inside that packet. Alternatively, calculate the profit for one piece and multiply it by the number of pieces in the packet.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Can I calculate total profit for bulk quantity?</h3>
+                    <p class="dark:text-slate-400">Yes. By enabling "Bulk Sale Mode" in our calculator, you can enter the total quantity sold (e.g., 500 units) to see the combined profit for that entire transaction.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is this calculator free to use?</h3>
+                    <p class="dark:text-slate-400">Yes, QuickCalc Pro offers this tool completely free of charge. No account or personal data is required to perform your business calculations.</p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Try Our Other Tools</h2>
+            <div class="flex flex-wrap gap-4 mt-6">
+                <a href="discount-calculator.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors">Calculate Sale Discounts</a>
+                <a href="simple-interest-calculator.html" class="px-4 py-2 bg-emerald-600 text-white rounded-lg font-bold text-sm hover:bg-emerald-700 transition-colors">Simple Interest & Maturity Calc</a>
             </div>
         </article>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro.</p>
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Reliable Business Logic.</p>
+            <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <a href="about.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); }
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
         function toggleDropdown(e) {
-            e.stopPropagation(); const d = document.getElementById('nav-dropdown'), c = document.getElementById('drop-chevron');
-            if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); c.style.transform = 'rotate(0deg)'; }
-            else { d.classList.replace('dropdown-hidden', 'dropdown-visible'); c.style.transform = 'rotate(180deg)'; }
-        }
-        window.onclick = function(e) {
-            const d = document.getElementById('nav-dropdown'), c = document.getElementById('drop-chevron');
-            if (d && !e.target.closest('#drop-btn') && !e.target.closest('#nav-dropdown')) { if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); c.style.transform = 'rotate(0deg)'; } }
+            e.stopPropagation();
+            const dropdown = document.getElementById('nav-dropdown');
+            const chevron = document.getElementById('drop-chevron');
+            const isVisible = dropdown.classList.contains('dropdown-visible');
+            if (isVisible) {
+                dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                dropdown.classList.replace('dropdown-hidden', 'dropdown-visible');
+                chevron.style.transform = 'rotate(180deg)';
+            }
         }
 
-        let state = { currency: '$', packetMode: false };
-        function setCurrency(symbol) { state.currency = symbol; document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol); calculate(); }
-        function toggleMode(m, on) { state.packetMode = on; document.getElementById('packet-pcs-wrap').classList.toggle('hidden', !on); calculate(); }
+        window.onclick = function(event) {
+            const dropdown = document.getElementById('nav-dropdown');
+            const chevron = document.getElementById('drop-chevron');
+            if (dropdown && !event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
+                if (dropdown.classList.contains('dropdown-visible')) {
+                    dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        let state = { currency: '$', packetMode: false, qtyMode: false };
+
+        function setCurrency(symbol) { 
+            state.currency = symbol; 
+            document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol); 
+            calculate(); 
+        }
+
+        function toggleMode(mode, isOn) {
+            const card = document.getElementById(mode + '-mode-card');
+            const wrap = document.getElementById(mode === 'packet' ? 'packet-pcs-wrap' : 'bulk-qty-wrap');
+            
+            state[mode + 'Mode'] = isOn;
+            
+            if (isOn) {
+                card.classList.add('mode-active');
+                wrap.classList.remove('hidden');
+            } else {
+                card.classList.remove('mode-active');
+                wrap.classList.add('hidden');
+            }
+
+            // Update Labels based on mode
+            const cpLabel = document.getElementById('cp-label');
+            const spLabel = document.getElementById('sp-label');
+            
+            if (state.packetMode) {
+                spLabel.innerText = "Selling Price (per Packet)";
+                document.getElementById('row-sp-piece').classList.remove('hidden');
+                document.getElementById('row-packet-profit').classList.remove('hidden');
+            } else {
+                spLabel.innerText = "Selling Price (per Piece)";
+                document.getElementById('row-sp-piece').classList.add('hidden');
+                document.getElementById('row-packet-profit').classList.add('hidden');
+            }
+
+            if (state.qtyMode) {
+                document.getElementById('row-total-profit').classList.remove('hidden');
+            } else {
+                document.getElementById('row-total-profit').classList.add('hidden');
+            }
+
+            calculate();
+        }
+
         function calculate() {
-            const cp = parseFloat(document.getElementById('cost').value) || 0;
-            const sp = parseFloat(document.getElementById('selling').value) || 0;
-            const unitProfit = sp - cp;
-            const margin = sp > 0 ? (unitProfit / sp) * 100 : 0;
-            document.getElementById('res-profit').innerText = unitProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const cpPerPiece = parseFloat(document.getElementById('cost').value) || 0;
+            const spInput = parseFloat(document.getElementById('selling').value) || 0;
+            const pcsInPacket = parseInt(document.getElementById('pcs-per-packet').value) || 1;
+            const bulkQty = parseInt(document.getElementById('quantity').value) || 1;
+
+            let spPerPiece = spInput;
+            if (state.packetMode && pcsInPacket > 0) {
+                spPerPiece = spInput / pcsInPacket;
+            }
+
+            const unitProfit = spPerPiece - cpPerPiece;
+            const packetProfit = unitProfit * pcsInPacket;
+            const totalProfit = unitProfit * (state.qtyMode ? bulkQty : 1);
+            const margin = spPerPiece > 0 ? (unitProfit / spPerPiece) * 100 : 0;
+
+            // Hero display logic: Show the most relevant bottom line
+            const heroVal = state.qtyMode ? totalProfit : (state.packetMode ? packetProfit : unitProfit);
+            const heroLabel = state.qtyMode ? "Total Estimated Profit" : (state.packetMode ? "Profit per Packet" : "Profit per Piece");
+            
+            const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            
+            document.getElementById('res-profit').innerText = fmt(Math.abs(heroVal));
+            document.getElementById('res-hero-label').innerText = heroLabel;
+            
+            document.getElementById('out-sp-piece').innerText = fmt(spPerPiece);
+            document.getElementById('out-cost').innerText = fmt(cpPerPiece);
+            document.getElementById('out-packet-profit').innerText = fmt(packetProfit);
+            document.getElementById('out-total-profit').innerText = fmt(totalProfit);
             document.getElementById('out-margin').innerText = margin.toFixed(2);
+            document.getElementById('out-margin-badge').innerText = Math.round(margin);
+
             const perf = document.getElementById('perf-status');
-            if (unitProfit > 0) { perf.innerText = "Profitable"; perf.className = "text-2xl font-black text-white"; }
-            else if (unitProfit < 0) { perf.innerText = "Loss"; perf.className = "text-2xl font-black text-red-400"; }
-            else { perf.innerText = "Balanced"; perf.className = "text-2xl font-black text-white opacity-40"; }
+            if (unitProfit > 0) {
+                perf.innerText = "Profitable";
+                perf.className = "text-2xl font-black text-white";
+            } else if (unitProfit < 0) {
+                perf.innerText = "Loss";
+                perf.className = "text-2xl font-black text-red-400";
+            } else {
+                perf.innerText = "Balanced";
+                perf.className = "text-2xl font-black text-white opacity-40";
+            }
         }
-        function resetAll() { document.querySelectorAll('input[type="number"]').forEach(i => i.value = ''); calculate(); }
-        async function copyResult() { const p = document.getElementById('res-profit').innerText; try { await navigator.clipboard.writeText(`Profit: ${state.currency}${p}`); const btn = document.getElementById('copy-btn'); btn.innerText = "Copied!"; setTimeout(() => btn.innerText = "Copy", 1500); } catch(e) {} }
 
-        // PUBLIC COMMENT SYSTEM
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
+        function resetAll() {
+            document.querySelectorAll('input[type="number"]').forEach(i => i.value = '');
+            document.querySelectorAll('input[type="checkbox"]').forEach(c => {
+                c.checked = false;
+                toggleMode(c.id.split('-')[0], false);
+            });
+            calculate();
+        }
 
+        async function copyResult() {
+            const hero = document.getElementById('res-profit').innerText;
+            const margin = document.getElementById('out-margin').innerText;
+            const label = document.getElementById('res-hero-label').innerText;
+            const text = `${label}: ${state.currency}${hero}\nMargin: ${margin}%\nCalculated by QuickCalc Pro`;
+            
+            try {
+                await navigator.clipboard.writeText(text);
+                const btn = document.getElementById('copy-btn');
+                const old = btn.innerText;
+                btn.innerText = "Copied!";
+                setTimeout(() => btn.innerText = old, 1500);
+            } catch(e) {}
+        }
+
+        // LOCAL COMMENT SYSTEM
+        const storageKey = `comments_${window.location.pathname}`;
         function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
-
-        async function fetchComments() {
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
             const list = document.getElementById('comment-list');
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                if (filtered.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No discussion yet.</p>'; return; }
-                list.innerHTML = filtered.map(c => `
-                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
-                            <span class="text-[9px] text-slate-400">${new Date(c.date).toLocaleDateString()}</span>
-                        </div>
-                        <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.comment)}</p>
+            if (comments.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No discussion yet.</p>'; return; }
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
+                        <span class="text-[9px] text-slate-400 font-medium">${new Date(c.timestamp).toLocaleString()}</span>
                     </div>
-                `).join('');
-            } catch (err) { list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Error loading comments.</p>'; }
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.text)}</p>
+                </div>
+            `).join('');
         }
-
-        async function handlePublicComment(e) {
+        function handleLocalComment(e) {
             e.preventDefault();
-            const btn = document.getElementById('suggest-submit');
-            const n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text'), s = document.getElementById('suggest-success-msg');
-            const payload = { page: currentPath, name: n.value.trim() || 'Anonymous', comment: t.value.trim() };
-            if (!payload.comment) return;
-            btn.disabled = true; btn.innerText = 'Posting...';
-            try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-                n.value = ''; t.value = ''; s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000);
-                fetchComments();
-            } catch (err) { alert('Failed to post.'); }
-            finally { btn.disabled = false; btn.innerText = 'Submit Comment'; }
+            const nameInput = document.getElementById('suggest-name');
+            const textInput = document.getElementById('suggest-text');
+            const comment = { name: nameInput.value.trim(), text: textInput.value.trim(), timestamp: Date.now() };
+            if (!comment.text) return;
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            comments.unshift(comment);
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+            nameInput.value = ''; textInput.value = '';
+            loadComments();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const oldText = btn.innerText; btn.innerText = "Saved!";
+            setTimeout(() => btn.innerText = oldText, 2000);
+        }
+        function clearMyComments() {
+            if (confirm("Clear local history?")) { localStorage.removeItem(storageKey); loadComments(); }
         }
 
         calculate();
-        fetchComments();
+        loadComments();
     </script>
 </body>
 </html>
