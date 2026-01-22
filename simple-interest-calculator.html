@@ -199,30 +199,38 @@
             </div>
         </div>
 
-        <!-- Suggestion Box -->
+        <!-- Local Suggestion Box -->
         <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-2">Have a Suggestion?</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Found a bug or want a new feature? Let us know! Your feedback helps us improve.</p>
-                
-                <form id="suggestion-form" onsubmit="sendSuggestion(event)" class="space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <label class="input-label dark:text-slate-400">Your Suggestion</label>
-                        <textarea id="suggest-text" required maxlength="500" placeholder="Describe your idea or report an issue..." class="input-field min-h-[100px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1 text-center md:text-left">Feedback & Suggestions</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">Share your ideas locally. Comments stay in your browser.</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                    <button onclick="clearMyComments()" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline text-center">Clear My History</button>
+                </div>
+                
+                <form id="suggestion-form" onsubmit="handleLocalComment(event)" class="space-y-4 mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="input-label dark:text-slate-400">Email (Optional)</label>
-                            <input type="email" id="suggest-email" placeholder="For follow-up" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                            <label class="input-label dark:text-slate-400">Your Name (Optional)</label>
+                            <input type="text" id="suggest-name" maxlength="30" placeholder="Anonymous" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
                         </div>
-                        <button type="submit" id="suggest-submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
-                            Send Suggestion
-                        </button>
+                        <div class="flex-grow">
+                            <label class="input-label dark:text-slate-400">Your Suggestion</label>
+                            <textarea id="suggest-text" required maxlength="400" placeholder="What should we add next?" class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                        </div>
                     </div>
-                    <p class="text-[10px] text-slate-400 italic">Suggestions are optional and emails are never shared.</p>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <button type="submit" class="w-full md:w-auto px-10 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">
+                            Post Comment
+                        </button>
+                        <p class="text-[10px] text-slate-400 italic">No data is sent to a server. Everything is stored locally.</p>
+                    </div>
                 </form>
-                <div id="suggest-success" class="hidden animate-in fade-in zoom-in duration-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 p-4 rounded-xl text-center">
-                    <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">Thank you! Your suggestion has been submitted.</p>
+
+                <div id="comment-list" class="space-y-4 max-h-[400px] overflow-y-auto pr-2 no-scrollbar">
+                    <!-- Comments render here -->
                 </div>
             </div>
         </section>
@@ -370,54 +378,60 @@
         function resetAll() { document.getElementById('principal').value = ''; document.getElementById('rate').value = ''; document.getElementById('time-val').value = ''; document.getElementById('compare-toggle').checked = false; calculate(); }
         async function copyBill() { const total = document.getElementById('res-total').innerText; try { await navigator.clipboard.writeText(`Maturity: ${state.currency}${total}`); const btn = document.getElementById('copy-btn'); const oldText = btn.innerText; btn.innerText = "Copied!"; setTimeout(() => btn.innerText = oldText, 2000); } catch(e) {} }
         
-        async function sendSuggestion(e) {
-            e.preventDefault();
-            const btn = document.getElementById('suggest-submit');
-            const originalText = btn.innerText;
+        // LOCAL COMMENT SYSTEM
+        const storageKey = `comments_${window.location.pathname}`;
+
+        function escapeHTML(str) {
+            const p = document.createElement('p');
+            p.textContent = str;
+            return p.innerHTML;
+        }
+
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            const list = document.getElementById('comment-list');
             
-            // Configuration
-            const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGQee28Dg3h4WYYnNT0Z6omemtFSlPrvuGvfqXDt-RB4GTuA/formResponse";
-            const ENTRIES = {
-                calcName: "entry.ENTRY_CALC",
-                url: "entry.ENTRY_URL",
-                suggestion: "entry.ENTRY_SUGGESTION",
-                email: "entry.ENTRY_EMAIL"
-            };
+            if (comments.length === 0) {
+                list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first!</p>';
+                return;
+            }
 
-            const calcName = document.querySelector('h1')?.innerText || "Simple Interest Calculator";
-            const pageUrl = window.location.href;
-            const suggestion = document.getElementById('suggest-text').value;
-            const email = document.getElementById('suggest-email').value;
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-black text-emerald-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
+                        <span class="text-[9px] text-slate-400 font-medium">${new Date(c.timestamp).toLocaleString()}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.text)}</p>
+                </div>
+            `).join('');
+        }
 
-            btn.disabled = true;
-            btn.innerText = "Sending...";
+        function handleLocalComment(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('suggest-name');
+            const textInput = document.getElementById('suggest-text');
+            const comment = { name: nameInput.value.trim(), text: textInput.value.trim(), timestamp: Date.now() };
+            if (!comment.text) return;
+            const comments = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            comments.unshift(comment);
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+            nameInput.value = ''; textInput.value = '';
+            loadComments();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const oldText = btn.innerText; btn.innerText = "Posted!";
+            setTimeout(() => btn.innerText = oldText, 2000);
+        }
 
-            const formData = new URLSearchParams();
-            formData.append(ENTRIES.calcName, calcName);
-            formData.append(ENTRIES.url, pageUrl);
-            formData.append(ENTRIES.suggestion, suggestion);
-            formData.append(ENTRIES.email, email);
-
-            try {
-                await fetch(FORM_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData.toString()
-                });
-
-                document.getElementById('suggestion-form').reset();
-                document.getElementById('suggestion-form').classList.add('hidden');
-                document.getElementById('suggest-success').classList.remove('hidden');
-            } catch (error) {
-                console.error("Submission failed", error);
-                alert("Something went wrong. Please check your internet connection.");
-                btn.disabled = false;
-                btn.innerText = originalText;
+        function clearMyComments() {
+            if (confirm("Clear all your comments for this page?")) {
+                localStorage.removeItem(storageKey);
+                loadComments();
             }
         }
 
         calculate();
+        loadComments();
     </script>
 </body>
 </html>
