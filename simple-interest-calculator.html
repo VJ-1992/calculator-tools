@@ -17,6 +17,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
         nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
         .nav-container { max-width: 1280px; margin: 0 auto; height: 100%; padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .brand-link { flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 1rem 1.25rem; display: flex; justify-content: center; }
         .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 650px; max-height: 85vh; overflow: hidden; border: 1px solid #e2e8f0; }
@@ -28,16 +29,15 @@
         .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
         @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
         .content-section { max-width: 850px; margin: 0 auto; padding: 2rem 1.5rem 4rem 1.5rem; }
+        .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
         .formula-box { background: #f8fafc; border-left: 4px solid #10b981; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: ui-monospace, monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
-        .pill-toggle { display: flex; background: #f1f5f9; padding: 2px; border-radius: 6px; }
-        .pill-toggle button { flex: 1; padding: 3px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #64748b; }
-        .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
-        .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+        .dropdown-animate { transform-origin: top right; transition: all 0.2s ease-out; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95) translateY(-10px); pointer-events: none; }
+        .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
     </style>
     <script>
         (function() {
@@ -49,7 +49,7 @@
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 dark:bg-slate-900 dark:border-slate-800">
         <div class="nav-container">
-            <a href="index.html" class="flex items-center gap-2">
+            <a href="index.html" class="brand-link">
                 <div class="bg-emerald-600 p-1 rounded-md text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
                 </div>
@@ -63,16 +63,16 @@
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
                         <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 group transition-colors">
+                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
                             </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 group transition-colors">
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
                             </a>
                             <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 group transition-colors">
                                 <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Simple Interest</span>
                             </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/20 group transition-colors">
+                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
                             </a>
                         </div>
@@ -97,51 +97,88 @@
             <div class="main-card dark:bg-slate-900 dark:border-slate-800 dark:shadow-none">
                 <div class="input-pane dark:border-slate-800">
                     <div class="space-y-4">
-                        <div class="input-group"><label class="input-label dark:text-slate-400">Principal</label><input type="number" id="principal" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
-                        <div class="input-group"><label class="input-label dark:text-slate-400">Rate (%)</label><input type="number" id="rate" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
-                        <div class="input-group"><label class="input-label dark:text-slate-400">Time (Years)</label><input type="number" id="time" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
-                        <button onclick="resetAll()" class="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800">Reset</button>
+                        <div class="input-group">
+                            <label class="input-label dark:text-slate-400">Principal Amount</label>
+                            <input type="number" id="principal" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label dark:text-slate-400">Annual Rate (%)</label>
+                            <input type="number" id="rate" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label dark:text-slate-400">Time (Years)</label>
+                            <input type="number" id="time" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        </div>
+                        <button onclick="resetAll()" class="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800 dark:text-slate-400 hover:bg-slate-200 transition-all">Reset</button>
                     </div>
                 </div>
                 <div class="result-pane dark:bg-black">
-                    <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Maturity Value</p><div class="flex items-baseline justify-center gap-1.5"><span id="res-total" class="text-5xl font-black tracking-tighter text-white">0.00</span></div></div>
-                    <div class="space-y-0.5"><div class="receipt-row"><span>Interest Earned</span><span class="font-bold text-emerald-400" id="out-interest">0.00</span></div></div>
+                    <div class="mb-10 text-center">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Maturity Value</p>
+                        <div class="flex items-baseline justify-center gap-1.5">
+                            <span id="res-total" class="text-5xl font-black tracking-tighter text-white">0.00</span>
+                        </div>
+                    </div>
+                    <div class="space-y-0.5">
+                        <div class="receipt-row"><span>Interest Earned</span><span class="font-bold text-emerald-400" id="out-interest">0.00</span></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">Formulas & Guide</h2>
-            <p class="dark:text-slate-400">Simple interest is calculated on the principal amount of a loan or investment.</p>
-            <div class="formula-box dark:bg-slate-900 dark:border-emerald-900 dark:text-white">SI = (P × R × T) / 100<br>Total = P + SI</div>
-            
+            <h2 class="dark:text-white">How to Calculate Simple Interest?</h2>
+            <p class="dark:text-slate-400">Simple interest is a quick method of calculating interest charges. It is determined by multiplying the daily interest rate by the principal by the number of days that elapse between payments.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-emerald-900 dark:text-white">
+                Simple Interest = (Principal × Rate × Time) ÷ 100<br>
+                Total Amount = Principal + Simple Interest
+            </div>
+
             <h2 class="text-xl font-black text-slate-900 mt-12 mb-6 dark:text-white">Explore Other Calculators</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="discount-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800"><p class="text-sm font-bold text-slate-900 dark:text-white">Discount Calculator</p></a>
-                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-orange-500 transition-all dark:bg-slate-900 dark:border-slate-800"><p class="text-sm font-bold text-slate-900 dark:text-white">GST Calculator</p></a>
-                <a href="profit-margin-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-500 transition-all dark:bg-slate-900 dark:border-slate-800"><p class="text-sm font-bold text-slate-900 dark:text-white">Profit Margin</p></a>
+                <a href="discount-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-blue-600 mb-1">Savings Tool</p>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">Discount Calculator</p>
+                </a>
+                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-orange-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-orange-600 mb-1">Tax Tool</p>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">GST Calculator</p>
+                </a>
+                <a href="profit-margin-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-indigo-600 mb-1">Business Tool</p>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">Profit Margin</p>
+                </a>
             </div>
         </article>
 
         <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-8">Feedback</h2>
+                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Feedback & Public Discussion</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Suggest features or ask about interest calculation rules.</p>
                 <form onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="suggest-name" placeholder="Name" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
-                        <textarea id="suggest-text" required placeholder="Comment" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                        <input type="text" id="suggest-name" maxlength="30" placeholder="Name (Optional)" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        <textarea id="suggest-text" required maxlength="500" placeholder="Your comment..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                     </div>
-                    <button type="submit" id="suggest-submit" class="px-10 py-3 bg-emerald-600 text-white font-bold rounded-lg text-xs uppercase shadow-md">Post Comment</button>
+                    <button type="submit" id="suggest-submit" class="px-10 py-3 bg-emerald-600 text-white font-bold rounded-lg text-xs uppercase tracking-widest shadow-md">Post Comment</button>
+                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 mt-2">Posted! Your feedback is now public.</div>
                 </form>
-                <div id="comment-list" class="space-y-4"></div>
+                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
+                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Recent Comments</h3>
+                    <div id="comment-list" class="space-y-4"></div>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-12 dark:bg-slate-900 dark:border-slate-800">
+    <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Reliable Financial Logic.</p>
             <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                <a href="about.html">About Us</a><a href="contact.html">Contact Us</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a>
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-blue-600 transition-colors">Terms & Conditions</a>
             </div>
         </div>
     </footer>
@@ -153,24 +190,28 @@
         function calculate() {
             const p = parseFloat(document.getElementById('principal').value) || 0, r = parseFloat(document.getElementById('rate').value) || 0, t = parseFloat(document.getElementById('time').value) || 0;
             const si = (p * r * t) / 100;
-            document.getElementById('res-total').innerText = (p + si).toLocaleString();
-            document.getElementById('out-interest').innerText = si.toLocaleString();
+            document.getElementById('res-total').innerText = (p + si).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('out-interest').innerText = si.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
         function resetAll() { document.getElementById('principal').value = ''; document.getElementById('rate').value = ''; document.getElementById('time').value = ''; calculate(); }
 
         const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
         const currentPath = window.location.pathname;
+        function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
         async function fetchComments() {
             const list = document.getElementById('comment-list');
             try {
                 const res = await fetch(API_URL); const data = await res.json();
                 const filtered = data.filter(c => c.page === currentPath).reverse();
-                list.innerHTML = filtered.length ? filtered.map(c => `<div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800"><p class="text-[10px] font-black text-emerald-600 mb-1">${c.name || 'Anonymous'}</p><p class="text-xs text-slate-700 dark:text-slate-300">${c.comment}</p></div>`).join('') : '<p class="text-xs text-slate-400">No discussion yet.</p>';
+                list.innerHTML = filtered.length ? filtered.map(c => `<div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] font-black text-emerald-600 mb-1">${escapeHTML(c.name || 'Anonymous')}</p>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.comment)}</p>
+                </div>`).join('') : '<p class="text-xs text-slate-400 italic">No discussion yet.</p>';
             } catch(e) { list.innerHTML = '<p class="text-xs text-red-400">Error loading comments.</p>'; }
         }
         async function handlePublicComment(e) {
-            e.preventDefault(); const btn = document.getElementById('suggest-submit'), n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text');
-            btn.disabled = true; try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ page: currentPath, name: n.value || 'Anonymous', comment: t.value }) }); n.value = ''; t.value = ''; fetchComments(); } finally { btn.disabled = false; }
+            e.preventDefault(); const btn = document.getElementById('suggest-submit'), n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text'), s = document.getElementById('suggest-success-msg');
+            btn.disabled = true; try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ page: currentPath, name: n.value.trim() || 'Anonymous', comment: t.value.trim() }) }); n.value = ''; t.value = ''; s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000); fetchComments(); } finally { btn.disabled = false; }
         }
         if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
         calculate(); fetchComments();

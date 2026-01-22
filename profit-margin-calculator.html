@@ -17,6 +17,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #0f172a; min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
         nav { height: 52px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
         .nav-container { max-width: 1280px; margin: 0 auto; height: 100%; padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .brand-link { flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
         .hero-section { padding: 2.5rem 1rem 1.5rem 1rem; text-align: center; }
         .app-container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 1rem 1.25rem; display: flex; justify-content: center; }
         .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); display: flex; width: 100%; height: 680px; overflow: hidden; border: 1px solid #e2e8f0; }
@@ -25,12 +26,14 @@
         .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
         @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
         .content-section { max-width: 850px; margin: 0 auto; padding: 2rem 1.5rem 4rem 1.5rem; }
+        .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
         .formula-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
-        .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+        .dropdown-animate { transform-origin: top right; transition: all 0.2s ease-out; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95) translateY(-10px); pointer-events: none; }
+        .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
     </style>
     <script>
         (function() {
@@ -42,7 +45,7 @@
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 dark:bg-slate-900 dark:border-slate-800">
         <div class="nav-container">
-            <a href="index.html" class="flex items-center gap-2">
+            <a href="index.html" class="brand-link">
                 <div class="bg-indigo-600 p-1 rounded-md text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
                 </div>
@@ -56,13 +59,13 @@
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
                         <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 group transition-colors">
+                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
                             </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 group transition-colors">
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
                             </a>
-                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 group transition-colors">
+                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Simple Interest</span>
                             </a>
                             <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 group transition-colors">
@@ -73,6 +76,8 @@
                 </div>
                 <button onclick="toggleTheme()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
                     <span id="theme-text">Light</span>
+                    <svg id="sun-icon" class="w-3.5 h-3.5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
+                    <svg id="moon-icon" class="w-3.5 h-3.5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 </button>
             </div>
         </div>
@@ -88,28 +93,50 @@
             <div class="main-card dark:bg-slate-900 dark:border-slate-800 dark:shadow-none">
                 <div class="input-pane dark:border-slate-800">
                     <div class="space-y-4">
-                        <div class="input-group"><label class="input-label dark:text-slate-400">Cost Price</label><input type="number" id="cost" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
-                        <div class="input-group"><label class="input-label dark:text-slate-400">Selling Price</label><input type="number" id="selling" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div>
-                        <button onclick="resetAll()" class="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800">Reset</button>
+                        <div class="input-group">
+                            <label class="input-label dark:text-slate-400">Cost Price</label>
+                            <input type="number" id="cost" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label dark:text-slate-400">Selling Price</label>
+                            <input type="number" id="selling" placeholder="0.00" oninput="calculate()" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        </div>
+                        <button onclick="resetAll()" class="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 transition-all">Reset</button>
                     </div>
                 </div>
                 <div class="result-pane dark:bg-black">
-                    <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Profit Amount</p><div class="flex items-baseline justify-center gap-1.5"><span id="res-profit" class="text-5xl font-black text-white">0.00</span></div></div>
-                    <div class="space-y-0.5"><div class="receipt-row"><span>Gross Margin %</span><span class="font-bold text-indigo-400" id="out-margin">0.00%</span></div></div>
+                    <div class="mb-10 text-center">
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Profit Amount</p>
+                        <div class="flex items-baseline justify-center gap-1.5">
+                            <span id="res-profit" class="text-5xl font-black text-white">0.00</span>
+                        </div>
+                    </div>
+                    <div class="space-y-0.5">
+                        <div class="receipt-row"><span>Gross Margin %</span><span class="font-bold text-indigo-400" id="out-margin">0.00%</span></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">Formulas & Business Logic</h2>
-            <p class="dark:text-slate-400">Understanding profit margins is essential for scaling any business.</p>
-            <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">Margin % = ((Selling - Cost) / Selling) × 100</div>
+            <h2 class="dark:text-white">How is Profit Margin Calculated?</h2>
+            <p class="dark:text-slate-400">Understanding profit margins is essential for scaling any business. This tool helps you find the difference between your costs and revenue.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
+                Profit = Selling Price − Cost Price<br>
+                Margin % = ((Selling - Cost) / Selling) × 100
+            </div>
             
             <h2 class="text-xl font-black text-slate-900 mt-12 mb-6 dark:text-white">Check Our Other Tools</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="discount-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800"><p class="text-sm font-bold text-slate-900 dark:text-white">Discount Calculator</p></a>
-                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-orange-500 transition-all dark:bg-slate-900 dark:border-slate-800"><p class="text-sm font-bold text-slate-900 dark:text-white">GST Calculator</p></a>
-                <a href="simple-interest-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 transition-all dark:bg-slate-900 dark:border-slate-800"><p class="text-sm font-bold text-slate-900 dark:text-white">Simple Interest</p></a>
+                <a href="discount-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">Discount Calculator</p>
+                </a>
+                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-orange-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">GST Calculator</p>
+                </a>
+                <a href="simple-interest-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">Simple Interest</p>
+                </a>
             </div>
         </article>
 
@@ -118,10 +145,10 @@
                 <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-6">User Discussion</h2>
                 <form onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="suggest-name" placeholder="Name" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
-                        <textarea id="suggest-text" required placeholder="Comment" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
+                        <input type="text" id="suggest-name" maxlength="30" placeholder="Name (Optional)" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                        <textarea id="suggest-text" required maxlength="500" placeholder="Suggestion..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                     </div>
-                    <button type="submit" id="suggest-submit" class="px-10 py-3 bg-indigo-600 text-white font-bold rounded-lg text-xs uppercase shadow-md">Post Comment</button>
+                    <button type="submit" id="suggest-submit" class="px-10 py-3 bg-indigo-600 text-white font-bold rounded-lg text-xs uppercase tracking-widest shadow-md">Post Comment</button>
                 </form>
                 <div id="comment-list" class="space-y-4"></div>
             </div>
@@ -130,7 +157,8 @@
 
     <footer class="bg-white border-t border-slate-200 py-12 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <div class="flex justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Accurate Business Logic.</p>
+            <div class="flex justify-center gap-6 text-[10px] font-black uppercase text-slate-500 dark:text-slate-400">
                 <a href="about.html">About Us</a><a href="contact.html">Contact Us</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a>
             </div>
         </div>
@@ -143,24 +171,28 @@
         function calculate() {
             const cp = parseFloat(document.getElementById('cost').value) || 0, sp = parseFloat(document.getElementById('selling').value) || 0;
             const profit = sp - cp; const margin = sp > 0 ? (profit / sp) * 100 : 0;
-            document.getElementById('res-profit').innerText = profit.toLocaleString();
+            document.getElementById('res-profit').innerText = profit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('out-margin').innerText = margin.toFixed(2) + '%';
         }
-        function resetAll() { document.querySelectorAll('input[type="number"]').forEach(i => i.value = ''); calculate(); }
+        function resetAll() { document.getElementById('cost').value = ''; document.getElementById('selling').value = ''; calculate(); }
 
         const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
         const currentPath = window.location.pathname;
+        function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
         async function fetchComments() {
             const list = document.getElementById('comment-list');
             try {
                 const res = await fetch(API_URL); const data = await res.json();
                 const filtered = data.filter(c => c.page === currentPath).reverse();
-                list.innerHTML = filtered.length ? filtered.map(c => `<div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800"><p class="text-[10px] font-black text-indigo-600 mb-1">${c.name || 'Anonymous'}</p><p class="text-xs text-slate-700 dark:text-slate-300">${c.comment}</p></div>`).join('') : '<p class="text-xs text-slate-400">No discussion yet.</p>';
-            } catch(e) { list.innerHTML = 'Error loading comments.'; }
+                list.innerHTML = filtered.length ? filtered.map(c => `<div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] font-black text-indigo-600 mb-1">${escapeHTML(c.name || 'Anonymous')}</p>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.comment)}</p>
+                </div>`).join('') : '<p class="text-xs text-slate-400 italic">No discussion yet.</p>';
+            } catch(e) { list.innerHTML = '<p class="text-xs text-red-400">Error loading comments.</p>'; }
         }
         async function handlePublicComment(e) {
             e.preventDefault(); const btn = document.getElementById('suggest-submit'), n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text');
-            btn.disabled = true; try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ page: currentPath, name: n.value || 'Anonymous', comment: t.value }) }); n.value = ''; t.value = ''; fetchComments(); } finally { btn.disabled = false; }
+            btn.disabled = true; try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ page: currentPath, name: n.value.trim() || 'Anonymous', comment: t.value.trim() }) }); n.value = ''; t.value = ''; fetchComments(); } finally { btn.disabled = false; }
         }
         if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
         calculate(); fetchComments();
