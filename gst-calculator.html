@@ -34,8 +34,6 @@
         @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; margin-bottom: 2rem; } }
         .content-section { max-width: 850px; margin: 0 auto; padding: 2rem 1.5rem 4rem 1.5rem; }
         .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
-        .content-section h3 { font-size: 1.25rem; font-weight: 700; color: #334155; margin-top: 2rem; margin-bottom: 0.75rem; }
-        .content-section p, .content-section li { color: #475569; line-height: 1.7; margin-bottom: 1rem; }
         .formula-box { background: #f8fafc; border-left: 4px solid #f97316; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: ui-monospace, monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.65rem 0.85rem; font-weight: 600; outline: none; font-size: 0.95rem; }
@@ -49,6 +47,36 @@
         .dropdown-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
         .type-pill { flex: 1; padding: 8px 4px; text-align: center; font-size: 0.55rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; border-radius: 6px; transition: all 0.2s; }
         .type-pill.active { background: #f97316; color: white; box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2); }
+
+        /* Invoice Styles */
+        #invoice-view { max-width: 800px; width: 100%; background: white; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 1rem; }
+        .invoice-header { padding: 2rem; border-bottom: 2px solid #f1f5f9; }
+        .invoice-body { padding: 2rem; }
+        .invoice-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .invoice-table th { text-align: left; padding: 12px; background: #f8fafc; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .invoice-table td { padding: 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #1e293b; }
+        .invoice-table td:last-child { text-align: right; }
+        .invoice-table th:last-child { text-align: right; }
+        
+        @media print {
+            nav, .hero-section, .main-card, .content-section, footer, #toggle-invoice-btn, .print-hide {
+                display: none !important;
+            }
+            body { background: white !important; padding: 0 !important; margin: 0 !important; }
+            #invoice-view {
+                display: block !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                max-width: none !important;
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .invoice-header, .invoice-body { padding: 1cm !important; }
+        }
     </style>
     <script>
         (function() {
@@ -203,32 +231,6 @@
                 </a>
             </div>
         </article>
-
-        <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">GST Discussion</h2>
-                <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="input-label dark:text-slate-400">Your Name</label>
-                            <input type="text" id="suggest-name" maxlength="30" placeholder="Anonymous" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
-                        </div>
-                        <div class="flex-grow">
-                            <label class="input-label dark:text-slate-400">Comment</label>
-                            <textarea id="suggest-text" required maxlength="500" placeholder="Suggest features..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">Post Comment</button>
-                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 mt-2">Posted! Your feedback is now public.</div>
-                </form>
-                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Discussion Thread</h3>
-                    <div id="comment-list" class="space-y-6">
-                        <div class="text-center py-4 text-slate-400 text-xs italic">Syncing with server...</div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
@@ -283,31 +285,8 @@
         }
         function resetAll() { document.getElementById('main-amount').value = ''; calculate(); }
 
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
-        async function fetchComments() {
-            const list = document.getElementById('comment-list');
-            try {
-                const res = await fetch(API_URL); const data = await res.json();
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                list.innerHTML = filtered.length ? filtered.map(c => `<div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] font-black text-orange-600 mb-1">${c.name || 'Anonymous'}</p>
-                    <p class="text-xs text-slate-700 dark:text-slate-300">${c.comment}</p>
-                </div>`).join('') : '<p class="text-center text-xs text-slate-400 italic">No comments yet.</p>';
-            } catch(e) { list.innerHTML = '<p class="text-center text-red-400 text-xs italic">Error loading comments.</p>'; }
-        }
-        async function handlePublicComment(e) {
-            e.preventDefault();
-            const btn = document.getElementById('suggest-submit'), n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text'), s = document.getElementById('suggest-success-msg');
-            btn.disabled = true;
-            try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify({ page: currentPath, name: n.value || 'Anonymous', comment: t.value }) });
-                n.value = ''; t.value = ''; s.classList.remove('hidden'); setTimeout(() => s.classList.add('hidden'), 3000);
-                fetchComments();
-            } finally { btn.disabled = false; }
-        }
         if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
-        calculate(); fetchComments();
+        calculate();
     </script>
 </body>
 </html>

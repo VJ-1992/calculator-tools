@@ -169,20 +169,6 @@
                 </a>
             </div>
         </article>
-
-        <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-6">User Discussion</h2>
-                <form onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="suggest-name" maxlength="30" placeholder="Name (Optional)" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
-                        <textarea id="suggest-text" required maxlength="500" placeholder="Suggestion..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
-                    </div>
-                    <button type="submit" id="suggest-submit" class="px-10 py-3 bg-indigo-600 text-white font-bold rounded-lg text-xs uppercase tracking-widest shadow-md">Post Comment</button>
-                </form>
-                <div id="comment-list" class="space-y-4"></div>
-            </div>
-        </section>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-12 dark:bg-slate-900 dark:border-slate-800">
@@ -207,28 +193,9 @@
             document.getElementById('res-profit').innerText = profit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('out-margin').innerText = margin.toFixed(2) + '%';
         }
-        function resetAll() { document.getElementById('cost').value = ''; document.getElementById('selling').value = ''; calculate(); }
-
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
-        function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
-        async function fetchComments() {
-            const list = document.getElementById('comment-list');
-            try {
-                const res = await fetch(API_URL); const data = await res.json();
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                list.innerHTML = filtered.length ? filtered.map(c => `<div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] font-black text-indigo-600 mb-1">${escapeHTML(c.name || 'Anonymous')}</p>
-                    <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHTML(c.comment)}</p>
-                </div>`).join('') : '<p class="text-xs text-slate-400 italic">No discussion yet.</p>';
-            } catch(e) { list.innerHTML = '<p class="text-xs text-red-400">Error loading comments.</p>'; }
-        }
-        async function handlePublicComment(e) {
-            e.preventDefault(); const btn = document.getElementById('suggest-submit'), n = document.getElementById('suggest-name'), t = document.getElementById('suggest-text');
-            btn.disabled = true; try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ page: currentPath, name: n.value.trim() || 'Anonymous', comment: t.value.trim() }) }); n.value = ''; t.value = ''; fetchComments(); } finally { btn.disabled = false; }
-        }
+        function resetAll() { document.querySelectorAll('input[type="number"]').forEach(i => i.value = ''); calculate(); }
         if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
-        calculate(); fetchComments();
+        calculate();
     </script>
 </body>
 </html>

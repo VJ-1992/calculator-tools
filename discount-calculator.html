@@ -219,36 +219,6 @@
                 </a>
             </div>
         </article>
-
-        <!-- Public Suggestion Box -->
-        <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Feedback & Public Discussion</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Share your ideas with the community. Your comment will be visible to everyone.</p>
-                <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="input-label dark:text-slate-400">Your Name (Optional)</label>
-                            <input type="text" id="suggest-name" maxlength="30" placeholder="Anonymous" class="input-field dark:bg-slate-800 dark:border-slate-700 dark:text-white">
-                        </div>
-                        <div class="flex-grow">
-                            <label class="input-label dark:text-slate-400">Your Suggestion</label>
-                            <textarea id="suggest-text" required maxlength="500" placeholder="What should we add next?" class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md disabled:opacity-50">
-                        Post Comment
-                    </button>
-                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-2">Thank you! Your suggestion has been submitted.</div>
-                </form>
-                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Recent Comments</h3>
-                    <div id="comment-list" class="space-y-6">
-                        <div class="text-center py-4 text-slate-400 text-xs italic">Loading discussion...</div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
@@ -314,46 +284,8 @@
         }
         function resetAll() { document.getElementById('base-price').value = ''; document.getElementById('d1-val').value = ''; calculate(); }
 
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
-        const currentPath = window.location.pathname;
-        function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
-        async function fetchComments() {
-            const list = document.getElementById('comment-list');
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                const filtered = data.filter(c => c.page === currentPath).reverse();
-                if (filtered.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first to share!</p>'; return; }
-                list.innerHTML = filtered.map(c => `
-                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
-                            <span class="text-[9px] text-slate-400 font-medium">${new Date(c.date).toLocaleDateString()}</span>
-                        </div>
-                        <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.comment)}</p>
-                    </div>
-                `).join('');
-            } catch (err) { list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Failed to load comments.</p>'; }
-        }
-        async function handlePublicComment(e) {
-            e.preventDefault();
-            const btn = document.getElementById('suggest-submit');
-            const nameEl = document.getElementById('suggest-name'), textEl = document.getElementById('suggest-text'), successMsg = document.getElementById('suggest-success-msg');
-            const payload = { page: currentPath, name: nameEl.value.trim() || 'Anonymous', comment: textEl.value.trim() };
-            if (!payload.comment) return;
-            btn.disabled = true; btn.innerText = 'Posting...';
-            try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-                nameEl.value = ''; textEl.value = ''; successMsg.classList.remove('hidden');
-                setTimeout(() => successMsg.classList.add('hidden'), 3000);
-                fetchComments();
-            } catch (err) { alert('Could not post comment.'); }
-            finally { btn.disabled = false; btn.innerText = 'Post Comment'; }
-        }
-
         if (localStorage.getItem('theme') === 'dark') { document.getElementById('theme-text').innerText = 'Dark'; }
         calculate();
-        fetchComments();
     </script>
 </body>
 </html>
