@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Interest Calculator – SI & Total Maturity Amount</title>
-    <meta name="description" content="Calculate simple interest and total maturity value instantly. Free online tool with currency support (INR/USD), year/month toggles, and verified formulas.">
+    <title>Interest Calculator – Simple & Compound Interest (100% Accurate)</title>
+    <meta name="description" content="Calculate both Simple and Compound Interest instantly. Compare maturity values, interest earned, and see the power of compounding with our professional online tool.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
@@ -24,7 +24,7 @@
         .calculator-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            min-height: 580px;
+            min-height: 620px;
             background: white;
             border-radius: 24px;
             overflow: hidden;
@@ -113,8 +113,8 @@
             font-size: 0.95rem;
         }
 
-        .dropdown-visible { opacity: 1; transform: scale(1); pointer-events: auto; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95); pointer-events: none; }
+        .dropdown-visible { opacity: 1; transform: scale(1); pointer-events: auto; }
 
         /* Dark Mode Overrides */
         .dark .calculator-grid { background: #1e293b; box-shadow: none; border: 1px solid #334155; }
@@ -148,7 +148,7 @@
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
                             </a>
                             <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 dark:bg-blue-900/20 group transition-colors">
-                                <span class="text-xs font-bold text-blue-600 dark:text-blue-400">Simple Interest</span>
+                                <span class="text-xs font-bold text-blue-600 dark:text-blue-400">Interest Calculator</span>
                             </a>
                             <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
@@ -168,18 +168,21 @@
     <main class="container mx-auto px-5 py-12 flex-grow">
         <div class="max-w-6xl mx-auto">
             <div class="mb-8 text-center">
-                <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Simple Interest Calculator</h1>
-                <p class="text-slate-500 dark:text-slate-400">Accurately calculate loan interest or investment growth.</p>
+                <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Interest Calculator</h1>
+                <p class="text-slate-500 dark:text-slate-400">Calculate Simple and Compound interest with precision.</p>
             </div>
 
             <div class="calculator-grid">
                 <!-- Left Panel: Inputs -->
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
                     <div class="flex items-center justify-between mb-8">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Configuration</span>
                         <div class="toggle-pill">
-                            <button onclick="setCurrency('₹')" id="curr-inr" class="active">INR (₹)</button>
-                            <button onclick="setCurrency('$')" id="curr-usd">USD ($)</button>
+                            <button onclick="setCalcMode('simple')" id="mode-simple" class="active">Simple</button>
+                            <button onclick="setCalcMode('compound')" id="mode-compound">Compound</button>
+                        </div>
+                        <div class="toggle-pill">
+                            <button onclick="setCurrency('₹')" id="curr-inr" class="active">₹</button>
+                            <button onclick="setCurrency('$')" id="curr-usd">$</button>
                         </div>
                     </div>
 
@@ -194,9 +197,9 @@
 
                     <!-- Rate -->
                     <div class="input-group">
-                        <label class="input-label">2. Annual Interest Rate (%)</label>
+                        <label class="input-label">2. Annual Rate (%)</label>
                         <div class="relative">
-                            <input type="number" id="rate" oninput="runCalc()" step="0.1" placeholder="e.g. 7.5" class="field-input pr-12">
+                            <input type="number" id="rate" oninput="runCalc()" step="0.01" placeholder="e.g. 7.5" class="field-input pr-12">
                             <span class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">%</span>
                         </div>
                     </div>
@@ -213,14 +216,27 @@
                         <input type="number" id="time" oninput="runCalc()" placeholder="Enter duration" class="field-input">
                     </div>
 
-                    <button onclick="resetCalculator()" class="w-full mt-8 py-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-red-500 font-bold text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all">Clear All Inputs</button>
+                    <!-- Compound Specific -->
+                    <div id="compound-options" class="hidden animate-in fade-in duration-300">
+                        <div class="input-group">
+                            <label class="input-label">4. Compounding Frequency</label>
+                            <select id="comp-freq" onchange="runCalc()" class="field-input appearance-none bg-no-repeat bg-[right_1rem_center] cursor-pointer">
+                                <option value="1">Yearly (Once a year)</option>
+                                <option value="2">Half-Yearly (Twice a year)</option>
+                                <option value="4">Quarterly (4 times a year)</option>
+                                <option value="12">Monthly (12 times a year)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="resetCalculator()" class="w-full mt-8 py-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-red-500 font-bold text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all">Reset All Fields</button>
                 </div>
 
                 <!-- Right Panel: Results -->
                 <div class="result-pane">
                     <div>
                         <div class="mb-12 text-center">
-                            <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Total Maturity Value</p>
+                            <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Final Maturity Amount</p>
                             <div class="flex items-baseline justify-center gap-2">
                                 <span id="res-symbol-large" class="text-2xl font-bold text-blue-400">₹</span>
                                 <span id="res-total-amount" class="text-6xl font-black tracking-tighter">0.00</span>
@@ -229,26 +245,30 @@
 
                         <div class="space-y-1">
                             <div class="receipt-row">
-                                <span class="text-slate-400">Principal Amount</span>
+                                <span class="text-slate-400">Initial Principal</span>
                                 <span class="font-bold"><span class="res-symbol">₹</span><span id="out-principal">0.00</span></span>
                             </div>
                             <div class="receipt-row">
-                                <span class="text-slate-400">Interest Earned</span>
+                                <span id="interest-label" class="text-slate-400">Simple Interest</span>
                                 <span class="font-bold text-emerald-400">+<span class="res-symbol">₹</span><span id="out-interest">0.00</span></span>
+                            </div>
+                            <div id="row-freq" class="receipt-row hidden">
+                                <span class="text-slate-400">Compounding</span>
+                                <span id="out-freq-text" class="font-bold text-blue-400">Yearly</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-12 pt-8 border-t border-white/5">
-                        <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-2">Quick Stats</p>
+                        <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-4">Investment Analysis</p>
                         <div class="flex gap-4">
-                            <div class="flex-1 bg-white/5 p-3 rounded-xl">
-                                <p class="text-[9px] text-slate-500 uppercase font-bold mb-1">Yearly Interest</p>
-                                <p class="text-sm font-black"><span class="res-symbol text-[10px]">₹</span><span id="stat-yearly">0.00</span></p>
+                            <div class="flex-1 bg-white/5 p-4 rounded-2xl">
+                                <p class="text-[9px] text-slate-500 uppercase font-black mb-1">Total Yield</p>
+                                <p id="stat-yield" class="text-lg font-black text-emerald-400">0%</p>
                             </div>
-                            <div class="flex-1 bg-white/5 p-3 rounded-xl">
-                                <p class="text-[9px] text-slate-500 uppercase font-bold mb-1">Interest Ratio</p>
-                                <p class="text-sm font-black text-blue-400" id="stat-ratio">0%</p>
+                            <div class="flex-1 bg-white/5 p-4 rounded-2xl">
+                                <p class="text-[9px] text-slate-500 uppercase font-black mb-1">Effective APR</p>
+                                <p id="stat-apr" class="text-lg font-black text-blue-400">0%</p>
                             </div>
                         </div>
                     </div>
@@ -258,50 +278,59 @@
             <!-- SEO Content -->
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Use the Simple Interest Calculator</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Calculate your returns or borrowing costs in four easy steps:</p>
-                    <ul class="list-decimal pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                        <li><strong>Principal Amount:</strong> Enter the initial amount of money invested or borrowed.</li>
-                        <li><strong>Interest Rate:</strong> Input the annual percentage rate (APR) charged or earned.</li>
-                        <li><strong>Time Period:</strong> Enter the duration and choose between 'Years' or 'Months'.</li>
-                        <li><strong>Instant Results:</strong> View the interest earned and total maturity amount updated in real-time.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Simple Interest Formula</h2>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6">Our tool uses the standard mathematical formula for Simple Interest (SI):</p>
-                    <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 font-mono text-sm space-y-4">
-                        <div>
-                            <p class="text-blue-500 font-bold text-lg">SI = (P × R × T) / 100</p>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Difference Between Simple and Compound Interest</h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Choosing the right calculation mode depends on how your bank or investment firm processes returns. Here is a breakdown of both:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
+                            <h3 class="font-black text-lg mb-2">Simple Interest (SI)</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed italic mb-4">"Interest on the original sum only."</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Simple interest is calculated solely on the principal amount. It's often used for short-term personal loans or specific bond types.</p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                                <span class="font-bold text-slate-900 dark:text-white">P (Principal)</span>
-                                <p class="text-slate-500">The initial balance.</p>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                                <span class="font-bold text-slate-900 dark:text-white">R (Rate)</span>
-                                <p class="text-slate-500">The annual percentage rate.</p>
-                            </div>
-                            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                                <span class="font-bold text-slate-900 dark:text-white">T (Time)</span>
-                                <p class="text-slate-500">Duration in years.</p>
-                            </div>
+                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
+                            <h3 class="font-black text-lg mb-2">Compound Interest (CI)</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed italic mb-4">"Interest on interest."</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Compound interest is calculated on the principal plus the accumulated interest from previous periods. This leads to exponential growth over time.</p>
                         </div>
-                        <p class="text-slate-400 italic">Note: Total Maturity Amount = Principal + Simple Interest</p>
                     </div>
                 </section>
 
                 <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Worked Example</h2>
-                    <div class="bg-blue-50 dark:bg-blue-900/10 p-6 rounded-2xl border border-blue-100 dark:border-blue-900/30">
-                        <p class="text-slate-700 dark:text-blue-200 leading-relaxed">
-                            If you invest <strong>₹10,000</strong> at an annual interest rate of <strong>5%</strong> for <strong>2 years</strong>:
-                        </p>
-                        <div class="mt-4 font-mono text-sm space-y-1 text-blue-600 dark:text-blue-400">
-                            <p>Interest = (10,000 × 5 × 2) / 100 = ₹1,000</p>
-                            <p>Total Maturity = 10,000 + 1,000 = ₹11,000</p>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">The Mathematical Formulas</h2>
+                    <div class="space-y-6">
+                        <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Simple Interest Formula</h3>
+                            <p class="text-2xl font-mono text-blue-600 dark:text-blue-400 mb-2">SI = (P × R × T) / 100</p>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Compound Interest Formula</h3>
+                            <p class="text-2xl font-mono text-emerald-600 dark:text-emerald-400 mb-2">A = P (1 + r/n)<sup>nt</sup></p>
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold text-slate-500">
+                        <p>P = Principal</p>
+                        <p>R = Annual Rate (%)</p>
+                        <p>T = Time (Years)</p>
+                        <p>N = Compounding Freq</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Calculation Example</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6">Let's compare ₹10,000 at 10% for 2 years:</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full flex items-center justify-center font-bold">SI</div>
+                            <div>
+                                <p class="text-sm font-bold">Simple Interest: ₹12,000</p>
+                                <p class="text-xs text-slate-400">Straight line growth of ₹1,000 per year.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center font-bold">CI</div>
+                            <div>
+                                <p class="text-sm font-bold">Compound Interest: ₹12,100</p>
+                                <p class="text-xs text-slate-400">Extra ₹100 earned from the first year's interest.</p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -310,20 +339,12 @@
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is Simple Interest?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Simple interest is a method used to calculate the interest charge on a loan or investment. It is determined by multiplying the daily interest rate by the principal by the number of days that elapse between payments.</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Which is better for long-term?</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">For investments, Compound Interest is vastly superior due to the effect of "interest on interest." For loans, Simple Interest is generally cheaper for the borrower.</p>
                         </div>
                         <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Simple vs. Compound Interest?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Simple interest is calculated only on the principal amount. Compound interest is calculated on the principal and also on the accumulated interest of previous periods.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Who should use this?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Students checking their math, individuals taking simple short-term personal loans, or business owners calculating interest on outstanding bills.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Is the tool free?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Yes! QuickCalc Pro provides all its financial calculators entirely for free with no account creation required.</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is compounding frequency?</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">It is the number of times interest is added to the principal per year. The more frequent the compounding (e.g., monthly vs. yearly), the higher the final amount.</p>
                         </div>
                     </div>
                 </section>
@@ -345,16 +366,26 @@
 
     <script>
         let state = {
+            mode: 'simple',
             currency: '₹',
             timeUnit: 'years'
         };
+
+        function setCalcMode(m) {
+            state.mode = m;
+            document.getElementById('mode-simple').classList.toggle('active', m === 'simple');
+            document.getElementById('mode-compound').classList.toggle('active', m === 'compound');
+            document.getElementById('compound-options').classList.toggle('hidden', m === 'simple');
+            document.getElementById('interest-label').innerText = m === 'simple' ? 'Simple Interest' : 'Compound Interest';
+            document.getElementById('row-freq').classList.toggle('hidden', m === 'simple');
+            runCalc();
+        }
 
         function setCurrency(c) {
             state.currency = c;
             document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c);
             document.getElementById('symbol-main').innerText = c;
             document.getElementById('res-symbol-large').innerText = c;
-            
             document.getElementById('curr-inr').classList.toggle('active', c === '₹');
             document.getElementById('curr-usd').classList.toggle('active', c === '$');
             runCalc();
@@ -368,35 +399,50 @@
         }
 
         function runCalc() {
-            const principal = parseFloat(document.getElementById('principal').value) || 0;
-            const rate = parseFloat(document.getElementById('rate').value) || 0;
-            const timeInput = parseFloat(document.getElementById('time').value) || 0;
+            const P = parseFloat(document.getElementById('principal').value) || 0;
+            const R = parseFloat(document.getElementById('rate').value) || 0;
+            const timeIn = parseFloat(document.getElementById('time').value) || 0;
+            const T = state.timeUnit === 'months' ? timeIn / 12 : timeIn;
 
-            // Convert time to years
-            const t = state.timeUnit === 'months' ? timeInput / 12 : timeInput;
+            let total = 0;
+            let interest = 0;
 
-            // Formula: SI = (P * R * T) / 100
-            const interest = (principal * rate * t) / 100;
-            const total = principal + interest;
+            if (state.mode === 'simple') {
+                interest = (P * R * T) / 100;
+                total = P + interest;
+            } else {
+                const n = parseInt(document.getElementById('comp-freq').value);
+                const r_dec = R / 100;
+                // A = P * (1 + r/n)^(nt)
+                total = P * Math.pow((1 + r_dec / n), (n * T));
+                interest = total - P;
+                
+                const selectEl = document.getElementById('comp-freq');
+                document.getElementById('out-freq-text').innerText = selectEl.options[selectEl.selectedIndex].text.split(' ')[0];
+            }
 
-            // Stats
-            const yearlyInterest = (principal * rate) / 100;
-            const ratio = principal > 0 ? (interest / principal) * 100 : 0;
+            // Analysis
+            const yieldVal = P > 0 ? (interest / P) * 100 : 0;
+            let effectiveAPR = R;
+            if (state.mode === 'compound') {
+                const n = parseInt(document.getElementById('comp-freq').value);
+                effectiveAPR = (Math.pow(1 + (R/100)/n, n) - 1) * 100;
+            }
 
             // Update UI
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('res-total-amount').innerText = fmt(total);
-            document.getElementById('out-principal').innerText = fmt(principal);
+            document.getElementById('out-principal').innerText = fmt(P);
             document.getElementById('out-interest').innerText = fmt(interest);
-            
-            document.getElementById('stat-yearly').innerText = fmt(yearlyInterest);
-            document.getElementById('stat-ratio').innerText = ratio.toFixed(1) + '%';
+            document.getElementById('stat-yield').innerText = yieldVal.toFixed(1) + '%';
+            document.getElementById('stat-apr').innerText = effectiveAPR.toFixed(2) + '%';
         }
 
         function resetCalculator() {
             document.getElementById('principal').value = '';
             document.getElementById('rate').value = '';
             document.getElementById('time').value = '';
+            document.getElementById('comp-freq').selectedIndex = 0;
             runCalc();
         }
 
@@ -432,7 +478,7 @@
             document.getElementById('theme-text').innerText = 'Dark';
         }
 
-        // Initialize calc
+        // Init
         runCalc();
     </script>
 </body>
