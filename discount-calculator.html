@@ -12,9 +12,7 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                 }
             }
         }
@@ -62,8 +60,8 @@
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 dark:bg-slate-900 dark:border-slate-800">
         <div class="nav-container">
             <a href="index.html" class="brand-link">
-                <div class="bg-blue-600 p-1 rounded-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
+                <div class="bg-blue-600 p-1 rounded-md text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 11h10"/><path d="M7 15h10"/><path d="M10 7h4"/></svg>
                 </div>
                 <span class="font-bold text-base tracking-tight dark:text-white">QuickCalc<span class="text-blue-600">Pro</span></span>
             </a>
@@ -73,40 +71,27 @@
                         Calculators
                         <svg id="drop-chevron" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
-                    
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
                         <div class="p-2 space-y-1">
                             <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 dark:bg-blue-900/20 group transition-colors">
-                                <div class="p-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 1.5 1.5L21 3"/><path d="M13 7h8"/><path d="M5 3v18"/><path d="m19 13-1.5 1.5L13 19"/><path d="M21 15h-8"/></svg>
-                                </div>
                                 <span class="text-xs font-bold text-blue-600 dark:text-blue-400">Discount Calculator</span>
                             </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 group transition-colors">
-                                <div class="p-1.5 bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                                </div>
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-orange-600 dark:group-hover:text-orange-400">GST Calculator</span>
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
                             </a>
-                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 group transition-colors">
-                                <div class="p-1.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                                </div>
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">Simple Interest</span>
+                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Simple Interest</span>
                             </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/20 group transition-colors">
-                                <div class="p-1.5 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                                </div>
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Profit Margin</span>
+                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
                             </a>
                         </div>
                     </div>
                 </div>
-
-                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" aria-label="Toggle Theme">
-                    <svg id="sun-icon" class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
-                    <svg id="moon-icon" class="w-4 h-4 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                <button onclick="toggleTheme()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    <span id="theme-text">Light</span>
+                    <svg id="sun-icon" class="w-3.5 h-3.5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
+                    <svg id="moon-icon" class="w-3.5 h-3.5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 </button>
             </div>
         </div>
@@ -114,7 +99,7 @@
 
     <header class="hero-section">
         <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-3 dark:text-white">Discount Calculator</h1>
-        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Quickly find out how much you will save on your next purchase. Our free online discount calculator is the perfect tool for shoppers, traders, and anyone looking to compare sale prices during seasonal deals and online shopping events.</p>
+        <p class="text-base text-slate-500 max-w-2xl mx-auto leading-relaxed dark:text-slate-400">Instantly find your total savings and final price after a sale.</p>
     </header>
 
     <main>
@@ -138,7 +123,7 @@
                         </div>
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
                             <div class="flex items-center justify-between mb-2">
-                                <label class="input-label !mb-0 dark:text-slate-400">2. Primary Discount</label>
+                                <label class="input-label !mb-0 dark:text-slate-400">2. Discount</label>
                                 <div class="pill-toggle w-28 dark:bg-slate-700">
                                     <button onclick="setD1Type('percent')" id="d1p" class="active dark:bg-slate-600 dark:text-blue-400">%</button>
                                     <button onclick="setD1Type('flat')" id="d1f">Flat</button>
@@ -149,81 +134,60 @@
                                 <span id="d1-suffix" class="absolute right-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">%</span>
                             </div>
                         </div>
-                        <div id="d2-wrap" class="hidden">
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 dark:bg-slate-800/50 dark:border-slate-700">
-                                <div class="flex items-center justify-between mb-2">
-                                    <label class="input-label !mb-0 text-blue-600 dark:text-blue-400">3. Extra Sequential %</label>
-                                    <button onclick="toggleD2(false)" class="text-[8px] font-black text-red-400 uppercase tracking-tighter hover:text-red-500">Remove</button>
-                                </div>
-                                <div class="relative">
-                                    <input type="number" id="d2-val" placeholder="0" oninput="calculate()" class="input-field border-blue-50 dark:bg-slate-800 dark:border-slate-700 dark:text-white">
-                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button id="add-d2" onclick="toggleD2(true)" class="flex items-center gap-1.5 text-[10px] font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                            Add sequential discount
-                        </button>
-                        <div class="space-y-3 pt-1">
-                            <div class="flex items-center gap-2">
-                                <input type="checkbox" id="tax-toggle" onchange="toggleTax(); calculate();" class="w-3.5 h-3.5 rounded border-slate-300 text-blue-600 cursor-pointer dark:bg-slate-800 dark:border-slate-700">
-                                <label for="tax-toggle" class="text-[11px] font-bold text-slate-500 cursor-pointer dark:text-slate-400">Apply Sales Tax / GST</label>
-                            </div>
-                            <div id="tax-wrap" class="hidden">
-                                <div class="p-4 bg-orange-50/50 border border-orange-100 rounded-xl dark:bg-orange-900/10 dark:border-orange-800">
-                                    <label class="input-label !text-orange-600 dark:text-orange-400">Tax Rate (%)</label>
-                                    <input type="number" id="tax-rate" placeholder="e.g. 18" oninput="calculate()" class="input-field bg-white border-orange-50 dark:bg-slate-800 dark:border-slate-700">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3 pt-2">
-                            <button onclick="resetAll()" class="py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">Clear</button>
-                            <button onclick="copyBill()" id="copy-btn" class="py-3 bg-slate-900 text-white font-bold rounded-lg text-[10px] uppercase flex items-center justify-center gap-1.5 hover:bg-black dark:bg-blue-600 dark:hover:bg-blue-700">Copy Result</button>
-                        </div>
+                        <button onclick="resetAll()" class="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400">Reset</button>
                     </div>
                 </div>
                 <div class="result-pane dark:bg-black">
                     <div>
-                        <div class="flex items-center gap-2 mb-5 opacity-40">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                            <span class="text-[8px] font-black uppercase tracking-[0.4em]">Breakdown</span>
-                        </div>
                         <div class="mb-10 text-center">
                             <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Payable Total</p>
                             <div class="flex items-baseline justify-center gap-1.5">
                                 <span class="text-xl font-bold currency-symbol text-blue-400">$</span>
-                                <span id="res-final" class="text-5xl font-black tracking-tighter leading-none">0.00</span>
+                                <span id="res-final" class="text-5xl font-black tracking-tighter leading-none text-white">0.00</span>
                             </div>
                         </div>
                         <div class="space-y-0.5">
                             <div class="receipt-row"><span>List Price</span><span class="font-bold"><span class="currency-symbol">$</span><span id="out-base">0.00</span></span></div>
                             <div class="receipt-row"><span>Total Savings</span><span class="font-bold text-emerald-400">-<span class="currency-symbol">$</span><span id="out-d1">0.00</span></span></div>
-                            <div id="row-d2" class="receipt-row hidden"><span>Extra Discount</span><span class="font-bold text-emerald-400">-<span class="currency-symbol">$</span><span id="out-d2">0.00</span></span></div>
-                            <div id="row-tax" class="receipt-row hidden"><span>Estimated Tax</span><span class="font-bold text-orange-400">+<span class="currency-symbol">$</span><span id="out-tax">0.00</span></span></div>
-                        </div>
-                    </div>
-                    <div class="pt-6 border-t border-slate-800">
-                        <div class="flex justify-between items-end">
-                            <div class="space-y-0.5">
-                                <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">Saved Total</p>
-                                <p class="text-2xl font-black text-white"><span class="currency-symbol">$</span><span id="res-savings">0.00</span></p>
-                            </div>
-                            <div class="text-right">
-                                <div class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-md text-[10px] font-black uppercase border border-emerald-500/20"><span id="savings-pct">0%</span> OFF</div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <article class="content-section">
+            <h2 class="dark:text-white">How to Calculate a Discount?</h2>
+            <p class="dark:text-slate-400">Finding the final price involves subtracting the discount amount from the original price.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
+                Discount Amount = (Original Price × Discount %) ÷ 100<br>
+                Final Price = Original Price − Discount Amount
+            </div>
+
+            <h2 class="dark:text-white">Example Calculation</h2>
+            <p class="dark:text-slate-400">If an item is ₹2,000 with a 25% discount, you save ₹500 and pay ₹1,500.</p>
+
+            <h2 class="text-xl font-black text-slate-900 mt-12 mb-6 dark:text-white">Try Our Other Tools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-blue-600 mb-1">Tax Tool</p>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">GST Calculator</p>
+                </a>
+                <a href="simple-interest-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-emerald-600 mb-1">Interest Tool</p>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">Simple Interest</p>
+                </a>
+                <a href="profit-margin-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-indigo-600 mb-1">Business Tool</p>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">Profit Margin</p>
+                </a>
+            </div>
+        </article>
+
         <!-- Public Suggestion Box -->
         <section id="suggestion-box" class="max-w-[1000px] mx-auto px-5 mb-12">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
                 <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Feedback & Public Discussion</h2>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Share your ideas with the community. Your comment will be visible to everyone.</p>
-                
                 <form id="suggestion-form" onsubmit="handlePublicComment(event)" class="space-y-4 mb-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -240,8 +204,6 @@
                     </button>
                     <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-2">Thank you! Your suggestion has been submitted.</div>
                 </form>
-
-                <!-- Comments List -->
                 <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
                     <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Recent Comments</h3>
                     <div id="comment-list" class="space-y-6">
@@ -250,72 +212,16 @@
                 </div>
             </div>
         </section>
-
-        <article class="content-section">
-            <h2 class="dark:text-white">How to Calculate a Discount?</h2>
-            <p class="dark:text-slate-400">Finding the final price of a product during a sale involves two main steps. You first determine the savings amount based on the discount percentage and then subtract that from the original price. Here are the exact formulas our tool uses:</p>
-            <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
-                Discount Amount = (Original Price × Discount %) ÷ 100<br>
-                Final Price = Original Price − Discount Amount
-            </div>
-            <p class="dark:text-slate-400">Our advanced dashboard also handles <strong>sequential discounts</strong> (stackable coupons) and regional sales tax, giving you a professional-grade breakdown similar to a retail receipt.</p>
-
-            <h2 class="dark:text-white">Real-World Shopping Example</h2>
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
-                <p class="dark:text-slate-400 font-bold">Scenario: Buying a pair of shoes during a 25% OFF festival sale.</p>
-                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
-                    <li><strong>Original Price:</strong> ₹2,000</li>
-                    <li><strong>Discount Percentage:</strong> 25%</li>
-                </ul>
-                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                    <p class="dark:text-slate-300 font-mono text-sm leading-relaxed">
-                        1. Calculate Savings: (2,000 × 25) ÷ 100 = <strong>₹500</strong><br>
-                        2. Calculate Final Price: 2,000 - 500 = <strong>₹1,500</strong><br>
-                        3. Your Total Savings: <strong>₹500</strong>
-                    </p>
-                </div>
-            </div>
-
-            <h2 class="dark:text-white">Frequently Asked Questions</h2>
-            <div class="space-y-6">
-                <div>
-                    <h3 class="dark:text-white">What is a discount calculator?</h3>
-                    <p class="dark:text-slate-400">A discount calculator is a tool that helps users determine the price reduction on a product or service. It calculates the dollar or rupee amount saved and the final cost you need to pay at checkout.</p>
-                </div>
-                <div>
-                    <h3 class="dark:text-white">How do you calculate discount percentage?</h3>
-                    <p class="dark:text-slate-400">To calculate the discount percentage manually, divide the savings amount by the original price and then multiply by 100. For example, if you saved $10 on a $50 item, the percentage is (10/50) * 100 = 20%.</p>
-                </div>
-                <div>
-                    <h3 class="dark:text-white">How to calculate final price after discount?</h3>
-                    <p class="dark:text-slate-400">Simply subtract the discount value from the original list price. If you have multiple discounts, apply them sequentially: calculate the first discount, find the new price, then apply the second discount to that new lower price.</p>
-                </div>
-                <div>
-                    <h3 class="dark:text-white">Can I calculate discount for online shopping?</h3>
-                    <p class="dark:text-slate-400">Yes! This tool is perfect for verifying coupon codes, seasonal sales, and store-wide discounts offered by popular online retailers like Amazon, Flipkart, or eBay.</p>
-                </div>
-                <div>
-                    <h3 class="dark:text-white">Is this discount calculator free to use?</h3>
-                    <p class="dark:text-slate-400">QuickCalc Pro provides this tool entirely for free. There are no limits on how many calculations you can perform, and we do not store your data.</p>
-                </div>
-            </div>
-
-            <h2 class="dark:text-white">Try Our Other Financial Tools</h2>
-            <div class="flex flex-wrap gap-4 mt-6">
-                <a href="profit-margin-calculator.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold text-sm hover:bg-indigo-700 transition-colors">Business Margin & Profit Tool</a>
-                <a href="simple-interest-calculator.html" class="px-4 py-2 bg-emerald-600 text-white rounded-lg font-bold text-sm hover:bg-emerald-700 transition-colors">Simple Interest & Maturity Calc</a>
-            </div>
-        </article>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
+    <footer class="bg-white border-t border-slate-200 py-12 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Accurate Financial Logic.</p>
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8">&copy; 2025 QuickCalc Pro. Reliable Financial Logic.</p>
             <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                <a href="about.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">About Us</a>
-                <a href="contact.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Contact Us</a>
-                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Privacy Policy</a>
-                <a href="terms-conditions.html" class="hover:text-blue-600 transition-colors dark:hover:text-blue-400">Terms of Service</a>
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-blue-600 transition-colors">Terms & Conditions</a>
             </div>
         </div>
     </footer>
@@ -324,130 +230,66 @@
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light';
         }
-
         function toggleDropdown(e) {
             e.stopPropagation();
-            const dropdown = document.getElementById('nav-dropdown');
-            const chevron = document.getElementById('drop-chevron');
-            const isVisible = dropdown.classList.contains('dropdown-visible');
-            
-            if (isVisible) {
-                dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
-                chevron.style.transform = 'rotate(0deg)';
+            const d = document.getElementById('nav-dropdown');
+            const c = document.getElementById('drop-chevron');
+            if (d.classList.contains('dropdown-visible')) {
+                d.classList.replace('dropdown-visible', 'dropdown-hidden');
+                c.style.transform = 'rotate(0deg)';
             } else {
-                dropdown.classList.replace('dropdown-hidden', 'dropdown-visible');
-                chevron.style.transform = 'rotate(180deg)';
+                d.classList.replace('dropdown-hidden', 'dropdown-visible');
+                c.style.transform = 'rotate(180deg)';
             }
         }
+        window.onclick = (e) => {
+            const d = document.getElementById('nav-dropdown');
+            if (d && !e.target.closest('#drop-btn') && !e.target.closest('#nav-dropdown')) {
+                d.classList.replace('dropdown-visible', 'dropdown-hidden');
+                document.getElementById('drop-chevron').style.transform = 'rotate(0deg)';
+            }
+        };
 
-        window.onclick = function(event) {
-            const dropdown = document.getElementById('nav-dropdown');
-            const chevron = document.getElementById('drop-chevron');
-            if (dropdown && !event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
-                if (dropdown.classList.contains('dropdown-visible')) {
-                    dropdown.classList.replace('dropdown-visible', 'dropdown-hidden');
-                    chevron.style.transform = 'rotate(0deg)';
-                }
-            }
-        }
-
-        let state = { currency: '$', d1Type: 'percent', hasD2: false, hasTax: false };
-        function setCurrency(symbol) {
-            state.currency = symbol;
-            document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = symbol);
-            const usdBtn = document.getElementById('c-usd'), inrBtn = document.getElementById('c-inr');
-            if (symbol === '$') { 
-                usdBtn.className = "px-2 py-1 bg-white shadow-sm rounded text-blue-600 dark:bg-slate-700 dark:text-blue-400"; 
-                inrBtn.className = "px-2 py-1 text-slate-500 dark:text-slate-400"; 
-            } else { 
-                inrBtn.className = "px-2 py-1 bg-white shadow-sm rounded text-blue-600 dark:bg-slate-700 dark:text-blue-400"; 
-                usdBtn.className = "px-2 py-1 text-slate-500 dark:text-slate-400"; 
-            }
+        let state = { currency: '$', d1Type: 'percent' };
+        function setCurrency(s) {
+            state.currency = s;
+            document.querySelectorAll('.currency-symbol').forEach(el => el.innerText = s);
             calculate();
         }
-        function setD1Type(type) {
-            state.d1Type = type;
-            document.getElementById('d1p').classList.toggle('active', type === 'percent');
-            document.getElementById('d1f').classList.toggle('active', type === 'flat');
-            document.getElementById('d1-suffix').innerText = type === 'percent' ? '%' : state.currency;
+        function setD1Type(t) {
+            state.d1Type = t;
+            document.getElementById('d1p').classList.toggle('active', t === 'percent');
+            document.getElementById('d1f').classList.toggle('active', t === 'flat');
+            document.getElementById('d1-suffix').innerText = t === 'percent' ? '%' : state.currency;
             calculate();
-        }
-        function toggleD2(show) {
-            state.hasD2 = show;
-            document.getElementById('d2-wrap').classList.toggle('hidden', !show);
-            document.getElementById('add-d2').classList.toggle('hidden', show);
-            document.getElementById('row-d2').classList.toggle('hidden', !show);
-            if (!show) document.getElementById('d2-val').value = '';
-            calculate();
-        }
-        function toggleTax() {
-            state.hasTax = document.getElementById('tax-toggle').checked;
-            document.getElementById('tax-wrap').classList.toggle('hidden', !state.hasTax);
-            document.getElementById('row-tax').classList.toggle('hidden', !state.hasTax);
-            if (!state.hasTax) document.getElementById('tax-rate').value = '';
         }
         function calculate() {
-            const base = parseFloat(document.getElementById('base-price').value) || 0;
-            const d1Val = parseFloat(document.getElementById('d1-val').value) || 0;
-            const d2Val = parseFloat(document.getElementById('d2-val').value) || 0;
-            const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
-            let d1Amt = state.d1Type === 'percent' ? (base * d1Val) / 100 : d1Val;
-            let afterD1 = Math.max(0, base - d1Amt);
-            let d2Amt = state.hasD2 ? (afterD1 * d2Val) / 100 : 0;
-            let afterD2 = Math.max(0, afterD1 - d2Amt);
-            let taxAmt = state.hasTax ? (afterD2 * taxRate) / 100 : 0;
-            let final = afterD2 + taxAmt;
-            let totalSavings = base - afterD2;
-            let pctOff = base > 0 ? (totalSavings / base) * 100 : 0;
+            const p = parseFloat(document.getElementById('base-price').value) || 0;
+            const d = parseFloat(document.getElementById('d1-val').value) || 0;
+            let savings = state.d1Type === 'percent' ? (p * d) / 100 : d;
+            let final = Math.max(0, p - savings);
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('res-final').innerText = fmt(final);
-            document.getElementById('out-base').innerText = fmt(base);
-            document.getElementById('out-d1').innerText = fmt(d1Amt + d2Amt);
-            document.getElementById('out-d2').innerText = fmt(d2Amt);
-            document.getElementById('out-tax').innerText = fmt(taxAmt);
-            document.getElementById('res-savings').innerText = fmt(totalSavings);
-            document.getElementById('savings-pct').innerText = Math.round(pctOff) + '%';
+            document.getElementById('out-base').innerText = fmt(p);
+            document.getElementById('out-d1').innerText = fmt(savings);
         }
-        function resetAll() {
-            document.getElementById('base-price').value = '';
-            document.getElementById('d1-val').value = '';
-            document.getElementById('d2-val').value = '';
-            document.getElementById('tax-rate').value = '';
-            document.getElementById('tax-toggle').checked = false;
-            toggleTax(); toggleD2(false); calculate();
-        }
-        async function copyBill() {
-            const final = document.getElementById('res-final').innerText;
-            const text = `Final Price: ${state.currency}${final}\nCalculated via QuickCalc Pro.`;
-            try { await navigator.clipboard.writeText(text); document.getElementById('copy-btn').innerText = 'Copied!'; setTimeout(() => document.getElementById('copy-btn').innerText = 'Copy Result', 1200); } catch(e) {}
-        }
+        function resetAll() { document.getElementById('base-price').value = ''; document.getElementById('d1-val').value = ''; calculate(); }
 
         // PUBLIC COMMENT SYSTEM
         const API_URL = 'https://script.google.com/macros/s/AKfycbwOBoNoaYnxkY69-QYB4D6Iy7k5XKJpgZfV6ncRRlG5Wd_NUMOjki5T8PH0vKZwbNlF4Q/exec';
         const currentPath = window.location.pathname;
-
-        function escapeHTML(str) {
-            const p = document.createElement('p');
-            p.textContent = str;
-            return p.innerHTML;
-        }
-
+        function escapeHTML(str) { const p = document.createElement('p'); p.textContent = str; return p.innerHTML; }
         async function fetchComments() {
             const list = document.getElementById('comment-list');
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
-                
                 const filtered = data.filter(c => c.page === currentPath).reverse();
-                
-                if (filtered.length === 0) {
-                    list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first to share!</p>';
-                    return;
-                }
-
+                if (filtered.length === 0) { list.innerHTML = '<p class="text-center py-10 text-slate-400 text-xs italic">No suggestions yet. Be the first to share!</p>'; return; }
                 list.innerHTML = filtered.map(c => `
-                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div class="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
                         <div class="flex justify-between items-start mb-2">
                             <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">${escapeHTML(c.name || 'Anonymous')}</span>
                             <span class="text-[9px] text-slate-400 font-medium">${new Date(c.date).toLocaleDateString()}</span>
@@ -455,50 +297,27 @@
                         <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHTML(c.comment)}</p>
                     </div>
                 `).join('');
-            } catch (err) {
-                list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Failed to load comments.</p>';
-            }
+            } catch (err) { list.innerHTML = '<p class="text-center py-4 text-red-400 text-xs italic">Failed to load comments.</p>'; }
         }
-
         async function handlePublicComment(e) {
             e.preventDefault();
             const btn = document.getElementById('suggest-submit');
-            const nameEl = document.getElementById('suggest-name');
-            const textEl = document.getElementById('suggest-text');
-            const successMsg = document.getElementById('suggest-success-msg');
-            
-            const payload = {
-                page: currentPath,
-                name: nameEl.value.trim() || 'Anonymous',
-                comment: textEl.value.trim()
-            };
-
+            const nameEl = document.getElementById('suggest-name'), textEl = document.getElementById('suggest-text'), successMsg = document.getElementById('suggest-success-msg');
+            const payload = { page: currentPath, name: nameEl.value.trim() || 'Anonymous', comment: textEl.value.trim() };
             if (!payload.comment) return;
-
-            btn.disabled = true;
-            btn.innerText = 'Posting...';
-
+            btn.disabled = true; btn.innerText = 'Posting...';
             try {
-                await fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload)
-                });
-
-                nameEl.value = '';
-                textEl.value = '';
-                successMsg.classList.remove('hidden');
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
+                nameEl.value = ''; textEl.value = ''; successMsg.classList.remove('hidden');
                 setTimeout(() => successMsg.classList.add('hidden'), 3000);
-                
-                fetchComments(); // Refresh list
-            } catch (err) {
-                alert('Could not post comment. Please try again.');
-            } finally {
-                btn.disabled = false;
-                btn.innerText = 'Post Comment';
-            }
+                fetchComments();
+            } catch (err) { alert('Could not post comment.'); }
+            finally { btn.disabled = false; btn.innerText = 'Post Comment'; }
         }
 
-        // Initialize
+        if (localStorage.getItem('theme') === 'dark') {
+            document.getElementById('theme-text').innerText = 'Dark';
+        }
         calculate();
         fetchComments();
     </script>
