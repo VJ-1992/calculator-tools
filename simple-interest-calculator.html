@@ -34,6 +34,9 @@
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 600; outline: none; font-size: 0.95rem; }
         .input-field:focus { border-color: #3b82f6; background: white; }
+        .pill-toggle { display: flex; background: #f1f5f9; padding: 2px; border-radius: 6px; }
+        .pill-toggle button { flex: 1; padding: 3px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #64748b; }
+        .pill-toggle button.active { background: white; color: #2563eb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .receipt-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 0.85rem; }
         .dropdown-animate { transform-origin: top right; transition: all 0.2s ease-out; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95) translateY(-10px); pointer-events: none; }
@@ -63,16 +66,16 @@
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
                         <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
                             </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
                             </a>
                             <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 group transition-colors">
                                 <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Simple Interest</span>
                             </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
                             </a>
                         </div>
@@ -127,11 +130,53 @@
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">How to Calculate Simple Interest?</h2>
-            <p class="dark:text-slate-400">Simple interest is a quick method of calculating interest charges. It is determined by multiplying the daily interest rate by the principal by the number of days that elapse between payments.</p>
+            <h2 class="dark:text-white">How is Simple Interest Calculated?</h2>
+            <p class="dark:text-slate-400">Calculating simple interest is a basic financial skill used to determine the cost of borrowing or the profit from an investment. Our tool uses standard mathematical formulas to provide accurate results:</p>
             <div class="formula-box dark:bg-slate-900 dark:border-emerald-900 dark:text-white">
                 Simple Interest = (Principal × Rate × Time) ÷ 100<br>
                 Total Amount = Principal + Simple Interest
+            </div>
+            <p class="dark:text-slate-400">In these formulas, <strong>Principal</strong> is the initial amount of money, <strong>Rate</strong> is the annual interest percentage, and <strong>Time</strong> is the number of years.</p>
+
+            <h2 class="dark:text-white">Step-by-Step Calculation Example</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <p class="dark:text-slate-400 font-bold">Example: Calculating interest for an investment.</p>
+                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
+                    <li><strong>Principal:</strong> ₹10,000</li>
+                    <li><strong>Rate:</strong> 5% per year</li>
+                    <li><strong>Time:</strong> 2 years</li>
+                </ul>
+                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <p class="dark:text-slate-300 font-mono text-sm leading-relaxed">
+                        1. Calculate Simple Interest: (10,000 × 5 × 2) / 100 = <strong>₹1,000</strong><br>
+                        2. Calculate Total Amount: 10,000 + 1,000 = <strong>₹11,000</strong><br>
+                        3. Your Total Earnings: <strong>₹1,000</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is simple interest?</h3>
+                    <p class="dark:text-slate-400">Simple interest is the interest calculated only on the original principal amount of a loan or deposit. It does not take into account any interest accumulated over time, making it easier to predict than compound interest.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How is simple interest different from compound interest?</h3>
+                    <p class="dark:text-slate-400">The primary difference is that simple interest is calculated only on the principal, whereas compound interest is calculated on the principal plus the interest that has already been added. Compound interest grows faster over time.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How to calculate simple interest manually?</h3>
+                    <p class="dark:text-slate-400">To calculate it manually, multiply the principal amount by the interest rate and the time period, then divide the result by 100. This is expressed as the simple interest formula: SI = (P × R × T) / 100.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Can students use this calculator?</h3>
+                    <p class="dark:text-slate-400">Absolutely! This calculator is designed to be student-friendly and is perfect for checking school assignments, understanding financial concepts, and learning how to calculate simple interest effectively.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is this simple interest calculator free?</h3>
+                    <p class="dark:text-slate-400">Yes, QuickCalc Pro provides this interest calculation tool 100% free of charge. You can use it as many times as you need for your personal or educational projects.</p>
+                </div>
             </div>
 
             <h2 class="text-xl font-black text-slate-900 mt-12 mb-6 dark:text-white">Explore Other Calculators</h2>
@@ -161,12 +206,8 @@
                         <textarea id="suggest-text" required maxlength="500" placeholder="Your comment..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                     </div>
                     <button type="submit" id="suggest-submit" class="px-10 py-3 bg-emerald-600 text-white font-bold rounded-lg text-xs uppercase tracking-widest shadow-md">Post Comment</button>
-                    <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 mt-2">Posted! Your feedback is now public.</div>
                 </form>
-                <div class="border-t border-slate-100 dark:border-slate-800 pt-8">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Recent Comments</h3>
-                    <div id="comment-list" class="space-y-4"></div>
-                </div>
+                <div id="comment-list" class="space-y-4"></div>
             </div>
         </section>
     </main>

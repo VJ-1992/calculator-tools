@@ -31,9 +31,11 @@
         .input-pane::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
         @media (max-width: 768px) { .input-pane { padding: 1.25rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow-y: visible; } }
         .result-pane { flex: 0.9; background: #0f172a; color: white; display: flex; flex-direction: column; padding: 1.5rem; justify-content: space-between; }
-        @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; } }
+        @media (max-width: 768px) { .result-pane { padding: 1.25rem; border-radius: 16px; margin-bottom: 2rem; } }
         .content-section { max-width: 850px; margin: 0 auto; padding: 2rem 1.5rem 4rem 1.5rem; }
         .content-section h2 { font-size: 1.875rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+        .content-section h3 { font-size: 1.25rem; font-weight: 700; color: #334155; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .content-section p, .content-section li { color: #475569; line-height: 1.7; margin-bottom: 1rem; }
         .formula-box { background: #f8fafc; border-left: 4px solid #f97316; padding: 1.25rem 1.75rem; margin: 1.5rem 0; font-family: ui-monospace, monospace; font-size: 0.95rem; color: #1e293b; border-radius: 0 8px 8px 0; }
         .input-label { display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
         .input-field { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 8px; padding: 0.65rem 0.85rem; font-weight: 600; outline: none; font-size: 0.95rem; }
@@ -72,16 +74,16 @@
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
                         <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
                             </a>
                             <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-orange-50 dark:bg-orange-900/20 group transition-colors">
                                 <span class="text-xs font-bold text-orange-600 dark:text-orange-400">GST Calculator</span>
                             </a>
-                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Simple Interest</span>
                             </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
                             </a>
                         </div>
@@ -150,14 +152,41 @@
         </div>
 
         <article class="content-section">
-            <h2 class="dark:text-white">GST Calculation Guide</h2>
-            <p class="dark:text-slate-400">Understanding which mode to use is key for accurate accounting.</p>
-            <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
-                Add GST: Total = Base + (Base × Rate / 100)<br>
-                Remove GST: Base = (Total × 100) / (100 + Rate)
-            </div>
-            <p class="dark:text-slate-400">In India, GST is split into CGST and SGST for intra-state transactions, or IGST for inter-state and import transactions.</p>
+            <h2 class="dark:text-white">Professional GST Calculation Guide</h2>
+            <p class="dark:text-slate-400">Our GST calculator is designed to handle all domestic and international trade scenarios for Indian businesses. Understanding which mode to use is key for accurate accounting.</p>
             
+            <h3 class="dark:text-white">1. Add GST (Exclusive to Inclusive)</h3>
+            <p class="dark:text-slate-400">Use this when you know the base price and want to find the final bill amount. Standard for generating sales invoices.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
+                GST Amount = (Base Price × GST Rate) / 100<br>
+                Total Price = Base Price + GST Amount
+            </div>
+
+            <h3 class="dark:text-white">2. Remove & Reverse GST (Inclusive to Exclusive)</h3>
+            <p class="dark:text-slate-400">Use this when you have a total amount (like a MRP) and need to extract the tax portion to find the original value.</p>
+            <div class="formula-box dark:bg-slate-900 dark:border-orange-900 dark:text-white">
+                Excluding Amount = (Including Price × 100) / (100 + GST Rate)<br>
+                GST Portion = Including Price − Excluding Amount
+            </div>
+
+            <h3 class="dark:text-white">Tax Splits (CGST, SGST, IGST)</h3>
+            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
+                <li><strong>Intra-State:</strong> Split 50:50 between CGST (Central) and SGST (State).</li>
+                <li><strong>Inter-State:</strong> Full 100% applied as IGST (Integrated Tax).</li>
+            </ul>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is the difference between Remove GST and Reverse GST?</h3>
+                    <p class="dark:text-slate-400">Mathematically, they are identical. Both extract the tax from an inclusive price. "Remove GST" is commonly used by shoppers to find pre-tax prices, while "Reverse GST" is often used by accountants to verify tax entries.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is IGST applicable on imports?</h3>
+                    <p class="dark:text-slate-400">Yes, under the GST regime, imports into India are treated as inter-state supplies and are subject to IGST in addition to standard customs duties.</p>
+                </div>
+            </div>
+
             <h2 class="text-xl font-black text-slate-900 mt-12 mb-6 dark:text-white">Explore Other Calculators</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <a href="discount-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800">
@@ -189,7 +218,7 @@
                             <textarea id="suggest-text" required maxlength="500" placeholder="Suggest features..." class="input-field min-h-[46px] py-3 resize-none dark:bg-slate-800 dark:border-slate-700 dark:text-white"></textarea>
                         </div>
                     </div>
-                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-orange-600 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">Post Comment</button>
+                    <button type="submit" id="suggest-submit" class="w-full md:w-auto px-10 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg text-xs uppercase tracking-widest transition-all shadow-md">Post Comment</button>
                     <div id="suggest-success-msg" class="hidden text-[10px] font-bold text-emerald-600 mt-2">Posted! Your feedback is now public.</div>
                 </form>
                 <div class="border-t border-slate-100 dark:border-slate-800 pt-8">

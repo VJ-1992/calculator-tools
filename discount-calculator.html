@@ -76,13 +76,13 @@
                             <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 dark:bg-blue-900/20 group transition-colors">
                                 <span class="text-xs font-bold text-blue-600 dark:text-blue-400">Discount Calculator</span>
                             </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
                             </a>
-                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Simple Interest</span>
                             </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/40 group transition-colors">
+                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
                             </a>
                         </div>
@@ -157,19 +157,56 @@
 
         <article class="content-section">
             <h2 class="dark:text-white">How to Calculate a Discount?</h2>
-            <p class="dark:text-slate-400">Finding the final price involves subtracting the discount amount from the original price. This calculator helps you verify sale prices instantly.</p>
+            <p class="dark:text-slate-400">Finding the final price of a product during a sale involves two main steps. You first determine the savings amount based on the discount percentage and then subtract that from the original price. Here are the exact formulas our tool uses:</p>
             <div class="formula-box dark:bg-slate-900 dark:border-blue-900 dark:text-white">
                 Discount Amount = (Original Price × Discount %) ÷ 100<br>
                 Final Price = Original Price − Discount Amount
             </div>
 
-            <h2 class="dark:text-white">Example Calculation</h2>
-            <p class="dark:text-slate-400">If an item is ₹2,000 with a 25% discount, you save ₹500 and pay ₹1,500.</p>
+            <h2 class="dark:text-white">Real-World Shopping Example</h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+                <p class="dark:text-slate-400 font-bold">Scenario: Buying a pair of shoes during a 25% OFF festival sale.</p>
+                <ul class="list-disc pl-5 space-y-2 mt-4 dark:text-slate-400">
+                    <li><strong>Original Price:</strong> ₹2,000</li>
+                    <li><strong>Discount Percentage:</strong> 25%</li>
+                </ul>
+                <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <p class="dark:text-slate-300 font-mono text-sm leading-relaxed">
+                        1. Calculate Savings: (2,000 × 25) ÷ 100 = <strong>₹500</strong><br>
+                        2. Calculate Final Price: 2,000 - 500 = <strong>₹1,500</strong><br>
+                        3. Your Total Savings: <strong>₹500</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="dark:text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="dark:text-white">What is a discount calculator?</h3>
+                    <p class="dark:text-slate-400">A discount calculator is a tool that helps users determine the price reduction on a product or service. It calculates the dollar or rupee amount saved and the final cost you need to pay at checkout.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How do you calculate discount percentage?</h3>
+                    <p class="dark:text-slate-400">To calculate the discount percentage manually, divide the savings amount by the original price and then multiply by 100. For example, if you saved $10 on a $50 item, the percentage is (10/50) * 100 = 20%.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">How to calculate final price after discount?</h3>
+                    <p class="dark:text-slate-400">Simply subtract the discount value from the original list price. If you have multiple discounts, apply them sequentially: calculate the first discount, find the new price, then apply the second discount to that new lower price.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Can I calculate discount for online shopping?</h3>
+                    <p class="dark:text-slate-400">Yes! This tool is perfect for verifying coupon codes, seasonal sales, and store-wide discounts offered by popular online retailers like Amazon, Flipkart, or eBay.</p>
+                </div>
+                <div>
+                    <h3 class="dark:text-white">Is this discount calculator free to use?</h3>
+                    <p class="dark:text-slate-400">QuickCalc Pro provides this tool entirely for free. There are no limits on how many calculations you can perform, and we do not store your data.</p>
+                </div>
+            </div>
 
             <h2 class="text-xl font-black text-slate-900 mt-12 mb-6 dark:text-white">Try Our Other Tools</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-blue-500 transition-all dark:bg-slate-900 dark:border-slate-800">
-                    <p class="text-xs font-black uppercase text-blue-600 mb-1">Tax Tool</p>
+                <a href="gst-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-orange-500 transition-all dark:bg-slate-900 dark:border-slate-800">
+                    <p class="text-xs font-black uppercase text-orange-600 mb-1">Tax Tool</p>
                     <p class="text-sm font-bold text-slate-900 dark:text-white">GST Calculator</p>
                 </a>
                 <a href="simple-interest-calculator.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 transition-all dark:bg-slate-900 dark:border-slate-800">
@@ -214,9 +251,9 @@
         </section>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-12 dark:bg-slate-900 dark:border-slate-800">
+    <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Reliable Financial Logic.</p>
+            <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-8 dark:text-slate-500">&copy; 2025 QuickCalc Pro. Reliable Calculation Logic.</p>
             <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
                 <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
                 <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact Us</a>
@@ -246,7 +283,7 @@
         }
         window.onclick = (e) => {
             const d = document.getElementById('nav-dropdown');
-            if (d && !e.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
+            if (d && !e.target.closest('#drop-btn') && !e.target.closest('#nav-dropdown')) {
                 d.classList.replace('dropdown-visible', 'dropdown-hidden');
                 document.getElementById('drop-chevron').style.transform = 'rotate(0deg)';
             }
