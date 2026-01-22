@@ -476,13 +476,13 @@
             const btn = document.getElementById('suggest-submit');
             const originalText = btn.innerText;
             
-            // Configuration: Replace these with your real Google Form/Field IDs
-            const FORM_ID = "1FAIpQLSfxxxx_your_form_id_here"; 
+            // Configuration
+            const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGQee28Dg3h4WYYnNT0Z6omemtFSlPrvuGvfqXDt-RB4GTuA/formResponse";
             const ENTRIES = {
-                calcName: "entry.123456789", // Field for Calculator Name
-                url: "entry.987654321",      // Field for Page URL
-                suggestion: "entry.456789123",// Field for User Suggestion
-                email: "entry.789123456"     // Field for Email (optional)
+                calcName: "entry.ENTRY_CALC",
+                url: "entry.ENTRY_URL",
+                suggestion: "entry.ENTRY_SUGGESTION",
+                email: "entry.ENTRY_EMAIL"
             };
 
             const calcName = document.querySelector('h1')?.innerText || "Profit Margin Calculator";
@@ -499,10 +499,8 @@
             formData.append(ENTRIES.suggestion, suggestion);
             formData.append(ENTRIES.email, email);
 
-            const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-
             try {
-                await fetch(formUrl, {
+                await fetch(FORM_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -514,7 +512,7 @@
                 document.getElementById('suggest-success').classList.remove('hidden');
             } catch (error) {
                 console.error("Submission failed", error);
-                alert("Submission failed. Please check your connection.");
+                alert("Something went wrong. Please check your internet connection.");
                 btn.disabled = false;
                 btn.innerText = originalText;
             }

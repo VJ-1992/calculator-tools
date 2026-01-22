@@ -154,7 +154,7 @@
                             </a>
                             <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 group transition-colors">
                                 <div class="p-1.5 bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                                 </div>
                                 <span class="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-orange-600 dark:group-hover:text-orange-400">GST Calculator</span>
                             </a>
@@ -493,13 +493,13 @@
             const btn = document.getElementById('suggest-submit');
             const originalText = btn.innerText;
             
-            // Configuration: Replace these with your real Google Form/Field IDs
-            const FORM_ID = "1FAIpQLSfxxxx_your_form_id_here"; 
+            // Configuration: Replace these entry.xxxx with your real entry IDs from Google Form pre-filled link
+            const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGQee28Dg3h4WYYnNT0Z6omemtFSlPrvuGvfqXDt-RB4GTuA/formResponse";
             const ENTRIES = {
-                calcName: "entry.123456789", // Field for Calculator Name
-                url: "entry.987654321",      // Field for Page URL
-                suggestion: "entry.456789123",// Field for User Suggestion
-                email: "entry.789123456"     // Field for Email (optional)
+                calcName: "entry.ENTRY_CALC", // Field for Calculator Name
+                url: "entry.ENTRY_URL",       // Field for Page URL
+                suggestion: "entry.ENTRY_SUGGESTION", // Field for User Suggestion
+                email: "entry.ENTRY_EMAIL"    // Field for Email (optional)
             };
 
             const calcName = document.querySelector('h1')?.innerText || "Discount Calculator";
@@ -516,24 +516,20 @@
             formData.append(ENTRIES.suggestion, suggestion);
             formData.append(ENTRIES.email, email);
 
-            const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-
             try {
-                // 'no-cors' allows submission without a valid response body
-                await fetch(formUrl, {
+                await fetch(FORM_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: formData.toString()
                 });
 
-                // Silent success handling
                 document.getElementById('suggestion-form').reset();
                 document.getElementById('suggestion-form').classList.add('hidden');
                 document.getElementById('suggest-success').classList.remove('hidden');
             } catch (error) {
                 console.error("Submission failed", error);
-                alert("Submission failed. Please check your connection.");
+                alert("Something went wrong. Please check your internet connection.");
                 btn.disabled = false;
                 btn.innerText = originalText;
             }
