@@ -48,9 +48,9 @@
 <script type="importmap">
 {
   "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
     "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
     "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
     "vite": "https://esm.sh/vite@^7.3.1"
   }
 }
@@ -99,37 +99,115 @@
         </div>
     </nav>
 
-    <main class="container mx-auto px-5 py-12 flex-grow text-center">
-        <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight dark:text-white">
-            Free Online Calculators for Daily Tasks
-        </h1>
-        <p class="text-slate-500 max-w-2xl mx-auto mb-16 dark:text-slate-400">Professional-grade mathematical tools for finance, business, and retail math.</p>
+    <main class="container mx-auto px-5 py-16 flex-grow">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight dark:text-white">
+                Free Online Calculators for Business, Retail, and Daily Tasks
+            </h1>
+            <p class="text-slate-500 text-lg max-w-3xl mx-auto leading-relaxed dark:text-slate-400">
+                Fast, accurate, and 100% free mathematical tools. No registration, no downloads—just instant results on any device, anywhere.
+            </p>
+        </section>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-20 text-left">
-            <a href="discount-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
-                <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Discount Calculator</h3>
-                <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Calculate final prices and stackable rebates instantly with our Sales Discount Calculator.</p>
-                <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-blue-400">Calculate Discounts &rarr;</span>
-            </a>
+        <!-- Introduction Section -->
+        <section class="max-w-4xl mx-auto mb-20">
+            <h2 class="text-3xl font-black text-slate-900 mb-6 dark:text-white">Welcome to QuickCalcPro</h2>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                QuickCalcPro is a dedicated platform designed to simplify your everyday mathematical challenges. Whether you're a student solving homework, a small business owner managing inventory, or a shopper hunting for the best deals, our calculators provide the precision you need with a modern, user-friendly interface.
+            </p>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                We believe in accessibility. That's why every tool on our site is fully optimized for mobile and desktop use, ensuring that you can <a href="gst-calculator.html" class="text-blue-600 font-bold hover:underline">calculate GST online</a> or check investment returns while on the go.
+            </p>
+        </section>
 
-            <a href="gst-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
-                <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">GST Calculator</h3>
-                <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Extract tax portions or add GST to items with the Professional GST Calculator India tool.</p>
-                <span class="text-orange-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-orange-400">Calculate GST Online &rarr;</span>
-            </a>
+        <!-- Available Calculators Section -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-black text-slate-900 mb-8 dark:text-white text-center">Explore Our Professional Calculation Tools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto text-left">
+                <a href="discount-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
+                    <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Discount Calculator</h3>
+                    <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Calculate final prices, savings, and stackable rebates instantly for retail shopping.</p>
+                    <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-blue-400">Calculate Discounts &rarr;</span>
+                </a>
 
-            <a href="simple-interest-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
-                <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Interest Calculator</h3>
-                <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Compute Simple and Compound interest earnings using our comprehensive Interest Calculator.</p>
-                <span class="text-emerald-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-emerald-400">Maturity Calculator &rarr;</span>
-            </a>
+                <a href="gst-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
+                    <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">GST Calculator</h3>
+                    <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Accurately add or remove tax with detailed splits for CGST, SGST, and IGST.</p>
+                    <span class="text-orange-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-orange-400">Calculate GST Online &rarr;</span>
+                </a>
 
-            <a href="profit-margin-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
-                <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Profit Margin</h3>
-                <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Determine per-unit profitability and bulk markup using the Business Profit Margin Calculator.</p>
-                <span class="text-indigo-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-indigo-400">Analyze Margins &rarr;</span>
-            </a>
-        </div>
+                <a href="simple-interest-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
+                    <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Interest Calculator</h3>
+                    <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Compare Simple and Compound interest returns to forecast your investment growth.</p>
+                    <span class="text-emerald-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-emerald-400">Maturity Calculator &rarr;</span>
+                </a>
+
+                <a href="profit-margin-calculator.html" class="nav-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col group dark:bg-slate-900 dark:border-slate-800">
+                    <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Profit Margin</h3>
+                    <p class="text-slate-500 mb-6 flex-grow text-sm dark:text-slate-400">Determine unit profitability, markups, and bulk sales margins for your business.</p>
+                    <span class="text-indigo-600 font-bold text-[10px] uppercase tracking-widest flex items-center dark:text-indigo-400">Analyze Margins &rarr;</span>
+                </a>
+            </div>
+            <p class="text-center mt-10 text-slate-400 italic text-sm">More specialized calculators coming soon...</p>
+        </section>
+
+        <!-- Why Use QuickCalcPro -->
+        <section class="max-w-4xl mx-auto mb-20">
+            <h2 class="text-3xl font-black text-slate-900 mb-8 dark:text-white">Why Choose QuickCalcPro?</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <li class="flex gap-4">
+                    <div class="text-blue-600 font-bold">01.</div>
+                    <p class="text-slate-600 dark:text-slate-400"><strong>Completely Free:</strong> Access all features without any hidden costs or subscription fees.</p>
+                </li>
+                <li class="flex gap-4">
+                    <div class="text-blue-600 font-bold">02.</div>
+                    <p class="text-slate-600 dark:text-slate-400"><strong>No Signups:</strong> Start calculating immediately without sharing any personal data or creating accounts.</p>
+                </li>
+                <li class="flex gap-4">
+                    <div class="text-blue-600 font-bold">03.</div>
+                    <p class="text-slate-600 dark:text-slate-400"><strong>Verified Formulas:</strong> All logic is based on standard mathematical and financial regulations for 100% accuracy.</p>
+                </li>
+                <li class="flex gap-4">
+                    <div class="text-blue-600 font-bold">04.</div>
+                    <p class="text-slate-600 dark:text-slate-400"><strong>Responsive Design:</strong> Our tools look and work perfectly on smartphones, tablets, and desktops.</p>
+                </li>
+                <li class="flex gap-4">
+                    <div class="text-blue-600 font-bold">05.</div>
+                    <p class="text-slate-600 dark:text-slate-400"><strong>Business Ready:</strong> From <a href="profit-margin-calculator.html" class="text-blue-600 hover:underline">markup calculations</a> to tax splits, we support retail and wholesale needs.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Who Can Use This Website -->
+        <section class="max-w-4xl mx-auto mb-20 bg-white dark:bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <h2 class="text-3xl font-black text-slate-900 mb-8 dark:text-white">Tools for Every Scenario</h2>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">For Students & Academics</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">Simplify your math homework and understand complex concepts like compound interest or percentage decreases with clear, step-by-step logic.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">For Small Business Owners & Shopkeepers</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">Manage your pricing strategy effectively. Easily <a href="profit-margin-calculator.html" class="text-blue-600 hover:underline">check your profit margin instantly</a> and account for taxes without needing a spreadsheet.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">For Professionals & Freelancers</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">Quickly estimate project costs, calculate service discounts for clients, and handle professional tax (GST) additions on your invoices.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Quality Section -->
+        <section class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-black text-slate-900 mb-6 dark:text-white">Accurate Results You Can Trust</h2>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                We take precision seriously. Every calculator on QuickCalcPro is built using industry-standard mathematical formulas. We provide transparent logic, often explaining how each value is derived, so you can verify the results manually if needed. 
+            </p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm italic">
+                Our mission is to provide reliable, informational tools that save you time and prevent calculation errors in your daily life.
+            </p>
+        </section>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-16 dark:bg-slate-900 dark:border-slate-800">
