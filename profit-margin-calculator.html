@@ -18,7 +18,18 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+        /* Global Reset & Safety */
+        *, ::before, ::after { box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            transition: background-color 0.3s ease, color 0.3s ease; 
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
         .calculator-grid {
@@ -29,6 +40,9 @@
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 100%; /* Prevents forcing parent overflow */
+            margin: 0 auto;
         }
 
         @media (max-width: 1024px) {
@@ -41,6 +55,7 @@
         .input-pane {
             padding: 40px;
             background: #ffffff;
+            width: 100%;
         }
 
         .result-pane {
@@ -50,6 +65,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            width: 100%;
         }
 
         .input-group {
@@ -72,6 +88,7 @@
             padding: 4px;
             border-radius: 10px;
             width: fit-content;
+            flex-wrap: wrap; /* Safety for small screens */
         }
 
         .toggle-pill button {
@@ -111,6 +128,7 @@
             padding: 14px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             font-size: 0.95rem;
+            gap: 12px;
         }
 
         .dropdown-hidden { opacity: 0; transform: scale(0.95); pointer-events: none; }
@@ -166,7 +184,7 @@
     </nav>
 
     <main class="container mx-auto px-5 py-12 flex-grow">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-6xl mx-auto w-full">
             <div class="mb-8 text-center">
                 <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Profit Margin Calculator</h1>
                 <p class="text-slate-500 dark:text-slate-400">Determine business profitability with per-unit and bulk scenarios.</p>
@@ -175,7 +193,7 @@
             <div class="calculator-grid">
                 <!-- Left Panel: Inputs -->
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
-                    <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center justify-between mb-8 gap-4 flex-wrap">
                         <div class="toggle-pill">
                             <button onclick="setCalcMode('simple')" id="mode-simple" class="active">Simple</button>
                             <button onclick="setCalcMode('quantity')" id="mode-quantity">Quantity</button>
