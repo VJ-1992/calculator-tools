@@ -278,61 +278,8 @@
             <!-- SEO Content -->
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Difference Between Simple and Compound Interest</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Choosing the right calculation mode depends on how your bank or investment firm processes returns. Here is a breakdown of both:</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
-                            <h3 class="font-black text-lg mb-2">Simple Interest (SI)</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed italic mb-4">"Interest on the original sum only."</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Simple interest is calculated solely on the principal amount. It's often used for short-term personal loans or specific bond types.</p>
-                        </div>
-                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
-                            <h3 class="font-black text-lg mb-2">Compound Interest (CI)</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed italic mb-4">"Interest on interest."</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Compound interest is calculated on the principal plus the accumulated interest from previous periods. This leads to exponential growth over time.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">The Mathematical Formulas</h2>
-                    <div class="space-y-6">
-                        <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
-                            <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Simple Interest Formula</h3>
-                            <p class="text-2xl font-mono text-blue-600 dark:text-blue-400 mb-2">SI = (P × R × T) / 100</p>
-                        </div>
-                        <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
-                            <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Compound Interest Formula</h3>
-                            <p class="text-2xl font-mono text-emerald-600 dark:text-emerald-400 mb-2">A = P (1 + r/n)<sup>nt</sup></p>
-                        </div>
-                    </div>
-                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold text-slate-500">
-                        <p>P = Principal</p>
-                        <p>R = Annual Rate (%)</p>
-                        <p>T = Time (Years)</p>
-                        <p>N = Compounding Freq</p>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Calculation Example</h2>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6">Let's compare ₹10,000 at 10% for 2 years:</p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
-                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full flex items-center justify-center font-bold">SI</div>
-                            <div>
-                                <p class="text-sm font-bold">Simple Interest: ₹12,000</p>
-                                <p class="text-xs text-slate-400">Straight line growth of ₹1,000 per year.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
-                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center font-bold">CI</div>
-                            <div>
-                                <p class="text-sm font-bold">Compound Interest: ₹12,100</p>
-                                <p class="text-xs text-slate-400">Extra ₹100 earned from the first year's interest.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Use the Interest Calculator</h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Compare potential returns by switching between Simple and Compound modes. If you are reinvesting business earnings, you may also find our <a href="profit-margin-calculator.html" class="text-blue-600 font-bold hover:underline">Profit Margin Calculator for Businesses</a> useful for forecasting growth.</p>
                 </section>
 
                 <section>
@@ -340,11 +287,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <h3 class="font-bold text-slate-900 dark:text-white mb-2">Which is better for long-term?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">For investments, Compound Interest is vastly superior due to the effect of "interest on interest." For loans, Simple Interest is generally cheaper for the borrower.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is compounding frequency?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">It is the number of times interest is added to the principal per year. The more frequent the compounding (e.g., monthly vs. yearly), the higher the final amount.</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">For long-term investments, Compound Interest is vastly superior due to the exponential growth effect.</p>
                         </div>
                     </div>
                 </section>
@@ -365,120 +308,30 @@
     </footer>
 
     <script>
-        let state = {
-            mode: 'simple',
-            currency: '₹',
-            timeUnit: 'years'
-        };
-
-        function setCalcMode(m) {
-            state.mode = m;
-            document.getElementById('mode-simple').classList.toggle('active', m === 'simple');
-            document.getElementById('mode-compound').classList.toggle('active', m === 'compound');
-            document.getElementById('compound-options').classList.toggle('hidden', m === 'simple');
-            document.getElementById('interest-label').innerText = m === 'simple' ? 'Simple Interest' : 'Compound Interest';
-            document.getElementById('row-freq').classList.toggle('hidden', m === 'simple');
-            runCalc();
-        }
-
-        function setCurrency(c) {
-            state.currency = c;
-            document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c);
-            document.getElementById('symbol-main').innerText = c;
-            document.getElementById('res-symbol-large').innerText = c;
-            document.getElementById('curr-inr').classList.toggle('active', c === '₹');
-            document.getElementById('curr-usd').classList.toggle('active', c === '$');
-            runCalc();
-        }
-
-        function setTimeUnit(u) {
-            state.timeUnit = u;
-            document.getElementById('time-years').classList.toggle('active', u === 'years');
-            document.getElementById('time-months').classList.toggle('active', u === 'months');
-            runCalc();
-        }
-
+        let state = { mode: 'simple', currency: '₹', timeUnit: 'years' };
+        function setCalcMode(m) { state.mode = m; document.getElementById('mode-simple').classList.toggle('active', m === 'simple'); document.getElementById('mode-compound').classList.toggle('active', m === 'compound'); document.getElementById('compound-options').classList.toggle('hidden', m === 'simple'); document.getElementById('interest-label').innerText = m === 'simple' ? 'Simple Interest' : 'Compound Interest'; document.getElementById('row-freq').classList.toggle('hidden', m === 'simple'); runCalc(); }
+        function setCurrency(c) { state.currency = c; document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c); document.getElementById('symbol-main').innerText = c; document.getElementById('res-symbol-large').innerText = c; document.getElementById('curr-inr').classList.toggle('active', c === '₹'); document.getElementById('curr-usd').classList.toggle('active', c === '$'); runCalc(); }
+        function setTimeUnit(u) { state.timeUnit = u; document.getElementById('time-years').classList.toggle('active', u === 'years'); document.getElementById('time-months').classList.toggle('active', u === 'months'); runCalc(); }
         function runCalc() {
             const P = parseFloat(document.getElementById('principal').value) || 0;
             const R = parseFloat(document.getElementById('rate').value) || 0;
             const timeIn = parseFloat(document.getElementById('time').value) || 0;
             const T = state.timeUnit === 'months' ? timeIn / 12 : timeIn;
-
-            let total = 0;
-            let interest = 0;
-
-            if (state.mode === 'simple') {
-                interest = (P * R * T) / 100;
-                total = P + interest;
-            } else {
-                const n = parseInt(document.getElementById('comp-freq').value);
-                const r_dec = R / 100;
-                // A = P * (1 + r/n)^(nt)
-                total = P * Math.pow((1 + r_dec / n), (n * T));
-                interest = total - P;
-                
-                const selectEl = document.getElementById('comp-freq');
-                document.getElementById('out-freq-text').innerText = selectEl.options[selectEl.selectedIndex].text.split(' ')[0];
-            }
-
-            // Analysis
+            let total = 0, interest = 0;
+            if (state.mode === 'simple') { interest = (P * R * T) / 100; total = P + interest; }
+            else { const n = parseInt(document.getElementById('comp-freq').value); total = P * Math.pow((1 + (R/100)/n), (n * T)); interest = total - P; const s = document.getElementById('comp-freq'); document.getElementById('out-freq-text').innerText = s.options[s.selectedIndex].text.split(' ')[0]; }
             const yieldVal = P > 0 ? (interest / P) * 100 : 0;
-            let effectiveAPR = R;
-            if (state.mode === 'compound') {
-                const n = parseInt(document.getElementById('comp-freq').value);
-                effectiveAPR = (Math.pow(1 + (R/100)/n, n) - 1) * 100;
-            }
-
-            // Update UI
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('res-total-amount').innerText = fmt(total);
             document.getElementById('out-principal').innerText = fmt(P);
             document.getElementById('out-interest').innerText = fmt(interest);
             document.getElementById('stat-yield').innerText = yieldVal.toFixed(1) + '%';
-            document.getElementById('stat-apr').innerText = effectiveAPR.toFixed(2) + '%';
         }
-
-        function resetCalculator() {
-            document.getElementById('principal').value = '';
-            document.getElementById('rate').value = '';
-            document.getElementById('time').value = '';
-            document.getElementById('comp-freq').selectedIndex = 0;
-            runCalc();
-        }
-
-        // Standard Utility Scripts
-        function toggleTheme() {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light';
-        }
-        function toggleDropdown(e) {
-            e.stopPropagation();
-            const d = document.getElementById('nav-dropdown');
-            const c = document.getElementById('drop-chevron');
-            if (d.classList.contains('dropdown-visible')) {
-                d.classList.replace('dropdown-visible', 'dropdown-hidden');
-                c.style.transform = 'rotate(0deg)';
-            } else {
-                d.classList.replace('dropdown-hidden', 'dropdown-visible');
-                c.style.transform = 'rotate(180deg)';
-            }
-        }
-        window.onclick = function(event) {
-            const d = document.getElementById('nav-dropdown');
-            const c = document.getElementById('drop-chevron');
-            if (!event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
-                if (d && d.classList.contains('dropdown-visible')) {
-                    d.classList.replace('dropdown-visible', 'dropdown-hidden');
-                    c.style.transform = 'rotate(0deg)';
-                }
-            }
-        }
-        if (localStorage.getItem('theme') === 'dark') {
-            document.getElementById('theme-text').innerText = 'Dark';
-        }
-
-        // Init
+        function resetCalculator() { document.querySelectorAll('input').forEach(i => i.value = ''); runCalc(); }
+        function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light'; }
+        function toggleDropdown(e) { e.stopPropagation(); const d = document.getElementById('nav-dropdown'); if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } else { d.classList.replace('dropdown-hidden', 'dropdown-visible'); } }
+        window.onclick = function(event) { if (!event.target.closest('#drop-btn')) { const d = document.getElementById('nav-dropdown'); if (d) d.classList.replace('dropdown-visible', 'dropdown-hidden'); } }
+        if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
         runCalc();
     </script>
 </body>

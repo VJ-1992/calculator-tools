@@ -303,26 +303,23 @@
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section>
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Use the Advanced Discount Calculator</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Finding the final price of an item is simple. Follow these steps for an accurate calculation:</p>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Finding the final price of an item after multiple markdowns is simple. This tool is perfect for stackable store coupons and seasonal sales.</p>
                     <ul class="list-decimal pl-5 space-y-2 text-slate-600 dark:text-slate-400">
-                        <li><strong>Original Price:</strong> Enter the base price of the item before any markdowns.</li>
-                        <li><strong>Primary Discount:</strong> Select either a percentage (%) or a flat currency amount to apply as the first reduction.</li>
-                        <li><strong>Sequential Discounts:</strong> Perfect for stackable coupons! Add as many extra discounts as needed. Each applies to the remaining balance from the previous step.</li>
-                        <li><strong>Tax / GST:</strong> Enable this if you need to calculate the final amount including sales tax. Tax is applied to the final discounted price.</li>
+                        <li><strong>Original Price:</strong> Enter the base price before reductions.</li>
+                        <li><strong>Primary Discount:</strong> Choose percentage or flat amount.</li>
+                        <li><strong>Stack Extra Savings:</strong> Click "Add Discount" for sequential rebates.</li>
+                        <li><strong>Add Tax:</strong> Use our integrated <a href="gst-calculator.html" class="text-blue-600 font-bold hover:underline">GST Calculator India</a> feature to add final sales tax.</li>
                     </ul>
                 </section>
 
                 <section>
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Understanding the Formula</h2>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6">Our calculator processes math line-by-line to mirror real-world shopping experiences where discounts are applied in stages.</p>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6">Our calculator processes math line-by-line to mirror real-world checkout systems.</p>
                     <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 font-mono text-sm space-y-2">
                         <p class="text-slate-400">// Stage 1: Primary Reduction</p>
                         <p class="text-blue-500">Balance1 = Original - Primary Discount</p>
                         <p class="text-slate-400 mt-4">// Stage 2: Sequential (Stackable)</p>
                         <p class="text-blue-500">Balance2 = Balance1 - Sequential Discount 1</p>
-                        <p class="text-blue-500">Balance3 = Balance2 - Sequential Discount 2...</p>
-                        <p class="text-slate-400 mt-4">// Stage 3: Final Tax</p>
-                        <p class="text-blue-500">Final Price = Final Balance + (Final Balance × Tax Rate%)</p>
                     </div>
                 </section>
 
@@ -330,20 +327,12 @@
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is a sequential discount?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">It's when a second discount is applied to the price already reduced by the first discount. For example, "20% off plus an extra 10% for members."</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Can I calculate business profits?</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Yes! If you are a retailer offering discounts, you should also use our <a href="profit-margin-calculator.html" class="text-blue-600 font-bold hover:underline">Business Profit Margin Calculator</a> to ensure your sales remain profitable.</p>
                         </div>
                         <div>
                             <h3 class="font-bold text-slate-900 dark:text-white mb-2">Is tax applied before or after discounts?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">In most jurisdictions, sales tax (GST/VAT) is calculated based on the final transaction price after all rebates and discounts have been subtracted.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Can I calculate stackable coupons?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Yes! Simply click "Add Discount" for every extra coupon or markdown you want to apply to your calculation.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Is this tool free to use?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">QuickCalc Pro is 100% free. We use standard mathematical formulas to ensure your results are consistent with store checkout systems.</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">In most jurisdictions, sales tax (GST/VAT) is calculated on the final transaction price after all rebates have been applied.</p>
                         </div>
                     </div>
                 </section>
@@ -377,12 +366,8 @@
             document.getElementById('symbol-main').innerText = c;
             document.getElementById('res-symbol-large').innerText = c;
             document.getElementById('p-type-symbol').innerText = state.primaryType === 'percent' ? '%' : c;
-            
-            // Update buttons
             document.getElementById('curr-inr').classList.toggle('active', c === '₹');
             document.getElementById('curr-usd').classList.toggle('active', c === '$');
-            
-            // Update sequential symbols
             renderSequential();
             runCalc();
         }
@@ -446,10 +431,7 @@
         function runCalc() {
             const original = parseFloat(document.getElementById('base-price').value) || 0;
             const pVal = parseFloat(document.getElementById('p-discount-val').value) || 0;
-            
             let runningBalance = original;
-            
-            // 1. Primary Discount
             let primaryAmt = 0;
             if (state.primaryType === 'percent') {
                 primaryAmt = (runningBalance * pVal) / 100;
@@ -457,11 +439,8 @@
                 primaryAmt = pVal;
             }
             runningBalance -= primaryAmt;
-
-            // 2. Sequential Discounts
             let seqContainer = document.getElementById('seq-breakdown-container');
             seqContainer.innerHTML = '';
-            
             state.sequentialDiscounts.forEach((disc, index) => {
                 let amt = 0;
                 if (disc.type === 'percent') {
@@ -470,7 +449,6 @@
                     amt = disc.value;
                 }
                 runningBalance -= amt;
-
                 seqContainer.innerHTML += `
                     <div class="receipt-row">
                         <span class="text-slate-400">Extra Discount ${index + 1}</span>
@@ -478,8 +456,6 @@
                     </div>
                 `;
             });
-
-            // 3. Tax
             let taxAmt = 0;
             if (state.taxEnabled) {
                 const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
@@ -488,8 +464,6 @@
             const finalTotal = runningBalance + taxAmt;
             const totalSavings = original - (finalTotal - taxAmt);
             const savingsPercent = original > 0 ? (totalSavings / original) * 100 : 0;
-
-            // Update UI
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('res-final-total').innerText = fmt(Math.max(0, finalTotal));
             document.getElementById('out-original').innerText = fmt(original);
@@ -512,7 +486,6 @@
             runCalc();
         }
 
-        // Theme and Dropdown logic
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');

@@ -301,56 +301,18 @@
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section>
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Professional Profit Calculation Guide</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Whether you're running a local shop or a large wholesale operation, understanding your margins is the first step to a sustainable business. Our tool supports three specific calculation methods:</p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
-                            <h3 class="font-black text-lg mb-2">Simple Sale</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Calculate the direct profit, margin, and markup on an individual item based on its cost and selling price.</p>
-                        </div>
-                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
-                            <h3 class="font-black text-lg mb-2">Quantity Sale</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Analyze bulk orders by entering the unit prices and total quantity sold to find your total net profit.</p>
-                        </div>
-                        <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
-                            <h3 class="font-black text-lg mb-2">Packet Breakdown</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Ideal for retailers! Break down the cost of a full packet to find the exact per-item cost and profit potential.</p>
-                        </div>
-                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Whether you're running a local shop or a large wholesale operation, understanding your margins is vital. For example, if you are offering seasonal discounts, use our <a href="discount-calculator.html" class="text-indigo-600 font-bold hover:underline">Sales Discount Tool</a> to adjust your prices while keeping margins healthy.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Tax Consideration</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6">Profit margins should be calculated on the base price before taxes. To accurately separate your tax obligations from your revenue, we recommend using the <a href="gst-calculator.html" class="text-indigo-600 font-bold hover:underline">Reverse GST Calculator</a>.</p>
                 </section>
 
                 <section>
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Formulas Used</h2>
-                    <div class="space-y-6">
-                        <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 font-mono text-sm">
-                            <p class="text-indigo-600 dark:text-indigo-400 font-bold text-lg mb-4">Profit Margin (%) = (Profit / Selling Price) × 100</p>
-                            <p class="text-blue-600 dark:text-blue-400 font-bold text-lg">Markup (%) = (Profit / Cost Price) × 100</p>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-slate-600 dark:text-slate-400 leading-relaxed">
-                        <p><strong>Note:</strong> A 20% margin means 20% of your selling price is profit. A 20% markup means you added 20% to your cost to reach the selling price. These are distinct metrics frequently confused in business.</p>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Why is Margin different from Markup?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Margin is based on the final sales price (revenue), while markup is based on the initial cost price. Businesses use margin to understand profitability relative to sales.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">How do I handle business losses?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">If your selling price is lower than your cost, the calculator will automatically highlight the result in red and display a negative margin, signaling a financial loss.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Is the calculator mobile-friendly?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Yes, QuickCalc Pro is optimized for all devices, allowing shopkeepers to calculate margins on-the-go directly from their smartphones.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Is there a cost to use this?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">No, this and all our other financial calculators are provided 100% free of charge to the public.</p>
-                        </div>
+                    <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 font-mono text-sm">
+                        <p class="text-indigo-600 dark:text-indigo-400 font-bold text-lg mb-4">Profit Margin (%) = (Profit / Selling Price) × 100</p>
                     </div>
                 </section>
             </article>
@@ -380,16 +342,12 @@
             document.getElementById('mode-simple').classList.toggle('active', m === 'simple');
             document.getElementById('mode-quantity').classList.toggle('active', m === 'quantity');
             document.getElementById('mode-packet').classList.toggle('active', m === 'packet');
-            
             document.getElementById('simple-inputs').classList.toggle('hidden', m !== 'simple');
             document.getElementById('quantity-inputs').classList.toggle('hidden', m !== 'quantity');
             document.getElementById('packet-inputs').classList.toggle('hidden', m !== 'packet');
-
             document.getElementById('row-total-profit').classList.toggle('hidden', m === 'simple');
             document.getElementById('row-cost-per-unit').classList.toggle('hidden', m !== 'packet');
-            
             document.getElementById('main-result-label').innerText = m === 'packet' ? 'Profit per Item' : 'Profit per Unit';
-            
             runCalc();
         }
 
@@ -397,7 +355,6 @@
             state.currency = c;
             document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c);
             document.getElementById('res-symbol-large').innerText = c;
-            
             document.getElementById('curr-inr').classList.toggle('active', c === '₹');
             document.getElementById('curr-usd').classList.toggle('active', c === '$');
             runCalc();
@@ -405,7 +362,6 @@
 
         function runCalc() {
             let CP = 0, SP = 0, Qty = 1;
-
             if (state.mode === 'simple') {
                 CP = parseFloat(document.getElementById('cost-price').value) || 0;
                 SP = parseFloat(document.getElementById('selling-price').value) || 0;
@@ -421,18 +377,14 @@
                 Qty = items;
                 document.getElementById('out-cpu').innerText = CP.toLocaleString(undefined, { minimumFractionDigits: 2 });
             }
-
             const profitPerUnit = SP - CP;
             const totalProfit = profitPerUnit * Qty;
             const margin = SP > 0 ? (profitPerUnit / SP) * 100 : 0;
             const markup = CP > 0 ? (profitPerUnit / CP) * 100 : 0;
             const totalRevenue = SP * Qty;
             const totalCost = CP * Qty;
-
-            // Handle Loss Coloring
             const resultEl = document.getElementById('res-profit-main');
             const marginEl = document.getElementById('out-margin');
-            
             if (profitPerUnit < 0) {
                 resultEl.classList.add('text-red-500');
                 marginEl.classList.remove('text-emerald-400');
@@ -442,8 +394,6 @@
                 marginEl.classList.remove('text-red-400');
                 marginEl.classList.add('text-emerald-400');
             }
-
-            // Update UI
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('res-profit-main').innerText = fmt(profitPerUnit);
             document.getElementById('out-margin').innerText = margin.toFixed(2) + '%';
@@ -458,7 +408,6 @@
             runCalc();
         }
 
-        // Standard Utility Scripts
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -489,8 +438,6 @@
         if (localStorage.getItem('theme') === 'dark') {
             document.getElementById('theme-text').innerText = 'Dark';
         }
-
-        // Initialize calc
         runCalc();
     </script>
 </body>
