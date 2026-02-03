@@ -10,6 +10,7 @@ export default defineConfig({
         gst: 'gst-calculator.html',
         interest: 'simple-interest-calculator.html',
         profit: 'profit-margin-calculator.html',
+        fuel_comparison: 'fuel-comparison-calculator.html',
         about: 'about.html',
         contact: 'contact.html',
         privacy: 'privacy-policy.html',
