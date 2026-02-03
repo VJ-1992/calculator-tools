@@ -86,6 +86,7 @@
             }
         }
 
+        /* Mobile Responsive Fixes */
         @media (max-width: 768px) {
             .calculator-grid {
                 border-radius: 16px;
@@ -93,27 +94,51 @@
                 overflow: visible;
                 display: flex;
                 flex-direction: column;
+                max-width: 100%;
             }
             .input-pane, .result-pane {
-                padding: 20px 16px;
+                padding: 24px 16px;
                 width: 100%;
                 box-sizing: border-box;
                 overflow-x: hidden;
             }
             .field-input {
-                font-size: 16px !important; /* Prevents iOS automatic zoom on focus */
-                width: 100%;
-                box-sizing: border-box;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                padding-left: 14px !important;
+                padding-right: 14px !important;
+                font-size: clamp(14px, 4vw, 16px) !important;
+                line-height: 1.4 !important;
+                min-width: 0 !important;
+                overflow: visible !important;
+                font-variant-numeric: tabular-nums;
+                letter-spacing: 0.3px;
+                height: 48px;
+            }
+            /* Hide Spinners for cleaner mobile look */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            input[type=number] {
+                -moz-appearance: textfield;
             }
             .comparison-card {
                 padding: 16px;
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+                box-sizing: border-box;
             }
             .comparison-card p.text-xl {
                 font-size: 1.25rem;
                 word-break: break-all;
+                line-height: 1.2;
             }
             .comparison-card .text-right {
-                max-width: 50%;
+                max-width: 55%;
+                flex-shrink: 0;
             }
         }
 
@@ -411,7 +436,7 @@
                     </div>
                 </section>
 
-                <!-- New How to Use Section -->
+                <!-- How to Use Section -->
                 <section class="content-section">
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Use the Fuel Cost Comparison Calculator</h2>
                     <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Follow these step-by-step instructions to accurately compare the long-term costs of your next vehicle:</p>
@@ -453,7 +478,7 @@
 
                 <!-- Internal Link Section for SEO Silo -->
                 <section class="content-section">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Try Our Other Free Calculators</h2>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Try Our Other Calculators</h2>
                     <p class="text-slate-600 dark:text-slate-400 mb-6">Explore more professional tools designed to simplify your financial and retail math:</p>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <li>
