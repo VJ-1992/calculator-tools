@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Cost Comparison Calculator – Petrol vs Diesel vs CNG (India)</title>
-    <meta name="description" content="Compare total ownership costs of Petrol, Diesel, and CNG vehicles in India. Find the most economical fuel option based on mileage, fuel price, and monthly running.">
+    <title>Fuel Cost Comparison Calculator – Petrol vs Diesel vs CNG vs EV (India)</title>
+    <meta name="description" content="Compare total ownership costs of Petrol, Diesel, CNG, and Electric Vehicles in India. Find the most economical fuel option based on mileage, fuel price, and monthly running.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
@@ -141,14 +141,38 @@
         <div class="max-w-6xl mx-auto">
             <div class="mb-8 text-center">
                 <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Fuel Cost Comparison</h1>
-                <p class="text-slate-500 dark:text-slate-400">Decide between Petrol, Diesel, or CNG for your next car.</p>
+                <p class="text-slate-500 dark:text-slate-400">Decide between Petrol, Diesel, CNG, or Electric for your next car.</p>
             </div>
 
             <div class="calculator-grid">
                 <!-- Left Panel -->
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
                     <div class="mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
-                        <h2 class="text-xs font-black uppercase tracking-[0.2em] text-blue-600 mb-6">1. Usage & Timeline</h2>
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xs font-black uppercase tracking-[0.2em] text-blue-600">1. Select Vehicles to Compare</h2>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="toggle-p" onchange="toggleVehicleUI('p')" checked class="accent-orange-500">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">Petrol</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="toggle-d" onchange="toggleVehicleUI('d')" class="accent-slate-500">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">Diesel</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="toggle-c" onchange="toggleVehicleUI('c')" checked class="accent-emerald-500">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">CNG</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="toggle-e" onchange="toggleVehicleUI('e')" class="accent-blue-500">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">Electric (EV)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+                        <h2 class="text-xs font-black uppercase tracking-[0.2em] text-blue-600 mb-6">2. Usage & Timeline</h2>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="input-group">
                                 <label class="input-label">Monthly Running (km)</label>
@@ -169,32 +193,42 @@
 
                     <div class="space-y-8">
                         <!-- Petrol Section -->
-                        <div class="p-4 bg-orange-50/50 dark:bg-orange-900/10 rounded-2xl border border-orange-100 dark:border-orange-800/30">
+                        <div id="section-p" class="p-4 bg-orange-50/50 dark:bg-orange-900/10 rounded-2xl border border-orange-100 dark:border-orange-800/30">
                             <h3 class="font-bold text-orange-600 text-xs uppercase tracking-widest mb-4">Petrol Option</h3>
                             <div class="grid grid-cols-3 gap-3">
-                                <div><label class="input-label">Price (₹)</label><input type="number" id="p-price" oninput="runCalc()" placeholder="8,00,000" class="field-input"></div>
-                                <div><label class="input-label">Mileage</label><input type="number" id="p-kmpl" oninput="runCalc()" value="17" class="field-input"></div>
+                                <div><label class="input-label">Price (₹)</label><input type="number" id="p-price" oninput="runCalc()" value="800000" class="field-input"></div>
+                                <div><label class="input-label">Mileage (kmpl)</label><input type="number" id="p-kmpl" oninput="runCalc()" value="17" class="field-input"></div>
                                 <div><label class="input-label">Fuel ₹/L</label><input type="number" id="p-fuel-p" oninput="runCalc()" value="105" class="field-input"></div>
                             </div>
                         </div>
 
                         <!-- Diesel Section -->
-                        <div class="p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200 dark:border-slate-700/30">
+                        <div id="section-d" class="hidden p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200 dark:border-slate-700/30">
                             <h3 class="font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Diesel Option</h3>
                             <div class="grid grid-cols-3 gap-3">
                                 <div><label class="input-label">Price (₹)</label><input type="number" id="d-price" oninput="runCalc()" placeholder="10,00,000" class="field-input"></div>
-                                <div><label class="input-label">Mileage</label><input type="number" id="d-kmpl" oninput="runCalc()" value="22" class="field-input"></div>
+                                <div><label class="input-label">Mileage (kmpl)</label><input type="number" id="d-kmpl" oninput="runCalc()" value="22" class="field-input"></div>
                                 <div><label class="input-label">Fuel ₹/L</label><input type="number" id="d-fuel-p" oninput="runCalc()" value="92" class="field-input"></div>
                             </div>
                         </div>
 
                         <!-- CNG Section -->
-                        <div class="p-4 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-800/30">
+                        <div id="section-c" class="p-4 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-800/30">
                             <h3 class="font-bold text-emerald-600 text-xs uppercase tracking-widest mb-4">CNG Option</h3>
                             <div class="grid grid-cols-3 gap-3">
-                                <div><label class="input-label">Price (₹)</label><input type="number" id="c-price" oninput="runCalc()" placeholder="9,00,000" class="field-input"></div>
-                                <div><label class="input-label">Mileage</label><input type="number" id="c-kmpl" oninput="runCalc()" value="28" class="field-input"></div>
+                                <div><label class="input-label">Price (₹)</label><input type="number" id="c-price" oninput="runCalc()" value="900000" class="field-input"></div>
+                                <div><label class="input-label">Mileage (km/kg)</label><input type="number" id="c-kmpl" oninput="runCalc()" value="28" class="field-input"></div>
                                 <div><label class="input-label">Fuel ₹/kg</label><input type="number" id="c-fuel-p" oninput="runCalc()" value="85" class="field-input"></div>
+                            </div>
+                        </div>
+
+                        <!-- EV Section -->
+                        <div id="section-e" class="hidden p-4 bg-blue-50/50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-800/30">
+                            <h3 class="font-bold text-blue-600 text-xs uppercase tracking-widest mb-4">Electric (EV) Option</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div><label class="input-label">Price (₹)</label><input type="number" id="e-price" oninput="runCalc()" value="1200000" class="field-input"></div>
+                                <div><label class="input-label">km / kWh</label><input type="number" id="e-kmkwh" oninput="runCalc()" value="7" class="field-input"></div>
+                                <div><label class="input-label">₹ / kWh</label><input type="number" id="e-fuel-p" oninput="runCalc()" value="8" class="field-input"></div>
                             </div>
                         </div>
                     </div>
@@ -208,15 +242,27 @@
                             <span class="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Include Advanced Costs (Maintenance & Resale)</span>
                         </label>
                         
-                        <div id="advanced-section" class="hidden space-y-4 animate-in fade-in slide-in-from-top-2">
-                            <div class="grid grid-cols-3 gap-4">
+                        <div id="advanced-section" class="hidden space-y-6 animate-in fade-in slide-in-from-top-2">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                 <div><label class="input-label">Petrol Maint./yr</label><input type="number" id="p-maint" oninput="runCalc()" value="8000" class="field-input"></div>
                                 <div><label class="input-label">Diesel Maint./yr</label><input type="number" id="d-maint" oninput="runCalc()" value="12000" class="field-input"></div>
                                 <div><label class="input-label">CNG Maint./yr</label><input type="number" id="c-maint" oninput="runCalc()" value="10000" class="field-input"></div>
+                                <div><label class="input-label">EV Maint./yr</label><input type="number" id="e-maint" oninput="runCalc()" value="4000" class="field-input"></div>
                             </div>
-                            <div class="grid grid-cols-3 gap-4">
-                                <div><label class="input-label">Resale Value %</label><input type="number" id="p-resale" oninput="runCalc()" value="50" class="field-input" placeholder="%"></div>
-                                <div class="col-span-2 flex items-center pt-6"><p class="text-[10px] text-slate-400 italic">Resale value estimated at end of period.</p></div>
+                            
+                            <div class="grid grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                                <div>
+                                    <label class="input-label">Battery Replacement (EV Only)</label>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input type="number" id="e-battery-cost" oninput="runCalc()" placeholder="Cost (₹)" class="field-input">
+                                        <input type="number" id="e-battery-year" oninput="runCalc()" placeholder="At Year" class="field-input">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="input-label">Resale Value (%)</label>
+                                    <input type="number" id="p-resale" oninput="runCalc()" value="50" class="field-input" placeholder="%">
+                                    <p class="text-[9px] text-slate-400 italic mt-1">Percentage of original price after the ownership period.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -239,12 +285,12 @@
             <!-- SEO Content -->
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Choose Between Petrol, Diesel, and CNG</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Selecting a fuel type isn't just about the fuel price; it's about the <strong>Total Cost of Ownership (TCO)</strong>. Petrol cars are usually cheaper to buy but costlier to run. CNG and Diesel cars have a "premium" purchase price but offer significantly lower running costs. This calculator helps you find the "breakeven point" where the fuel savings finally cover the extra cost you paid for the car.</p>
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Choose Between Petrol, Diesel, CNG, and Electric</h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Selecting a fuel type isn't just about the fuel price; it's about the <strong>Total Cost of Ownership (TCO)</strong>. Petrol cars are usually cheaper to buy but costlier to run. CNG and Diesel cars have a "premium" purchase price but offer significantly lower running costs. Electric Vehicles (EVs) have the highest upfront cost but the lowest per-km running expense. This calculator helps you find the "breakeven point" where the fuel savings finally cover the extra cost you paid for the car.</p>
                 </section>
 
                 <section class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800">
-                    <h2 class="text-xl font-black text-slate-900 dark:text-white mb-4">A Practical Example</h2>
+                    <h2 class="text-xl font-black text-slate-900 dark:text-white mb-4">A Practical Comparison Example</h2>
                     <div class="grid md:grid-cols-2 gap-8">
                         <div>
                             <h3 class="font-bold text-orange-600 mb-2">Scenario A: Petrol Car</h3>
@@ -252,20 +298,20 @@
                                 <li>Car Price: ₹8,00,000</li>
                                 <li>Mileage: 15 kmpl</li>
                                 <li>Monthly Running: 1,000 km</li>
-                                <li><strong>5-Year Fuel Cost:</strong> Approx ₹4,20,000</li>
+                                <li><strong>5-Year Running Cost:</strong> Approx ₹4,20,000</li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="font-bold text-emerald-600 mb-2">Scenario B: CNG Car</h3>
+                            <h3 class="font-bold text-blue-600 mb-2">Scenario B: Electric Vehicle (EV)</h3>
                             <ul class="text-sm text-slate-500 space-y-1">
-                                <li>Car Price: ₹9,00,000 (₹1 Lakh extra)</li>
-                                <li>Mileage: 25 km/kg</li>
+                                <li>Car Price: ₹12,00,000</li>
+                                <li>Efficiency: 7 km/kWh</li>
                                 <li>Monthly Running: 1,000 km</li>
-                                <li><strong>5-Year Fuel Cost:</strong> Approx ₹2,04,000</li>
+                                <li><strong>5-Year Charging Cost:</strong> Approx ₹68,500</li>
                             </ul>
                         </div>
                     </div>
-                    <p class="mt-6 text-sm font-bold text-slate-900 dark:text-white">Verdict: In this case, the CNG user saves ₹2.16 Lakh in fuel, which easily justifies the ₹1 Lakh extra paid for the car.</p>
+                    <p class="mt-6 text-sm font-bold text-slate-900 dark:text-white">Verdict: The EV saves ₹3.5 Lakhs in fuel over 5 years. If the purchase gap is ₹4 Lakhs, you'll need nearly 6 years to break even on fuel savings alone.</p>
                 </section>
 
                 <section>
@@ -276,8 +322,12 @@
                             <p class="text-sm text-slate-600 dark:text-slate-400">Only if your running is high. If you drive less than 500km a month, it may take 7-10 years to recover the extra purchase cost of a CNG kit.</p>
                         </div>
                         <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-1">When does an EV make sense?</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">EVs are ideal for city commutes with daily running above 40-50km. They offer a silent drive and the lowest running costs (often under ₹1.5 per km), provided you have home charging facilities.</p>
+                        </div>
+                        <div>
                             <h3 class="font-bold text-slate-900 dark:text-white mb-1">Why consider Diesel?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Diesel offers the best torque for highway driving and better long-distance fuel efficiency, though it has the highest maintenance costs and stricter environmental regulations (10-year limit in NCR).</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Diesel offers the best torque for highway driving and better long-distance fuel efficiency, though it has the highest maintenance costs and stricter environmental regulations in certain zones.</p>
                         </div>
                     </div>
                 </section>
@@ -305,33 +355,55 @@
             const includeAdvanced = document.getElementById('adv-calc-toggle').checked;
 
             const configs = [
-                { id: 'p', name: 'Petrol', color: 'orange' },
-                { id: 'd', name: 'Diesel', color: 'slate' },
-                { id: 'c', name: 'CNG', color: 'emerald' }
+                { id: 'p', name: 'Petrol', color: 'orange', type: 'fuel' },
+                { id: 'd', name: 'Diesel', color: 'slate', type: 'fuel' },
+                { id: 'c', name: 'CNG', color: 'emerald', type: 'fuel' },
+                { id: 'e', name: 'Electric (EV)', color: 'blue', type: 'electric' }
             ];
 
             const results = configs.map(c => {
                 const price = parseFloat(document.getElementById(`${c.id}-price`).value) || 0;
-                const kmpl = parseFloat(document.getElementById(`${c.id}-kmpl`).value) || 1;
-                const fuelP = parseFloat(document.getElementById(`${c.id}-fuel-p`).value) || 0;
+                const active = document.getElementById(`toggle-${c.id}`).checked;
                 
-                // Advanced costs only included if toggle is ON
-                const maint = includeAdvanced ? (parseFloat(document.getElementById(`${c.id}-maint`).value) || 0) : 0;
-                const resalePerc = includeAdvanced ? (parseFloat(document.getElementById(`p-resale`).value) || 0) : 0;
+                let totalRunningCost = 0;
+                if (c.type === 'fuel') {
+                    const kmpl = parseFloat(document.getElementById(`${c.id}-kmpl`).value) || 1;
+                    const fuelP = parseFloat(document.getElementById(`${c.id}-fuel-p`).value) || 0;
+                    totalRunningCost = (totalKm / kmpl) * fuelP;
+                } else {
+                    const kmkwh = parseFloat(document.getElementById('e-kmkwh').value) || 1;
+                    const electricityP = parseFloat(document.getElementById('e-fuel-p').value) || 0;
+                    totalRunningCost = (totalKm / kmkwh) * electricityP;
+                }
+                
+                let extraCosts = 0;
+                if (includeAdvanced) {
+                    const maint = (parseFloat(document.getElementById(`${c.id}-maint`).value) || 0) * years;
+                    extraCosts += maint;
 
-                const totalFuelCost = (totalKm / kmpl) * fuelP;
-                const totalMaint = maint * years;
-                const resaleVal = price * (resalePerc / 100);
-                const totalOwnership = price + totalFuelCost + totalMaint - resaleVal;
+                    if (c.id === 'e') {
+                        const batteryCost = parseFloat(document.getElementById('e-battery-cost').value) || 0;
+                        const batteryYear = parseFloat(document.getElementById('e-battery-year').value) || 0;
+                        if (batteryCost > 0 && batteryYear > 0 && batteryYear <= years) {
+                            extraCosts += batteryCost;
+                        }
+                    }
 
-                return { ...c, price, totalFuelCost, totalMaint, totalOwnership, active: price > 0 };
+                    const resalePerc = parseFloat(document.getElementById(`p-resale`).value) || 0;
+                    const resaleVal = price * (resalePerc / 100);
+                    extraCosts -= resaleVal;
+                }
+
+                const totalOwnership = price + totalRunningCost + extraCosts;
+
+                return { ...c, price, totalRunningCost, extraCosts, totalOwnership, active: active && price > 0 };
             }).filter(r => r.active);
 
             const container = document.getElementById('results-container');
             container.innerHTML = '';
 
             if (results.length === 0) {
-                container.innerHTML = '<div class="text-slate-500 italic text-sm">Enter vehicle prices to see comparison...</div>';
+                container.innerHTML = '<div class="text-slate-500 italic text-sm">Select vehicles and enter purchase prices to see comparison...</div>';
                 document.getElementById('summary-banner').classList.add('hidden');
                 return;
             }
@@ -357,8 +429,8 @@
                         </div>
                         <div class="space-y-1 text-[11px] text-slate-400">
                             <div class="flex justify-between"><span>Purchase Price</span><span class="text-slate-200">₹${r.price.toLocaleString()}</span></div>
-                            <div class="flex justify-between"><span>Total Fuel Cost</span><span class="text-slate-200">₹${r.totalFuelCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span></div>
-                            ${includeAdvanced ? `<div class="flex justify-between"><span>Maintenance</span><span class="text-slate-200">₹${r.totalMaint.toLocaleString()}</span></div>` : ''}
+                            <div class="flex justify-between"><span>Total ${r.type === 'fuel' ? 'Fuel' : 'Charging'} Cost</span><span class="text-slate-200">₹${r.totalRunningCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span></div>
+                            ${includeAdvanced ? `<div class="flex justify-between"><span>Maint. & Resale Adj.</span><span class="text-slate-200">₹${r.extraCosts.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span></div>` : ''}
                         </div>
                     </div>
                 `;
@@ -373,6 +445,14 @@
             } else {
                 document.getElementById('summary-banner').classList.add('hidden');
             }
+        }
+
+        function toggleVehicleUI(id) {
+            const isChecked = document.getElementById(`toggle-${id}`).checked;
+            const section = document.getElementById(`section-${id}`);
+            if (isChecked) section.classList.remove('hidden');
+            else section.classList.add('hidden');
+            runCalc();
         }
 
         function toggleAdvancedUI() {
