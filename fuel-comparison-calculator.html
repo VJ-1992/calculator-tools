@@ -86,6 +86,37 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .calculator-grid {
+                border-radius: 16px;
+                box-shadow: none;
+                overflow: visible;
+                display: flex;
+                flex-direction: column;
+            }
+            .input-pane, .result-pane {
+                padding: 20px 16px;
+                width: 100%;
+                box-sizing: border-box;
+                overflow-x: hidden;
+            }
+            .field-input {
+                font-size: 16px !important; /* Prevents iOS automatic zoom on focus */
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .comparison-card {
+                padding: 16px;
+            }
+            .comparison-card p.text-xl {
+                font-size: 1.25rem;
+                word-break: break-all;
+            }
+            .comparison-card .text-right {
+                max-width: 50%;
+            }
+        }
+
         .input-pane {
             padding: 32px;
             background: #ffffff;
@@ -419,6 +450,30 @@
                         </li>
                     </ul>
                 </section>
+
+                <!-- Internal Link Section for SEO Silo -->
+                <section class="content-section">
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Try Our Other Free Calculators</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6">Explore more professional tools designed to simplify your financial and retail math:</p>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <li>
+                            <a href="discount-calculator.html" class="text-blue-600 font-bold hover:underline">Discount Calculator</a>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Calculate final prices after multiple savings, net savings, and sequential discounts for shopping.</p>
+                        </li>
+                        <li>
+                            <a href="simple-interest-calculator.html" class="text-blue-600 font-bold hover:underline">Interest Calculator</a>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Forecast your investment growth or estimate the cost of borrowing money with simple and compound options.</p>
+                        </li>
+                        <li>
+                            <a href="profit-margin-calculator.html" class="text-blue-600 font-bold hover:underline">Profit Margin Calculator</a>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Analyze business unit profitability, markups, and bulk sales margins to optimize your pricing strategy.</p>
+                        </li>
+                        <li>
+                            <a href="gst-calculator.html" class="text-blue-600 font-bold hover:underline">GST Calculator India</a>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Accurately add or remove tax with detailed splits for CGST, SGST, and IGST for professional invoices.</p>
+                        </li>
+                    </ul>
+                </section>
             </article>
         </div>
     </main>
@@ -504,15 +559,16 @@
                 const isMostExpensive = r.totalOwnership === maxCost && results.length > 1;
 
                 container.innerHTML += `
-                    <div class="comparison-card ${isCheapest ? 'ring-2 ring-emerald-500/50 bg-emerald-500/5' : ''}">
+                    <div class="comparison-card ${isCheapest ? 'ring-2 ring-emerald-500/50 bg-emerald-500/5' : ''} ${isMostExpensive ? 'border-red-500/30' : ''}">
                         <div class="flex justify-between items-start mb-4">
                             <div>
                                 <h3 class="font-bold text-${r.color}-400">${r.name}</h3>
                                 <p class="text-[10px] text-slate-500 uppercase font-black">Ownership Cost</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-xl font-black">₹${r.totalOwnership.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                                <p class="text-xl font-black ${isMostExpensive && !isCheapest ? 'text-red-400' : ''}">₹${r.totalOwnership.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
                                 ${isCheapest ? '<span class="text-[9px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded">MOST ECONOMICAL</span>' : ''}
+                                ${isMostExpensive && !isCheapest ? '<span class="text-[9px] font-bold text-red-400 bg-red-400/10 px-2 py-0.5 rounded">HIGHEST COST</span>' : ''}
                             </div>
                         </div>
                         <div class="space-y-1 text-[11px] text-slate-400">
