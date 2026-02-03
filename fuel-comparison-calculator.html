@@ -87,7 +87,7 @@
         }
 
         /* 
-           MOBILE OVERRIDES: Fix Digit Cutoff & Layout
+           MOBILE OVERRIDES: Fix Digit Cutoff & Layout Stability
         */
         @media (max-width: 768px) {
             .calculator-grid {
@@ -105,21 +105,33 @@
                 overflow-x: hidden;
             }
             
-            /* Restructure the 3-column input grid into a 2-row layout */
+            /* Force side-by-side alignment for Mileage + Fuel */
             #section-p > div.grid,
             #section-d > div.grid,
             #section-c > div.grid,
             #section-e > div.grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 16px !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 10px !important;
+                width: 100% !important;
             }
 
-            /* Price field (first child) becomes full width */
+            /* Price field (first child) always full width */
             #section-p > div.grid > div:first-child,
             #section-d > div.grid > div:first-child,
             #section-c > div.grid > div:first-child,
             #section-e > div.grid > div:first-child {
-                grid-column: span 2 / span 2 !important;
+                grid-column: span 2 !important;
+            }
+
+            /* Ensure input containers don't force width jumps */
+            #section-p > div.grid > div,
+            #section-d > div.grid > div,
+            #section-c > div.grid > div,
+            #section-e > div.grid > div {
+                min-width: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
 
             .field-input {
