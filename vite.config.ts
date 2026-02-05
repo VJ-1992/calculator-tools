@@ -6,6 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        cng_mileage: 'cng-mileage-calculator.html',
         discount: 'discount-calculator.html',
         gst: 'gst-calculator.html',
         interest: 'simple-interest-calculator.html',
