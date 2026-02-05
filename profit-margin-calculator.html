@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profit Margin Calculator – Calculate Unit & Bulk Profit (100% Accurate)</title>
     <meta name="description" content="Calculate profit margins, markups, and per-unit profitability for retail and wholesale. Supports simple sales, bulk quantity orders, and packet breakdown scenarios.">
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://vj-1992.github.io/calculator-tools/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Finance Calculators",
+        "item": "https://vj-1992.github.io/calculator-tools/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Profit Margin Calculator",
+        "item": "https://vj-1992.github.io/calculator-tools/profit-margin-calculator.html"
+      }]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="calculators.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -18,123 +44,23 @@
         }
     </script>
     <style>
-        /* Global Reset & Safety */
         *, ::before, ::after { box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            transition: background-color 0.3s ease, color 0.3s ease; 
-            overflow-x: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            min-height: 650px;
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.08);
-            width: 100%;
-            max-width: 100%; /* Prevents forcing parent overflow */
-            margin: 0 auto;
-        }
-
-        @media (max-width: 1024px) {
-            .calculator-grid {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-        }
-
-        .input-pane {
-            padding: 40px;
-            background: #ffffff;
-            width: 100%;
-        }
-
-        .result-pane {
-            padding: 40px;
-            background: #0f172a;
-            color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .input-group {
-            margin-bottom: 24px;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .toggle-pill {
-            display: flex;
-            background: #f1f5f9;
-            padding: 4px;
-            border-radius: 10px;
-            width: fit-content;
-            flex-wrap: wrap; /* Safety for small screens */
-        }
-
-        .toggle-pill button {
-            padding: 6px 16px;
-            border-radius: 7px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            transition: all 0.2s;
-        }
-
-        .toggle-pill button.active {
-            background: white;
-            color: #2563eb;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .field-input {
-            width: 100%;
-            background: #f8fafc;
-            border: 2px solid #f1f5f9;
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-weight: 600;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .field-input:focus {
-            border-color: #3b82f6;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.95rem;
-            gap: 12px;
-        }
-
+        .calculator-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; min-height: 650px; background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.08); width: 100%; max-width: 100%; margin: 0 auto; }
+        @media (max-width: 1024px) { .calculator-grid { grid-template-columns: 1fr; height: auto; } }
+        .input-pane { padding: 40px; background: #ffffff; width: 100%; }
+        .result-pane { padding: 40px; background: #0f172a; color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; width: 100%; }
+        .input-group { margin-bottom: 24px; }
+        .input-label { display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+        .toggle-pill { display: flex; background: #f1f5f9; padding: 4px; border-radius: 10px; width: fit-content; flex-wrap: wrap; }
+        .toggle-pill button { padding: 6px 16px; border-radius: 7px; font-size: 0.75rem; font-weight: 700; transition: all 0.2s; }
+        .toggle-pill button.active { background: white; color: #2563eb; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .field-input { width: 100%; background: #f8fafc; border: 2px solid #f1f5f9; border-radius: 12px; padding: 12px 16px; font-weight: 600; outline: none; transition: all 0.2s; }
+        .field-input:focus { border-color: #3b82f6; background: white; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        .receipt-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; gap: 12px; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95); pointer-events: none; }
         .dropdown-visible { opacity: 1; transform: scale(1); pointer-events: auto; }
-
-        /* Dark Mode Overrides */
         .dark .calculator-grid { background: #1e293b; box-shadow: none; border: 1px solid #334155; }
         .dark .input-pane { background: #1e293b; }
         .dark .field-input { background: #0f172a; border-color: #334155; color: white; }
@@ -158,22 +84,8 @@
                         <svg id="drop-chevron" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50 transition-all duration-200 origin-top-right">
-                        <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
-                            </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
-                            </a>
-                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Interest Calculator</span>
-                            </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 group transition-colors">
-                                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Profit Margin</span>
-                            </a>
-                            <a href="fuel-comparison-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Fuel Cost Comparison Calculator</span>
-                            </a>
+                        <div id="nav-dropdown-list" class="p-2 space-y-1">
+                            <!-- Populated by calculators.js -->
                         </div>
                     </div>
                 </div>
@@ -192,184 +104,48 @@
                 <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Profit Margin Calculator</h1>
                 <p class="text-slate-500 dark:text-slate-400">Determine business profitability with per-unit and bulk scenarios.</p>
             </div>
-
             <div class="calculator-grid">
-                <!-- Left Panel: Inputs -->
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
                     <div class="flex items-center justify-between mb-8 gap-4 flex-wrap">
-                        <div class="toggle-pill">
-                            <button onclick="setCalcMode('simple')" id="mode-simple" class="active">Simple</button>
-                            <button onclick="setCalcMode('quantity')" id="mode-quantity">Quantity</button>
-                            <button onclick="setCalcMode('packet')" id="mode-packet">Packet</button>
-                        </div>
-                        <div class="toggle-pill">
-                            <button onclick="setCurrency('₹')" id="curr-inr" class="active">₹</button>
-                            <button onclick="setCurrency('$')" id="curr-usd">$</button>
-                        </div>
+                        <div class="toggle-pill"><button onclick="setCalcMode('simple')" id="mode-simple" class="active">Simple</button><button onclick="setCalcMode('quantity')" id="mode-quantity">Quantity</button><button onclick="setCalcMode('packet')" id="mode-packet">Packet</button></div>
+                        <div class="toggle-pill"><button onclick="setCurrency('₹')" id="curr-inr" class="active">₹</button><button onclick="setCurrency('$')" id="curr-usd">$</button></div>
                     </div>
-
-                    <!-- Mode Specific Inputs Section -->
                     <div id="simple-inputs" class="space-y-4">
-                        <div class="input-group">
-                            <label class="input-label">1. Cost Price (Unit)</label>
-                            <div class="relative">
-                                <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
-                                <input type="number" id="cost-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">2. Selling Price (Unit)</label>
-                            <div class="relative">
-                                <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
-                                <input type="number" id="selling-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
-                            </div>
-                        </div>
+                        <div class="input-group"><label class="input-label">1. Cost Price (Unit)</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="cost-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
+                        <div class="input-group"><label class="input-label">2. Selling Price (Unit)</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="selling-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
                     </div>
-
                     <div id="quantity-inputs" class="hidden space-y-4">
-                        <div class="input-group">
-                            <label class="input-label">1. Cost Price (Unit)</label>
-                            <div class="relative">
-                                <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
-                                <input type="number" id="cost-price-q" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">2. Selling Price (Unit)</label>
-                            <div class="relative">
-                                <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
-                                <input type="number" id="selling-price-q" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">3. Quantity Sold</label>
-                            <input type="number" id="quantity" oninput="runCalc()" placeholder="e.g. 50" class="field-input">
-                        </div>
+                        <div class="input-group"><label class="input-label">1. Cost Price (Unit)</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="cost-price-q" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
+                        <div class="input-group"><label class="input-label">2. Selling Price (Unit)</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="selling-price-q" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
+                        <div class="input-group"><label class="input-label">3. Quantity Sold</label><input type="number" id="quantity" oninput="runCalc()" placeholder="e.g. 50" class="field-input"></div>
                     </div>
-
                     <div id="packet-inputs" class="hidden space-y-4">
-                        <div class="input-group">
-                            <label class="input-label">1. Packet Cost Price</label>
-                            <div class="relative">
-                                <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
-                                <input type="number" id="packet-cost" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">2. Items Per Packet</label>
-                            <input type="number" id="packet-items" oninput="runCalc()" placeholder="e.g. 20" class="field-input">
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">3. Selling Price (Per Item)</label>
-                            <div class="relative">
-                                <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
-                                <input type="number" id="item-selling-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
-                            </div>
-                        </div>
+                        <div class="input-group"><label class="input-label">1. Packet Cost Price</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="packet-cost" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
+                        <div class="input-group"><label class="input-label">2. Items Per Packet</label><input type="number" id="packet-items" oninput="runCalc()" placeholder="e.g. 20" class="field-input"></div>
+                        <div class="input-group"><label class="input-label">3. Selling Price (Per Item)</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="item-selling-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
                     </div>
-
                     <button onclick="resetCalculator()" class="w-full mt-8 py-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-red-500 font-bold text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all">Clear Form</button>
                 </div>
-
-                <!-- Right Panel: Results -->
                 <div class="result-pane">
                     <div>
-                        <div class="mb-12 text-center">
-                            <p id="main-result-label" class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Profit per Unit</p>
-                            <div class="flex items-baseline justify-center gap-2">
-                                <span id="res-symbol-large" class="text-2xl font-bold text-blue-400">₹</span>
-                                <span id="res-profit-main" class="text-6xl font-black tracking-tighter">0.00</span>
-                            </div>
-                        </div>
-
+                        <div class="mb-12 text-center"><p id="main-result-label" class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Profit per Unit</p><div class="flex items-baseline justify-center gap-2"><span id="res-symbol-large" class="text-2xl font-bold text-blue-400">₹</span><span id="res-profit-main" class="text-6xl font-black tracking-tighter">0.00</span></div></div>
                         <div class="space-y-1">
-                            <div id="row-cost-per-unit" class="receipt-row hidden">
-                                <span class="text-slate-400">Cost Per Item</span>
-                                <span class="font-bold"><span class="res-symbol">₹</span><span id="out-cpu">0.00</span></span>
-                            </div>
-                            <div class="receipt-row">
-                                <span class="text-slate-400">Profit Margin</span>
-                                <span id="out-margin" class="font-bold text-emerald-400">0.00%</span>
-                            </div>
-                            <div class="receipt-row">
-                                <span class="text-slate-400">Markup</span>
-                                <span id="out-markup" class="font-bold text-blue-400">0.00%</span>
-                            </div>
-                            <div id="row-total-profit" class="receipt-row hidden">
-                                <span class="text-slate-400">Total Profit</span>
-                                <span class="font-bold text-indigo-400"><span class="res-symbol">₹</span><span id="out-total-profit">0.00</span></span>
-                            </div>
+                            <div id="row-cost-per-unit" class="receipt-row hidden"><span class="text-slate-400">Cost Per Item</span><span class="font-bold"><span class="res-symbol">₹</span><span id="out-cpu">0.00</span></span></div>
+                            <div class="receipt-row"><span class="text-slate-400">Profit Margin</span><span id="out-margin" class="font-bold text-emerald-400">0.00%</span></div>
+                            <div class="receipt-row"><span class="text-slate-400">Markup</span><span id="out-markup" class="font-bold text-blue-400">0.00%</span></div>
+                            <div id="row-total-profit" class="receipt-row hidden"><span class="text-slate-400">Total Profit</span><span class="font-bold text-indigo-400"><span class="res-symbol">₹</span><span id="out-total-profit">0.00</span></span></div>
                         </div>
                     </div>
-
-                    <div class="mt-12 pt-8 border-t border-white/5">
-                        <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-4">Breakdown Summary</p>
-                        <div class="flex gap-4">
-                            <div class="flex-1 bg-white/5 p-4 rounded-2xl">
-                                <p class="text-[9px] text-slate-500 uppercase font-black mb-1">Total Revenue</p>
-                                <p id="stat-revenue" class="text-lg font-black text-white"><span class="res-symbol text-[10px]">₹</span>0.00</p>
-                            </div>
-                            <div class="flex-1 bg-white/5 p-4 rounded-2xl">
-                                <p class="text-[9px] text-slate-500 uppercase font-black mb-1">Total Cost</p>
-                                <p id="stat-cost" class="text-lg font-black text-white"><span class="res-symbol text-[10px]">₹</span>0.00</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="mt-12 pt-8 border-t border-white/5"><p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-4">Breakdown Summary</p><div class="flex gap-4"><div class="flex-1 bg-white/5 p-4 rounded-2xl"><p class="text-[9px] text-slate-500 uppercase font-black mb-1">Total Revenue</p><p id="stat-revenue" class="text-lg font-black text-white"><span class="res-symbol text-[10px]">₹</span>0.00</p></div><div class="flex-1 bg-white/5 p-4 rounded-2xl"><p class="text-[9px] text-slate-500 uppercase font-black mb-1">Total Cost</p><p id="stat-cost" class="text-lg font-black text-white"><span class="res-symbol text-[10px]">₹</span>0.00</p></div></div></div>
                 </div>
             </div>
 
-            <!-- SEO Content -->
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Professional Profit Calculation Guide</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Whether you're running a local shop or a large wholesale operation, understanding your margins is vital. For example, if you are offering seasonal discounts, use our <a href="discount-calculator.html" class="text-indigo-600 font-bold hover:underline">Sales Discount Tool</a> to adjust your prices while keeping margins healthy.</p>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Tax Consideration</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">Profit margins should be calculated on the base price before taxes. To accurately separate your tax obligations from your revenue, we recommend using the <a href="gst-calculator.html" class="text-indigo-600 font-bold hover:underline">Reverse GST Calculator</a>.</p>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Formulas Used</h2>
-                    <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 font-mono text-sm">
-                        <p class="text-indigo-600 dark:text-indigo-400 font-bold text-lg mb-4">Profit Margin (%) = (Profit / Selling Price) × 100</p>
-                    </div>
-                </section>
-
-                <!-- Frequently Asked Questions (FAQs) Section -->
-                <section class="content-section faq-section">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Frequently Asked Questions (FAQs)</h2>
-                    <div class="space-y-8 mt-8">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">What is profit margin?</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Profit margin is a measure of profitability. It is calculated by finding the profit as a percentage of the total revenue or selling price. It helps business owners understand how much of every dollar of sales is kept as earnings after paying for costs.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">What is the difference between profit margin and markup?</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">The main difference is the base value. Profit margin is calculated as (Profit / Selling Price), while markup is calculated as (Profit / Cost Price). For example, if an item costs ₹80 and sells for ₹100, the margin is 20% but the markup is 25%.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">How do I calculate profit on bulk or quantity sales?</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">To calculate bulk profit, you multiply the unit profit by the total quantity sold. Our calculator automates this in the "Quantity" mode, where you can enter the total number of items to see the total net profit instantly.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Can this calculator be used for retail and wholesale businesses?</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Yes! QuickCalcPro is designed for all business types. The "Simple" mode is great for individual retail items, "Quantity" is perfect for wholesale orders, and "Packet" helps retailers break down bulk purchase costs into unit profits.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">What happens if selling price is lower than cost price?</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">If your selling price is lower than the cost price, the business is making a loss. The calculator will display the loss amount and a negative margin, highlighting the results in red to signify a deficit.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Is this profit margin calculator free to use?</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Yes, our profit margin calculator is 100% free and accessible online. There is no registration or software installation required to use any of our calculation tools. Check discounted pricing using our <a href="discount-calculator.html" class="text-indigo-600 font-bold hover:underline">Discount Calculator</a> or estimate tax impact using the <a href="gst-calculator.html" class="text-indigo-600 font-bold hover:underline">GST Calculator</a>.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="mt-12 text-center">
-                    <p class="text-slate-400 text-sm">Automotive buyer? Check our <a href="fuel-comparison-calculator.html" class="text-indigo-600 font-bold hover:underline">Fuel Cost Comparison Calculator</a>.</p>
+                <section class="content-section">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Related Calculators</h3>
+                    <ul id="related-calc-links" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Populated by calculators.js -->
+                    </ul>
                 </section>
             </article>
         </div>
@@ -388,112 +164,26 @@
     </footer>
 
     <script>
-        let state = {
-            mode: 'simple',
-            currency: '₹'
-        };
-
-        function setCalcMode(m) {
-            state.mode = m;
-            document.getElementById('mode-simple').classList.toggle('active', m === 'simple');
-            document.getElementById('mode-quantity').classList.toggle('active', m === 'quantity');
-            document.getElementById('mode-packet').classList.toggle('active', m === 'packet');
-            document.getElementById('simple-inputs').classList.toggle('hidden', m !== 'simple');
-            document.getElementById('quantity-inputs').classList.toggle('hidden', m !== 'quantity');
-            document.getElementById('packet-inputs').classList.toggle('hidden', m !== 'packet');
-            document.getElementById('row-total-profit').classList.toggle('hidden', m === 'simple');
-            document.getElementById('row-cost-per-unit').classList.toggle('hidden', m !== 'packet');
-            document.getElementById('main-result-label').innerText = m === 'packet' ? 'Profit per Item' : 'Profit per Unit';
-            runCalc();
-        }
-
-        function setCurrency(c) {
-            state.currency = c;
-            document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c);
-            document.getElementById('res-symbol-large').innerText = c;
-            document.getElementById('curr-inr').classList.toggle('active', c === '₹');
-            document.getElementById('curr-usd').classList.toggle('active', c === '$');
-            runCalc();
-        }
-
+        let state = { mode: 'simple', currency: '₹' };
+        function setCalcMode(m) { state.mode = m; document.getElementById('mode-simple').classList.toggle('active', m === 'simple'); document.getElementById('mode-quantity').classList.toggle('active', m === 'quantity'); document.getElementById('mode-packet').classList.toggle('active', m === 'packet'); document.getElementById('simple-inputs').classList.toggle('hidden', m !== 'simple'); document.getElementById('quantity-inputs').classList.toggle('hidden', m !== 'quantity'); document.getElementById('packet-inputs').classList.toggle('hidden', m !== 'packet'); document.getElementById('row-total-profit').classList.toggle('hidden', m === 'simple'); document.getElementById('row-cost-per-unit').classList.toggle('hidden', m !== 'packet'); document.getElementById('main-result-label').innerText = m === 'packet' ? 'Profit per Item' : 'Profit per Unit'; runCalc(); }
+        function setCurrency(c) { state.currency = c; document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c); document.getElementById('res-symbol-large').innerText = c; document.getElementById('curr-inr').classList.toggle('active', c === '₹'); document.getElementById('curr-usd').classList.toggle('active', c === '$'); runCalc(); }
         function runCalc() {
             let CP = 0, SP = 0, Qty = 1;
-            if (state.mode === 'simple') {
-                CP = parseFloat(document.getElementById('cost-price').value) || 0;
-                SP = parseFloat(document.getElementById('selling-price').value) || 0;
-            } else if (state.mode === 'quantity') {
-                CP = parseFloat(document.getElementById('cost-price-q').value) || 0;
-                SP = parseFloat(document.getElementById('selling-price-q').value) || 0;
-                Qty = parseFloat(document.getElementById('quantity').value) || 1;
-            } else if (state.mode === 'packet') {
-                const packetCost = parseFloat(document.getElementById('packet-cost').value) || 0;
-                const items = parseFloat(document.getElementById('packet-items').value) || 1;
-                CP = packetCost / Math.max(1, items);
-                SP = parseFloat(document.getElementById('item-selling-price').value) || 0;
-                Qty = items;
-                document.getElementById('out-cpu').innerText = CP.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            }
-            const profitPerUnit = SP - CP;
-            const totalProfit = profitPerUnit * Qty;
-            const margin = SP > 0 ? (profitPerUnit / SP) * 100 : 0;
-            const markup = CP > 0 ? (profitPerUnit / CP) * 100 : 0;
-            const totalRevenue = SP * Qty;
-            const totalCost = CP * Qty;
-            const resultEl = document.getElementById('res-profit-main');
-            const marginEl = document.getElementById('out-margin');
-            if (profitPerUnit < 0) {
-                resultEl.classList.add('text-red-500');
-                marginEl.classList.remove('text-emerald-400');
-                marginEl.classList.add('text-red-400');
-            } else {
-                resultEl.classList.remove('text-red-500');
-                marginEl.classList.remove('text-red-400');
-                marginEl.classList.add('text-emerald-400');
-            }
+            if (state.mode === 'simple') { CP = parseFloat(document.getElementById('cost-price').value) || 0; SP = parseFloat(document.getElementById('selling-price').value) || 0; }
+            else if (state.mode === 'quantity') { CP = parseFloat(document.getElementById('cost-price-q').value) || 0; SP = parseFloat(document.getElementById('selling-price-q').value) || 0; Qty = parseFloat(document.getElementById('quantity').value) || 1; }
+            else if (state.mode === 'packet') { const packetCost = parseFloat(document.getElementById('packet-cost').value) || 0; const items = parseFloat(document.getElementById('packet-items').value) || 1; CP = packetCost / Math.max(1, items); SP = parseFloat(document.getElementById('item-selling-price').value) || 0; Qty = items; document.getElementById('out-cpu').innerText = CP.toLocaleString(undefined, { minimumFractionDigits: 2 }); }
+            const profitPerUnit = SP - CP; const totalProfit = profitPerUnit * Qty; const margin = SP > 0 ? (profitPerUnit / SP) * 100 : 0; const markup = CP > 0 ? (profitPerUnit / CP) * 100 : 0; const totalRevenue = SP * Qty; const totalCost = CP * Qty;
+            const resultEl = document.getElementById('res-profit-main'); const marginEl = document.getElementById('out-margin');
+            if (profitPerUnit < 0) { resultEl.classList.add('text-red-500'); marginEl.classList.remove('text-emerald-400'); marginEl.classList.add('text-red-400'); }
+            else { resultEl.classList.remove('text-red-500'); marginEl.classList.remove('text-red-400'); marginEl.classList.add('text-emerald-400'); }
             const fmt = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('res-profit-main').innerText = fmt(profitPerUnit);
-            document.getElementById('out-margin').innerText = margin.toFixed(2) + '%';
-            document.getElementById('out-markup').innerText = markup.toFixed(2) + '%';
-            document.getElementById('out-total-profit').innerText = fmt(totalProfit);
-            document.getElementById('stat-revenue').innerHTML = `<span class="res-symbol text-[10px]">${state.currency}</span>${fmt(totalRevenue)}`;
-            document.getElementById('stat-cost').innerHTML = `<span class="res-symbol text-[10px]">${state.currency}</span>${fmt(totalCost)}`;
+            document.getElementById('res-profit-main').innerText = fmt(profitPerUnit); document.getElementById('out-margin').innerText = margin.toFixed(2) + '%'; document.getElementById('out-markup').innerText = markup.toFixed(2) + '%'; document.getElementById('out-total-profit').innerText = fmt(totalProfit); document.getElementById('stat-revenue').innerHTML = `<span class="res-symbol text-[10px]">${state.currency}</span>${fmt(totalRevenue)}`; document.getElementById('stat-cost').innerHTML = `<span class="res-symbol text-[10px]">${state.currency}</span>${fmt(totalCost)}`;
         }
-
-        function resetCalculator() {
-            document.querySelectorAll('input[type="number"]').forEach(i => i.value = '');
-            runCalc();
-        }
-
-        function toggleTheme() {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light';
-        }
-        function toggleDropdown(e) {
-            e.stopPropagation();
-            const d = document.getElementById('nav-dropdown');
-            const c = document.getElementById('drop-chevron');
-            if (d.classList.contains('dropdown-visible')) {
-                d.classList.replace('dropdown-visible', 'dropdown-hidden');
-                c.style.transform = 'rotate(0deg)';
-            } else {
-                d.classList.replace('dropdown-hidden', 'dropdown-visible');
-                c.style.transform = 'rotate(180deg)';
-            }
-        }
-        window.onclick = function(event) {
-            const d = document.getElementById('nav-dropdown');
-            const c = document.getElementById('drop-chevron');
-            if (!event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) {
-                if (d && d.classList.contains('dropdown-visible')) {
-                    d.classList.replace('dropdown-visible', 'dropdown-hidden');
-                    c.style.transform = 'rotate(0deg)';
-                }
-            }
-        }
-        if (localStorage.getItem('theme') === 'dark') {
-            document.getElementById('theme-text').innerText = 'Dark';
-        }
+        function resetCalculator() { document.querySelectorAll('input[type="number"]').forEach(i => i.value = ''); runCalc(); }
+        function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light'; }
+        function toggleDropdown(e) { e.stopPropagation(); const d = document.getElementById('nav-dropdown'); if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } else { d.classList.replace('dropdown-hidden', 'dropdown-visible'); } }
+        window.onclick = function(event) { const d = document.getElementById('nav-dropdown'); if (d && !event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } }
+        if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
         runCalc();
     </script>
 </body>

@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GST Calculator India – CGST, SGST, IGST & Reverse GST</title>
     <meta name="description" content="Professional GST calculator for India. Supports Add GST, Remove GST, and reverse calculations. Detailed split for CGST, SGST, IGST, UTGST, and Import IGST.">
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://vj-1992.github.io/calculator-tools/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tax Calculators",
+        "item": "https://vj-1992.github.io/calculator-tools/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "GST Calculator Pro",
+        "item": "https://vj-1992.github.io/calculator-tools/gst-calculator.html"
+      }]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="calculators.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -67,22 +93,8 @@
                         <svg id="drop-chevron" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden dropdown-animate absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
-                        <div class="p-2 space-y-1">
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
-                            </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-orange-50 dark:bg-orange-900/20 group transition-colors">
-                                <span class="text-xs font-bold text-orange-600 dark:text-orange-400">GST Calculator</span>
-                            </a>
-                            <a href="simple-interest-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Simple Interest</span>
-                            </a>
-                            <a href="profit-margin-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Profit Margin</span>
-                            </a>
-                            <a href="fuel-comparison-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 group transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Fuel Cost Comparison Calculator</span>
-                            </a>
+                        <div id="nav-dropdown-list" class="p-2 space-y-1">
+                            <!-- Populated by calculators.js -->
                         </div>
                     </div>
                 </div>
@@ -139,109 +151,10 @@
         </article>
 
         <section class="content-section">
-            <h2 class="dark:text-white">How to Use the GST Calculator</h2>
-            <p class="dark:text-slate-400">Calculating your tax liability or reverse-calculating a base price is simple with our tool. Follow these steps for an accurate result:</p>
-            <ol class="list-decimal pl-5 space-y-3 dark:text-slate-400">
-                <li><strong>Enter Amount:</strong> Type in the monetary value you wish to calculate tax for.</li>
-                <li><strong>Select GST Rate:</strong> Choose from standard Indian slabs: 5%, 12%, 18%, or 28%.</li>
-                <li><strong>Choose Calculation Type:</strong>
-                    <ul class="list-disc pl-5 mt-2">
-                        <li><strong>Add GST (Exclusive):</strong> Use this if your base price does not include tax yet.</li>
-                        <li><strong>Remove GST (Inclusive):</strong> Use this if the price already includes tax and you want to find the original value.</li>
-                    </ul>
-                </li>
-                <li><strong>Select Transaction Type:</strong> Choose 'Intra-State' for local sales (CGST+SGST) or 'Inter-State' for sales between states (IGST).</li>
-                <li><strong>View Results:</strong> The tool instantly displays the GST amount, tax splits, and final net total.</li>
-            </ol>
-        </section>
-
-        <section class="content-section">
-            <h2 class="dark:text-white">GST Calculation Formulas</h2>
-            <p class="dark:text-slate-400">Depending on whether the price is tax-inclusive or tax-exclusive, different formulas are used:</p>
-            <div class="formula-box dark:bg-slate-900 dark:text-slate-200 dark:border-orange-500">
-                <p class="font-bold text-orange-600 dark:text-orange-400 mb-2">1. For Exclusive GST (Add Tax):</p>
-                GST Amount = (Original Amount × GST %) / 100<br>
-                Net Price = Original Amount + GST Amount
-            </div>
-            <div class="formula-box dark:bg-slate-900 dark:text-slate-200 dark:border-orange-500">
-                <p class="font-bold text-orange-600 dark:text-orange-400 mb-2">2. For Inclusive GST (Remove Tax):</p>
-                GST Amount = Original Amount - (Original Amount × (100 / (100 + GST %)))<br>
-                Base Price = Original Amount - GST Amount
-            </div>
-            <p class="dark:text-slate-400 mt-4"><strong>Exclusive GST</strong> is common in B2B transactions, while <strong>Inclusive GST</strong> is typically seen in retail (MRP) pricing.</p>
-        </section>
-
-        <section class="content-section">
-            <h2 class="dark:text-white">Types of GST in India</h2>
-            <p class="dark:text-slate-400">The Goods and Services Tax is divided into three main components based on the destination of the goods/services:</p>
-            <div class="space-y-6 mt-4">
-                <div>
-                    <h3 class="dark:text-white">CGST (Central GST)</h3>
-                    <p class="dark:text-slate-400">Collected by the Central Government on an intra-state sale (e.g., a sale within Maharashtra).</p>
-                </div>
-                <div>
-                    <h3 class="dark:text-white">SGST (State GST)</h3>
-                    <p class="dark:text-slate-400">Collected by the State Government on an intra-state sale. It is always equal to CGST in a transaction.</p>
-                </div>
-                <div>
-                    <h3 class="dark:text-white">IGST (Integrated GST)</h3>
-                    <p class="dark:text-slate-400">Collected by the Central Government for inter-state transactions (e.g., a sale from Gujarat to Delhi). It is the sum of CGST and SGST.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2 class="dark:text-white">GST Calculation Examples</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
-                    <h3 class="dark:text-white">Example 1: Exclusive GST (Add)</h3>
-                    <p class="text-sm dark:text-slate-400"><strong>Base Price:</strong> ₹1,000<br><strong>GST Rate:</strong> 18%</p>
-                    <p class="text-sm font-mono mt-2 text-orange-600 dark:text-orange-400">GST = (1000 × 18) / 100 = ₹180<br>Total = ₹1,180</p>
-                </div>
-                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
-                    <h3 class="dark:text-white">Example 2: Inclusive GST (Remove)</h3>
-                    <p class="text-sm dark:text-slate-400"><strong>MRP:</strong> ₹1,180<br><strong>GST Rate:</strong> 18%</p>
-                    <p class="text-sm font-mono mt-2 text-orange-600 dark:text-orange-400">GST = 1180 - (1180 × 100 / 118) = ₹180<br>Base Price = ₹1,000</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2 class="dark:text-white">Who Can Use This GST Calculator</h2>
-            <p class="dark:text-slate-400">This tool is essential for anyone dealing with taxable goods or services in India:</p>
-            <ul class="list-disc pl-5 space-y-2 dark:text-slate-400">
-                <li><strong>Shopkeepers:</strong> Quickly calculate the total amount to charge customers.</li>
-                <li><strong>Small Businesses:</strong> Estimate tax liability before filing returns.</li>
-                <li><strong>Freelancers:</strong> Calculate the GST amount to include in your professional invoices.</li>
-                <li><strong>Traders:</strong> Verify the tax amount on purchase invoices received from suppliers.</li>
-                <li><strong>Students:</strong> Learn and verify tax calculation concepts for commerce studies.</li>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Related Calculators</h3>
+            <ul id="related-calc-links" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Populated by calculators.js -->
             </ul>
-        </section>
-
-        <section class="content-section">
-            <h2 class="dark:text-white">Frequently Asked Questions (FAQs)</h2>
-            <div class="space-y-8 mt-8">
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">What is GST?</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">GST (Goods and Services Tax) is an indirect tax used in India on the supply of goods and services. It is a destination-based tax that replaced many former indirect taxes like VAT, Service Tax, and Excise Duty.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">What is the difference between CGST, SGST, and IGST?</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">CGST and SGST are applied to transactions within the same state (Intra-state). IGST is applied to transactions between two different states (Inter-state) or on imported goods.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">How do I know which GST rate to apply?</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">GST rates depend on the type of product or service. Essential items are usually at 5%, standard products at 12% or 18%, and luxury items at 28%. You should refer to the HSN/SAC code list provided by the GST council.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Is this GST calculator free to use?</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Yes, the QuickCalcPro GST calculator is 100% free and accessible without any signup or registration. Additionally, you can calculate business profit using our <a href="profit-margin-calculator.html" class="text-orange-600 font-bold hover:underline">Profit Margin Calculator</a>.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Are GST calculations accurate?</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Yes, our tool uses precise mathematical logic based on the official GST guidelines. However, for legal and filing purposes, always cross-check with your tax consultant.</p>
-                </div>
-            </div>
         </section>
     </main>
 
