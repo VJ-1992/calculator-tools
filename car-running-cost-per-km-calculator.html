@@ -5,26 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Running Cost Per KM Calculator – Petrol, Diesel, CNG & EV | QuickCalcPro</title>
     <meta name="description" content="Calculate car running cost per km in India. Compare Petrol, Diesel, CNG, and Electric car fuel cost and estimate monthly and yearly expenses.">
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Car Running Cost Per KM Calculator",
-      "description": "Calculate your car’s running cost per kilometer in India for Petrol, Diesel, CNG, and Electric (EV) vehicles.",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "INR"
-      }
-    }
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="calculators.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -64,17 +47,7 @@
         .dark .calculator-grid { background: #1e293b; border: 1px solid #334155; box-shadow: none; }
         .dark .input-pane { background: #1e293b; }
         .dark .field-input { background: #0f172a; border-color: #334155; color: white; }
-
-        .fuel-pill {
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: all 0.2s;
-            border: 2px solid transparent;
-        }
+        .fuel-pill { padding: 8px 16px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s; border: 2px solid transparent; }
         .fuel-pill.active { background: #3b82f6; color: white; }
         .fuel-pill:not(.active) { background: #f1f5f9; color: #64748b; }
         .dark .fuel-pill:not(.active) { background: #0f172a; color: #475569; }
@@ -96,22 +69,8 @@
                         <svg id="drop-chevron" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div id="nav-dropdown" class="dropdown-hidden absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden z-50 transition-all duration-200 origin-top-right">
-                        <div class="p-2 space-y-1">
-                            <a href="car-running-cost-per-km-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 dark:bg-blue-900/20 transition-colors">
-                                <span class="text-xs font-bold text-blue-600 dark:text-blue-400">Running Cost Per KM</span>
-                            </a>
-                            <a href="cng-mileage-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">CNG Mileage Calculator</span>
-                            </a>
-                            <a href="fuel-comparison-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Fuel Comparison</span>
-                            </a>
-                            <a href="gst-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">GST Calculator</span>
-                            </a>
-                            <a href="discount-calculator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
-                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Discount Calculator</span>
-                            </a>
+                        <div id="nav-dropdown-list" class="p-2 space-y-1">
+                            <!-- Populated by calculators.js -->
                         </div>
                     </div>
                 </div>
@@ -132,7 +91,6 @@
             </div>
 
             <div class="calculator-grid">
-                <!-- Left Pane -->
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
                     <div class="mb-8">
                         <label class="input-label">Select Fuel Type</label>
@@ -143,7 +101,6 @@
                             <button onclick="setFuelType('ev')" id="btn-ev" class="fuel-pill">Electric (EV)</button>
                         </div>
                     </div>
-
                     <div class="input-group">
                         <label id="label-mileage" class="input-label">Mileage (km per litre)</label>
                         <input type="number" id="mileage" oninput="runCalc()" placeholder="e.g. 18" class="field-input">
@@ -152,7 +109,6 @@
                         <label id="label-price" class="input-label">Fuel Price (₹ per litre)</label>
                         <input type="number" id="price" oninput="runCalc()" placeholder="e.g. 105" class="field-input">
                     </div>
-
                     <div class="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
                         <label class="flex items-center gap-3 cursor-pointer group mb-6">
                             <div class="relative">
@@ -161,7 +117,6 @@
                             </div>
                             <span class="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-400">Calculate Monthly & Yearly Cost</span>
                         </label>
-                        
                         <div id="monthly-section" class="hidden space-y-6 animate-in fade-in slide-in-from-top-2">
                             <div class="input-group">
                                 <label class="input-label">Monthly running distance (km)</label>
@@ -169,11 +124,8 @@
                             </div>
                         </div>
                     </div>
-
                     <button onclick="resetCalc()" class="w-full mt-4 py-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-red-500 font-bold text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all">Reset All</button>
                 </div>
-
-                <!-- Right Pane -->
                 <div class="result-pane">
                     <div>
                         <div class="mb-12 text-center">
@@ -184,7 +136,6 @@
                                 <span class="text-xl font-bold text-slate-500">/km</span>
                             </div>
                         </div>
-
                         <div class="space-y-1">
                             <div id="res-monthly-row" class="receipt-row hidden">
                                 <span class="text-slate-400">Monthly Fuel Expense</span>
@@ -196,64 +147,17 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mt-8 p-6 rounded-2xl bg-white/5 border border-white/10">
                         <p class="text-xs text-slate-400 leading-relaxed italic">Understanding your TCO (Total Cost of Ownership) helps in making better car buying decisions.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SEO Content -->
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">How to Use the Car Running Cost Per KM Calculator</h2>
-                    <ol class="list-decimal pl-5 space-y-4 text-slate-600 dark:text-slate-400">
-                        <li><strong>Select Fuel Type:</strong> Choose between Petrol, Diesel, CNG, or Electric (EV) to update the units.</li>
-                        <li><strong>Enter Mileage:</strong> Input your car's mileage in km/L, km/kg, or km/kWh.</li>
-                        <li><strong>Fuel Price:</strong> Enter the current price of fuel or electricity per unit in your city.</li>
-                        <li><strong>Optional Usage:</strong> Toggle the monthly distance option to see long-term expense estimates.</li>
-                        <li><strong>Analyze Results:</strong> View the exact cost you incur for every single kilometer driven.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Running Cost Per KM Formula Explained</h2>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">Car running cost per kilometer is calculated by dividing the fuel or electricity price by the vehicle’s mileage. This gives an accurate estimate of how much you spend to drive one kilometer. The formula is as follows:</p>
-                    <div class="bg-slate-100 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 font-mono text-sm space-y-2 text-blue-600 dark:text-blue-400">
-                        <p>Cost per KM (₹) = Fuel Price ÷ Mileage (km per unit)</p>
-                        <p>Total Monthly Cost = Cost per KM × Monthly Distance</p>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-1">Which car has the lowest running cost per km in India?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Electric (EV) and CNG cars usually have the lowest running cost per kilometer in India, often ranging between ₹1.00 to ₹3.00 depending on driving style and city utility rates.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-1">Is diesel cheaper than petrol per km?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Historically, yes. Diesel cars often have a lower cost per km due to better thermal efficiency (higher mileage), though the gap in fuel prices has narrowed in recent years.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-1">Does this calculator work for Indian fuel prices?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Yes, this tool is designed specifically for Indian fuel metrics (Litre, KG) and electricity slabs (kWh), using the Rupee (₹) symbol.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-1">Can I calculate monthly car fuel cost?</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400">Yes, by enabling the "Calculate Monthly & Yearly Cost" toggle and entering your average monthly travel distance.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
+                <section class="content-section">
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Related Calculators</h3>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <li><a href="fuel-comparison-calculator.html" class="text-blue-600 hover:underline">Fuel Cost Comparison Calculator</a></li>
-                        <li><a href="cng-mileage-calculator.html" class="text-blue-600 hover:underline">CNG Mileage Calculator</a></li>
-                        <li><a href="gst-calculator.html" class="text-blue-600 hover:underline">GST Calculator</a></li>
-                        <li><a href="profit-margin-calculator.html" class="text-blue-600 hover:underline">Profit Margin Calculator</a></li>
+                    <ul id="related-calc-links" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Populated by calculators.js -->
                     </ul>
                 </section>
             </article>
@@ -274,17 +178,14 @@
 
     <script>
         let currentFuel = 'petrol';
-
         function setFuelType(type) {
             currentFuel = type;
             document.querySelectorAll('.fuel-pill').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`btn-${type}`).classList.add('active');
-            
             const mLabel = document.getElementById('label-mileage');
             const pLabel = document.getElementById('label-price');
             const mInput = document.getElementById('mileage');
             const pInput = document.getElementById('price');
-
             if (type === 'ev') {
                 mLabel.innerText = 'Efficiency (km per kWh)';
                 pLabel.innerText = 'Electricity Price (₹ per kWh)';
@@ -303,7 +204,6 @@
             }
             runCalc();
         }
-
         function toggleMonthlyUI() {
             const isChecked = document.getElementById('toggle-monthly').checked;
             document.getElementById('monthly-section').classList.toggle('hidden', !isChecked);
@@ -311,20 +211,14 @@
             document.getElementById('res-yearly-row').classList.toggle('hidden', !isChecked);
             runCalc();
         }
-
         function runCalc() {
             const mileage = parseFloat(document.getElementById('mileage').value) || 0;
             const price = parseFloat(document.getElementById('price').value) || 0;
             const monthlyDist = parseFloat(document.getElementById('monthly-dist').value) || 0;
             const showMonthly = document.getElementById('toggle-monthly').checked;
-
             let costKm = 0;
-            if (mileage > 0) {
-                costKm = price / mileage;
-            }
-
+            if (mileage > 0) { costKm = price / mileage; }
             document.getElementById('res-cost-km').innerText = costKm.toFixed(2);
-
             if (showMonthly) {
                 const monthlyCost = monthlyDist * costKm;
                 const yearlyCost = monthlyCost * 12;
@@ -332,39 +226,10 @@
                 document.getElementById('res-yearly').innerText = yearlyCost.toLocaleString(undefined, { maximumFractionDigits: 0 });
             }
         }
-
-        function resetCalc() {
-            document.querySelectorAll('input[type="number"]').forEach(i => i.value = '');
-            runCalc();
-        }
-
-        function toggleTheme() {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light';
-        }
-
-        function toggleDropdown(e) {
-            e.stopPropagation();
-            const d = document.getElementById('nav-dropdown');
-            const c = document.getElementById('drop-chevron');
-            if (d.classList.contains('dropdown-visible')) {
-                d.classList.replace('dropdown-visible', 'dropdown-hidden');
-                c.style.transform = 'rotate(0deg)';
-            } else {
-                d.classList.replace('dropdown-hidden', 'dropdown-visible');
-                c.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        window.onclick = (e) => {
-            const d = document.getElementById('nav-dropdown');
-            if (d && !e.target.closest('#drop-btn') && !e.target.closest('#nav-dropdown')) {
-                d.classList.replace('dropdown-visible', 'dropdown-hidden');
-                document.getElementById('drop-chevron').style.transform = 'rotate(0deg)';
-            }
-        }
-        
+        function resetCalc() { document.querySelectorAll('input[type="number"]').forEach(i => i.value = ''); runCalc(); }
+        function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light'; }
+        function toggleDropdown(e) { e.stopPropagation(); const d = document.getElementById('nav-dropdown'); if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } else { d.classList.replace('dropdown-hidden', 'dropdown-visible'); } }
+        window.onclick = (e) => { const d = document.getElementById('nav-dropdown'); if (d && !e.target.closest('#drop-btn') && !e.target.closest('#nav-dropdown')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } }
         if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
         runCalc();
     </script>
