@@ -132,16 +132,9 @@
         }
 
         .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.95rem;
-        }
-
+            display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
         .dropdown-hidden { opacity: 0; transform: scale(0.95); pointer-events: none; }
         .dropdown-visible { opacity: 1; transform: scale(1); pointer-events: auto; }
-
         .dark .calculator-grid { background: #1e293b; box-shadow: none; border: 1px solid #334155; }
         .dark .input-pane { background: #1e293b; }
         .dark .field-input { background: #0f172a; border-color: #334155; color: white; }
@@ -215,6 +208,50 @@
                     </div>
                 </div>
             </div>
+
+            <section class="calculator-content mt-16 max-w-4xl mx-auto space-y-12">
+                <div>
+                    <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-6 text-center">How to Use This Calculator</h2>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</div><span>Choose between "Simple" or "Compound" interest modes at the top.</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</div><span>Enter your Principal Amount (the initial sum of money).</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</div><span>Enter the Annual Interest Rate (%) offered by your bank or investment.</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</div><span>Select the time period in Years or Months.</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">5</div><span>For compound interest, select the compounding frequency (Monthly, Quarterly, etc.).</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Formula Used</h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        Simple Interest = (Principal * Rate * Time) / 100. Compound Interest = Principal * (1 + Rate/Frequency)^(Frequency * Time) - Principal. Compound interest is "interest on interest."
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is the main difference between Simple and Compound interest?</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">Simple interest is calculated only on the principal amount. Compound interest is calculated on the principal plus any accumulated interest from previous periods, leading to faster growth.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">How does compounding frequency affect my returns?</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">The more frequently interest is compounded (e.g., Monthly vs. Yearly), the higher your total return will be, because interest starts earning more interest sooner.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Can I use this for loan calculations?</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">Yes, you can use Simple Interest mode for basic personal loans or the Compound mode for understanding how interest builds up on credit card debt or long-term business loans.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-800/30">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        This versatile Interest Calculator is perfect for investors, students, and financial planners. Use it to compare different savings products or understand the true cost of borrowing. Results are mathematical estimates and should be used for reference alongside professional advice.
+                    </p>
+                </div>
+            </section>
 
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section class="content-section">

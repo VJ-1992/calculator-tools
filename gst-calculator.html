@@ -136,6 +136,50 @@
             </div>
         </div>
 
+        <section class="calculator-content mt-16 max-w-4xl mx-auto space-y-12 px-5">
+            <div>
+                <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-6 text-center">How to Use This Calculator</h2>
+                <ul class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</div><span>Select your calculation mode: "Add GST" to include tax on top of a price, or "Remove GST" to find the base price of an inclusive total.</span></li>
+                    <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</div><span>Enter the base price or total amount in the "Base Price" field.</span></li>
+                    <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</div><span>Choose the applicable GST rate (5%, 12%, 18%, or 28%) used in India.</span></li>
+                    <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</div><span>Select "Intra-State" for transactions within the same state (CGST+SGST) or "Inter-State" for transactions between different states (IGST).</span></li>
+                    <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">5</div><span>Instantly view the Net Total and detailed Tax Portion breakdown in the result pane.</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Formula Used</h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                    To Add GST: Amount * (Rate / 100). To Remove GST: Amount - (Amount * (100 / (100 + Rate))). For Intra-state deals, the tax is split exactly 50/50 between Central (CGST) and State (SGST).
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is the difference between CGST, SGST, and IGST?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">CGST is the Central portion and SGST is the State portion of GST for local sales. IGST is a single tax collected by the center for sales between different states or imports.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white mb-2">What is "Reverse GST" calculation?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">This is used when you have the final MRP (inclusive of tax) and you want to work backward to find out how much the original item cost before the government added the GST percentage.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white mb-2">Which GST rate should I apply?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">In India, essential goods are usually 5%, most services and products are at 18%, and luxury or 'sin' goods are at 28%. Consult your CA for specific item classifications.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-orange-50 dark:bg-orange-900/10 p-8 rounded-3xl border border-orange-100 dark:border-orange-800/30 text-sm">
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                    This GST Calculator India tool is indispensable for business owners, freelancers, and accounting professionals dealing with Indian taxation. It ensures compliance and accuracy for invoices and billing. Please note that all calculations are estimates for reference and should be verified against official tax portal results.
+                </p>
+            </div>
+        </section>
+
         <article class="content-section">
             <h2 class="dark:text-white">Professional GST Calculation Guide</h2>
             <p class="dark:text-slate-400">Our GST calculator is designed to handle all domestic and international trade scenarios for Indian businesses. If you are calculating prices for retail products, you might also want to check our <a href="discount-calculator.html" class="text-orange-600 font-bold hover:underline">Sales Discount Calculator</a> to find final pricing after rebates.</p>

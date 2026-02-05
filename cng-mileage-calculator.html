@@ -55,7 +55,7 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', sans-serif'] },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                 }
             }
         }
@@ -187,6 +187,50 @@
                     </div>
                 </div>
             </div>
+
+            <section class="calculator-content mt-16 max-w-4xl mx-auto space-y-12">
+                <div>
+                    <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-6 text-center">How to Use This Calculator</h2>
+                    <ul class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</div><span>Enter the total distance traveled since your last full CNG tank fill (use your trip meter).</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</div><span>Enter the total kilograms of CNG consumed for that distance.</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</div><span>Enter the current price per kg of CNG in your city.</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</div><span>Toggle the "Monthly" option and enter your average monthly travel to see estimated costs.</span></li>
+                        <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">5</div><span>The results pane will instantly show your Mileage (km/kg) and Running Cost per KM.</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Formula Used</h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        The Mileage is calculated as: Distance (km) / CNG Consumed (kg). The Running Cost per km is calculated as: CNG Price per kg / Calculated Mileage.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Why does my CNG mileage drop in winter?</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">CNG is stored as a compressed gas. Temperature changes affect gas density and pressure, which can slightly influence the amount of fuel delivered and recorded during filling.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Is it better to fill CNG at night?</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">Gas is denser when it's cooler. Filling up during cooler parts of the day like night or early morning might allow a slightly more complete fill-up in some scenarios.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">How can I increase my CNG car mileage?</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">Regular servicing of the CNG kit, cleaning the air filter, maintaining correct tire pressure, and smooth gear transitions are the best ways to maximize mileage.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50 dark:bg-emerald-900/10 p-8 rounded-3xl border border-emerald-100 dark:border-emerald-800/30">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        This specialized CNG Mileage Calculator is designed for owners of factory-fitted and aftermarket CNG vehicles in India. It helps you track your vehicle's performance over time and budget for your travel expenses effectively. Results are estimates based on your input values.
+                    </p>
+                </div>
+            </section>
 
             <article class="mt-16 max-w-4xl mx-auto space-y-12 pb-20">
                 <section class="content-section">
