@@ -132,6 +132,22 @@
                 <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">Calculate your car’s running cost per kilometer in India. Compare Petrol, Diesel, CNG, and Electric car cost per km based on mileage and fuel prices.</p>
             </div>
 
+            <!-- Global Currency Selector -->
+            <div class="flex justify-end mb-4">
+                <div class="relative inline-block text-left">
+                    <select id="global-currency-select" onchange="setGlobalCurrency(this.value)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8 cursor-pointer shadow-sm">
+                        <option value="₹">INR (₹)</option>
+                        <option value="$">USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="د.إ">AED (د.إ)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+                        <svg class="h-3 w-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                    </div>
+                </div>
+            </div>
+
             <div class="calculator-grid">
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
                     <div class="mb-8">
@@ -144,12 +160,15 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <label id="label-mileage" class="input-label">Mileage (km per litre)</label>
+                        <label id="label-mileage" class="input-label">Mileage (km per unit)</label>
                         <input type="number" id="mileage" oninput="runCalc()" placeholder="e.g. 18" class="field-input">
                     </div>
                     <div class="input-group">
-                        <label id="label-price" class="input-label">Fuel Price (₹ per litre)</label>
-                        <input type="number" id="price" oninput="runCalc()" placeholder="e.g. 105" class="field-input">
+                        <label id="label-price" class="input-label">Fuel Price (per unit)</label>
+                        <div class="relative">
+                            <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
+                            <input type="number" id="price" oninput="runCalc()" placeholder="e.g. 105" class="field-input pl-10">
+                        </div>
                     </div>
                     <div class="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
                         <label class="flex items-center gap-3 cursor-pointer group mb-6">
@@ -173,7 +192,7 @@
                         <div class="mb-12 text-center">
                             <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Running Cost</p>
                             <div class="flex items-baseline justify-center gap-2">
-                                <span class="text-2xl font-bold text-blue-400">₹</span>
+                                <span class="res-symbol text-2xl font-bold text-blue-400">₹</span>
                                 <span id="res-cost-km" class="text-6xl font-black tracking-tighter">0.00</span>
                                 <span class="text-xl font-bold text-slate-500">/km</span>
                             </div>
@@ -181,11 +200,11 @@
                         <div class="space-y-1">
                             <div id="res-monthly-row" class="receipt-row hidden">
                                 <span class="text-slate-400">Monthly Fuel Expense</span>
-                                <span class="font-bold text-emerald-400">₹<span id="res-monthly">0.00</span></span>
+                                <span class="font-bold text-emerald-400"><span class="res-symbol">₹</span><span id="res-monthly">0.00</span></span>
                             </div>
                             <div id="res-yearly-row" class="receipt-row hidden">
                                 <span class="text-slate-400">Yearly Fuel Expense</span>
-                                <span class="font-bold text-emerald-400">₹<span id="res-yearly">0.00</span></span>
+                                <span class="font-bold text-emerald-400"><span class="res-symbol">₹</span><span id="res-yearly">0.00</span></span>
                             </div>
                         </div>
                     </div>
@@ -210,7 +229,7 @@
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Formula Used</h2>
                     <p class="text-slate-600 dark:text-slate-400 leading-relaxed bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
-                        The calculation logic is straightforward: Cost per KM = Fuel Price / Car Mileage. For example, if petrol is ₹100 per litre and your car gives 20 kmpl, the cost is ₹5 per kilometer.
+                        The calculation logic is straightforward: Cost per KM = Fuel Price / Car Mileage. For example, if petrol is 100 per unit and your car gives 20 kmpl, the cost is 5 per kilometer.
                     </p>
                 </div>
 
@@ -264,6 +283,8 @@
 
     <script>
         let currentFuel = 'petrol';
+        window.addEventListener('currencyChange', (e) => { runCalc(); });
+
         function setFuelType(type) {
             currentFuel = type;
             document.querySelectorAll('.fuel-pill').forEach(btn => btn.classList.remove('active'));
@@ -274,17 +295,17 @@
             const pInput = document.getElementById('price');
             if (type === 'ev') {
                 mLabel.innerText = 'Efficiency (km per kWh)';
-                pLabel.innerText = 'Electricity Price (₹ per kWh)';
+                pLabel.innerText = 'Electricity Price (per kWh)';
                 mInput.placeholder = 'e.g. 7';
                 pInput.placeholder = 'e.g. 8';
             } else if (type === 'cng') {
                 mLabel.innerText = 'Mileage (km per kg)';
-                pLabel.innerText = 'CNG Price (₹ per kg)';
+                pLabel.innerText = 'CNG Price (per kg)';
                 mInput.placeholder = 'e.g. 26';
                 pInput.placeholder = 'e.g. 85';
             } else {
                 mLabel.innerText = 'Mileage (km per litre)';
-                pLabel.innerText = 'Fuel Price (₹ per litre)';
+                pLabel.innerText = 'Fuel Price (per litre)';
                 mInput.placeholder = 'e.g. 18';
                 pInput.placeholder = 'e.g. 105';
             }

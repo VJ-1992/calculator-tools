@@ -60,6 +60,22 @@ const CALCULATORS = [
 
 const CATEGORY_ORDER = ["Automobile", "Finance", "Tax"];
 
+// --- Global Currency Logic ---
+function getGlobalCurrency() {
+    return localStorage.getItem('user_currency_symbol') || '₹';
+}
+
+function setGlobalCurrency(symbol) {
+    localStorage.setItem('user_currency_symbol', symbol);
+    // Update all UI elements on the current page
+    document.querySelectorAll('.res-symbol').forEach(el => el.innerText = symbol);
+    // Sync dropdown if it exists
+    const select = document.getElementById('global-currency-select');
+    if (select) select.value = symbol;
+    // Notify the specific calculator logic to refresh results
+    window.dispatchEvent(new CustomEvent('currencyChange', { detail: symbol }));
+}
+
 function initCalculators() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -70,9 +86,7 @@ function initCalculators() {
         CATEGORY_ORDER.forEach(catName => {
             const catCalcs = CALCULATORS.filter(c => c.category === catName);
             if (catCalcs.length > 0) {
-                // Category Heading
                 navHtml += `<div class="px-3 py-2 mt-1 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-50/50 dark:bg-slate-800/30 first:mt-0">${catName} Calculators</div>`;
-                // Category Items
                 navHtml += catCalcs.map(calc => `
                     <a href="${calc.url}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors group">
                         <span class="text-xs font-bold ${calc.url === currentPage ? 'text-' + calc.color + '-600' : 'text-slate-700 dark:text-slate-300'} group-hover:text-${calc.color}-600">${calc.name}</span>
@@ -100,7 +114,7 @@ function initCalculators() {
         `).join('');
     }
 
-    // 3. Render Related Links (Grouped - for calculator pages)
+    // 3. Render Related Links (Grouped)
     const relatedLinks = document.getElementById('related-calc-links');
     if (relatedLinks) {
         let relatedHtml = '';
@@ -124,6 +138,12 @@ function initCalculators() {
         });
         relatedLinks.innerHTML = relatedHtml;
     }
+
+    // 4. Initialize Global Currency Symbol
+    setTimeout(() => {
+        const symbol = getGlobalCurrency();
+        setGlobalCurrency(symbol);
+    }, 0);
 }
 
 document.addEventListener('DOMContentLoaded', initCalculators);

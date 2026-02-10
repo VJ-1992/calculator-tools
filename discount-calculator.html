@@ -165,19 +165,28 @@
                 <p class="text-slate-500 dark:text-slate-400">Professional tool for sequential discounts and tax additions.</p>
             </div>
 
+            <!-- Global Currency Selector -->
+            <div class="flex justify-end mb-4">
+                <div class="relative inline-block text-left">
+                    <select id="global-currency-select" onchange="setGlobalCurrency(this.value)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8 cursor-pointer shadow-sm">
+                        <option value="₹">INR (₹)</option>
+                        <option value="$">USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="د.إ">AED (د.إ)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+                        <svg class="h-3 w-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                    </div>
+                </div>
+            </div>
+
             <div class="calculator-grid">
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
-                    <div class="flex items-center justify-between mb-8">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Configure Inputs</span>
-                        <div class="toggle-pill">
-                            <button onclick="setCurrency('₹')" id="curr-inr" class="active">INR (₹)</button>
-                            <button onclick="setCurrency('$')" id="curr-usd">USD ($)</button>
-                        </div>
-                    </div>
                     <div class="input-group">
                         <label class="input-label">1. Original Price</label>
                         <div class="relative">
-                            <span id="symbol-main" class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
+                            <span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span>
                             <input type="number" id="base-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10">
                         </div>
                     </div>
@@ -226,7 +235,7 @@
                         <div class="mb-12 text-center">
                             <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Payable Total</p>
                             <div class="flex items-baseline justify-center gap-2">
-                                <span id="res-symbol-large" class="text-2xl font-bold text-blue-400">₹</span>
+                                <span class="res-symbol text-2xl font-bold text-blue-400">₹</span>
                                 <span id="res-final-total" class="text-6xl font-black tracking-tighter">0.00</span>
                             </div>
                         </div>
@@ -316,7 +325,8 @@
 
     <script>
         let state = { currency: '₹', primaryType: 'percent', sequentialDiscounts: [], taxEnabled: false };
-        function setCurrency(c) { state.currency = c; document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c); document.getElementById('symbol-main').innerText = c; document.getElementById('res-symbol-large').innerText = c; document.getElementById('p-type-symbol').innerText = state.primaryType === 'percent' ? '%' : c; document.getElementById('curr-inr').classList.toggle('active', c === '₹'); document.getElementById('curr-usd').classList.toggle('active', c === '$'); renderSequential(); runCalc(); }
+        window.addEventListener('currencyChange', (e) => { state.currency = e.detail; renderSequential(); runCalc(); });
+
         function setPrimaryType(t) { state.primaryType = t; document.getElementById('p-type-symbol').innerText = t === 'percent' ? '%' : state.currency; document.getElementById('p-type-percent').classList.toggle('active', t === 'percent'); document.getElementById('p-type-flat').classList.toggle('active', t === 'flat'); runCalc(); }
         function addSequential() { state.sequentialDiscounts.push({ id: Date.now(), type: 'percent', value: 0 }); renderSequential(); }
         function removeSequential(id) { state.sequentialDiscounts = state.sequentialDiscounts.filter(d => d.id !== id); renderSequential(); runCalc(); }

@@ -104,11 +104,27 @@
                 <h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Profit Margin Calculator</h1>
                 <p class="text-slate-500 dark:text-slate-400">Determine business profitability with per-unit and bulk scenarios.</p>
             </div>
+
+            <!-- Global Currency Selector -->
+            <div class="flex justify-end mb-4">
+                <div class="relative inline-block text-left">
+                    <select id="global-currency-select" onchange="setGlobalCurrency(this.value)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8 cursor-pointer shadow-sm">
+                        <option value="₹">INR (₹)</option>
+                        <option value="$">USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="د.إ">AED (د.إ)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+                        <svg class="h-3 w-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                    </div>
+                </div>
+            </div>
+
             <div class="calculator-grid">
                 <div class="input-pane border-r border-slate-100 dark:border-slate-800">
                     <div class="flex items-center justify-between mb-8 gap-4 flex-wrap">
                         <div class="toggle-pill"><button onclick="setCalcMode('simple')" id="mode-simple" class="active">Simple</button><button onclick="setCalcMode('quantity')" id="mode-quantity">Quantity</button><button onclick="setCalcMode('packet')" id="mode-packet">Packet</button></div>
-                        <div class="toggle-pill"><button onclick="setCurrency('₹')" id="curr-inr" class="active">₹</button><button onclick="setCurrency('$')" id="curr-usd">$</button></div>
                     </div>
                     <div id="simple-inputs" class="space-y-4">
                         <div class="input-group"><label class="input-label">1. Cost Price (Unit)</label><div class="relative"><span class="res-symbol absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-300">₹</span><input type="number" id="cost-price" oninput="runCalc()" placeholder="0.00" class="field-input pl-10"></div></div>
@@ -128,7 +144,7 @@
                 </div>
                 <div class="result-pane">
                     <div>
-                        <div class="mb-12 text-center"><p id="main-result-label" class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Profit per Unit</p><div class="flex items-baseline justify-center gap-2"><span id="res-symbol-large" class="text-2xl font-bold text-blue-400">₹</span><span id="res-profit-main" class="text-6xl font-black tracking-tighter">0.00</span></div></div>
+                        <div class="mb-12 text-center"><p id="main-result-label" class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Profit per Unit</p><div class="flex items-baseline justify-center gap-2"><span class="res-symbol text-2xl font-bold text-blue-400">₹</span><span id="res-profit-main" class="text-6xl font-black tracking-tighter">0.00</span></div></div>
                         <div class="space-y-1">
                             <div id="row-cost-per-unit" class="receipt-row hidden"><span class="text-slate-400">Cost Per Item</span><span class="font-bold"><span class="res-symbol">₹</span><span id="out-cpu">0.00</span></span></div>
                             <div class="receipt-row"><span class="text-slate-400">Profit Margin</span><span id="out-margin" class="font-bold text-emerald-400">0.00%</span></div>
@@ -209,8 +225,9 @@
 
     <script>
         let state = { mode: 'simple', currency: '₹' };
+        window.addEventListener('currencyChange', (e) => { state.currency = e.detail; runCalc(); });
+
         function setCalcMode(m) { state.mode = m; document.getElementById('mode-simple').classList.toggle('active', m === 'simple'); document.getElementById('mode-quantity').classList.toggle('active', m === 'quantity'); document.getElementById('mode-packet').classList.toggle('active', m === 'packet'); document.getElementById('simple-inputs').classList.toggle('hidden', m !== 'simple'); document.getElementById('quantity-inputs').classList.toggle('hidden', m !== 'quantity'); document.getElementById('packet-inputs').classList.toggle('hidden', m !== 'packet'); document.getElementById('row-total-profit').classList.toggle('hidden', m === 'simple'); document.getElementById('row-cost-per-unit').classList.toggle('hidden', m !== 'packet'); document.getElementById('main-result-label').innerText = m === 'packet' ? 'Profit per Item' : 'Profit per Unit'; runCalc(); }
-        function setCurrency(c) { state.currency = c; document.querySelectorAll('.res-symbol').forEach(el => el.innerText = c); document.getElementById('res-symbol-large').innerText = c; document.getElementById('curr-inr').classList.toggle('active', c === '₹'); document.getElementById('curr-usd').classList.toggle('active', c === '$'); runCalc(); }
         function runCalc() {
             let CP = 0, SP = 0, Qty = 1;
             if (state.mode === 'simple') { CP = parseFloat(document.getElementById('cost-price').value) || 0; SP = parseFloat(document.getElementById('selling-price').value) || 0; }
@@ -228,7 +245,6 @@
         function toggleDropdown(e) { e.stopPropagation(); const d = document.getElementById('nav-dropdown'); if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } else { d.classList.replace('dropdown-hidden', 'dropdown-visible'); } }
         window.onclick = function(event) { const d = document.getElementById('nav-dropdown'); if (d && !event.target.closest('#drop-btn') && !event.target.closest('#nav-dropdown')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); } }
         if (localStorage.getItem('theme') === 'dark') document.getElementById('theme-text').innerText = 'Dark';
-        runCalc();
     </script>
 </body>
 </html>

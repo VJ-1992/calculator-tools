@@ -114,23 +114,39 @@
 
     <main>
         <div class="app-container">
+            <!-- Global Currency Selector -->
+            <div class="flex justify-end w-full max-w-[1000px] mb-4">
+                <div class="relative inline-block text-left">
+                    <select id="global-currency-select" onchange="setGlobalCurrency(this.value)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8 cursor-pointer shadow-sm">
+                        <option value="₹">INR (₹)</option>
+                        <option value="$">USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="د.إ">AED (د.إ)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+                        <svg class="h-3 w-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                    </div>
+                </div>
+            </div>
+
             <div class="main-card dark:bg-slate-900 dark:border-slate-800 dark:shadow-none">
                 <div class="input-pane dark:border-slate-800">
                     <div class="mb-6"><label class="input-label dark:text-slate-400 mb-2">Calculation Mode</label><div class="mode-toggle dark:bg-slate-800"><button onclick="setMode('add')" id="m-add" class="active">Add GST</button><button onclick="setMode('remove')" id="m-remove">Remove GST</button></div></div>
                     <div class="space-y-6">
-                        <div class="input-group"><label id="amt-label" class="input-label dark:text-slate-400">Base Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">₹</span><input type="number" id="main-amount" placeholder="0.00" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div></div>
+                        <div class="input-group"><label id="amt-label" class="input-label dark:text-slate-400">Base Price</label><div class="relative"><span class="res-symbol absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-300 text-xs dark:text-slate-600">₹</span><input type="number" id="main-amount" placeholder="0.00" oninput="calculate()" class="input-field pl-8 dark:bg-slate-800 dark:border-slate-700 dark:text-white"></div></div>
                         <div><label class="input-label dark:text-slate-400 mb-2">Tax Rate (%)</label><div class="grid grid-cols-4 gap-2"><button onclick="setRate(5)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold dark:bg-slate-800 dark:border-slate-700">5%</button><button onclick="setRate(12)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold dark:bg-slate-800 dark:border-slate-700">12%</button><button onclick="setRate(18)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold dark:bg-slate-800 dark:border-slate-700 ring-2 ring-orange-500">18%</button><button onclick="setRate(28)" class="rate-btn py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold dark:bg-slate-800 dark:border-slate-700">28%</button></div></div>
                         <div><label class="input-label dark:text-slate-400 mb-2">Transaction</label><div class="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl dark:bg-slate-800"><button onclick="setTxType('intra')" id="tx-intra" class="type-pill active">Intra-State</button><button onclick="setTxType('inter')" id="tx-inter" class="type-pill">Inter-State</button></div></div>
                         <button onclick="resetAll()" class="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-lg text-[10px] uppercase dark:bg-slate-800">Reset</button>
                     </div>
                 </div>
                 <div class="result-pane dark:bg-black">
-                    <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Total</p><div class="flex items-baseline justify-center gap-1.5"><span class="text-xl font-bold text-orange-400">₹</span><span id="res-total" class="text-5xl font-black tracking-tighter leading-none text-white">0.00</span></div></div>
+                    <div class="mb-10 text-center"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Net Total</p><div class="flex items-baseline justify-center gap-1.5"><span class="res-symbol text-xl font-bold text-orange-400">₹</span><span id="res-total" class="text-5xl font-black tracking-tighter leading-none text-white">0.00</span></div></div>
                     <div class="space-y-0.5">
-                        <div class="receipt-row"><span>GST Portion</span><span class="font-bold">₹<span id="out-gst-total">0.00</span></span></div>
-                        <div id="row-cgst" class="receipt-row"><span>CGST (Central)</span><span class="font-bold">₹<span id="out-cgst">0.00</span></span></div>
-                        <div id="row-sgst" class="receipt-row"><span>SGST (State)</span><span class="font-bold">₹<span id="out-sgst">0.00</span></span></div>
-                        <div id="row-igst" class="receipt-row hidden"><span>IGST (Integrated)</span><span class="font-bold">₹<span id="out-igst">0.00</span></span></div>
+                        <div class="receipt-row"><span>GST Portion</span><span class="font-bold"><span class="res-symbol">₹</span><span id="out-gst-total">0.00</span></span></div>
+                        <div id="row-cgst" class="receipt-row"><span>CGST (Central)</span><span class="font-bold"><span class="res-symbol">₹</span><span id="out-cgst">0.00</span></span></div>
+                        <div id="row-sgst" class="receipt-row"><span>SGST (State)</span><span class="font-bold"><span class="res-symbol">₹</span><span id="out-sgst">0.00</span></span></div>
+                        <div id="row-igst" class="receipt-row hidden"><span>IGST (Integrated)</span><span class="font-bold"><span class="res-symbol">₹</span><span id="out-igst">0.00</span></span></div>
                     </div>
                 </div>
             </div>
@@ -215,6 +231,9 @@
     </footer>
 
     <script>
+        let globalCurrency = '₹';
+        window.addEventListener('currencyChange', (e) => { globalCurrency = e.detail; calculate(); });
+
         function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); document.getElementById('theme-text').innerText = isDark ? 'Dark' : 'Light'; }
         function toggleDropdown(e) { e.stopPropagation(); const d = document.getElementById('nav-dropdown'); const c = document.getElementById('drop-chevron'); if (d.classList.contains('dropdown-visible')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); c.style.transform = 'rotate(0deg)'; } else { d.classList.replace('dropdown-hidden', 'dropdown-visible'); c.style.transform = 'rotate(180deg)'; } }
         window.onclick = (e) => { const d = document.getElementById('nav-dropdown'); if (d && !e.target.closest('#drop-btn') && !e.target.closest('#nav-dropdown')) { d.classList.replace('dropdown-visible', 'dropdown-hidden'); document.getElementById('drop-chevron').style.transform = 'rotate(0deg)'; } };
