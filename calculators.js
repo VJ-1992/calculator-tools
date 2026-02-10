@@ -76,6 +76,34 @@ function setGlobalCurrency(symbol) {
     window.dispatchEvent(new CustomEvent('currencyChange', { detail: symbol }));
 }
 
+/**
+ * Injects the currency selector if it's missing from a calculator page.
+ * Standardizes placement above the calculator grid.
+ */
+function injectCurrencySelector() {
+    if (document.getElementById('global-currency-select')) return;
+    const grid = document.querySelector('.calculator-grid');
+    if (!grid) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex justify-end mb-4';
+    wrapper.innerHTML = `
+        <div class="relative inline-block text-left">
+            <select id="global-currency-select" onchange="setGlobalCurrency(this.value)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8 cursor-pointer shadow-sm">
+                <option value="₹">INR (₹)</option>
+                <option value="$">USD ($)</option>
+                <option value="€">EUR (€)</option>
+                <option value="£">GBP (£)</option>
+                <option value="د.إ">AED (د.إ)</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+                <svg class="h-3 w-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+            </div>
+        </div>
+    `;
+    grid.parentNode.insertBefore(wrapper, grid);
+}
+
 function initCalculators() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -139,7 +167,8 @@ function initCalculators() {
         relatedLinks.innerHTML = relatedHtml;
     }
 
-    // 4. Initialize Global Currency Symbol
+    // 4. Initialize Global Currency selector and Symbol
+    injectCurrencySelector();
     setTimeout(() => {
         const symbol = getGlobalCurrency();
         setGlobalCurrency(symbol);
